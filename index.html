@@ -129,6 +129,7 @@
       opacity: 0;
       transform: translate3d(0, 30px, 0);
       transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1), transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+      will-change: transform, opacity;
     }
 
     .reveal.active {
@@ -168,7 +169,7 @@
       word-break: keep-all;
       text-align: center;
       min-height: 28px;
-font-family: 'MaruBuri', sans-serif !important;
+      font-family: 'MaruBuri', sans-serif !important;
     }
 
     .typing-text::after {
@@ -390,7 +391,7 @@ font-family: 'MaruBuri', sans-serif !important;
 
     .circle-countdown { display: flex; justify-content: center; gap: 12px; margin-top: 36px; width: 100%; }
     .circle-item { display: flex; flex-direction: column; align-items: center; }
-    .circle-box { width: 65px; height: 65px; border-radius: 50%; background: #f7d6dc; color: #ffffff; display: flex; justify-content: center; align-items: center; font-size: 18px; font-weight: bold; box-shadow: 0 4px 10px rgba(230, 160, 175, 0.2); }
+    .circle-box { width: 65px; height: 65px; border-radius: 50%; background: #eec8ce; color: #ffffff; display: flex; justify-content: center; align-items: center; font-size: 18px; font-weight: bold; box-shadow: 0 4px 10px rgba(230, 160, 175, 0.2); }
     .circle-label { margin-top: 8px; font-size: 11px; color: var(--text-sub); }
 
     .gallery-grid-3x3 { 
@@ -569,9 +570,26 @@ font-family: 'MaruBuri', sans-serif !important;
 
     .account-accordion { width: 100%; margin-top: 16px; }
     .acc-header { width: 100%; padding: 16px; background: #ffffff; border: 1px solid var(--line-color); border-radius: 8px; display: flex; justify-content: space-between; align-items: center; font-size: 15px; cursor: pointer; margin-bottom: 8px; }
-    .acc-body { display: none; padding: 16px; background: #ffffff; border: 1px solid var(--line-color); border-radius: 8px; margin-bottom: 12px; text-align: left; }
+   .acc-body { 
+      display: none; 
+      width: 100%; 
+      padding: 16px; 
+      background: #ffffff; 
+      border: 1px solid var(--line-color); 
+      border-radius: 8px; 
+      margin-bottom: 12px; 
+      text-align: left; 
+      box-sizing: border-box; 
+    }
     .acc-body.active { display: block; }
-    .acc-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+    .acc-row { 
+      display: flex; 
+      justify-content: space-between; 
+      align-items: center; 
+      margin-bottom: 10px; 
+      width: 100%;
+      box-sizing: border-box;
+    }
 
     .btn-pink { width: 100%; padding: 16px; border: none; border-radius: 8px; background: var(--pink-main); color: #ffffff; font-size: 15px; font-weight: 600; cursor: pointer; text-decoration: none; display: inline-block; text-align: center; }
     .btn-outline { padding: 6px 12px; border: 1px solid var(--pink-dark); background: #fff; color: var(--pink-dark); border-radius: 4px; font-size: 12px; cursor: pointer; }
@@ -675,7 +693,7 @@ font-family: 'MaruBuri', sans-serif !important;
     .call-phone-num { font-size: 22px; font-weight: bold; color: var(--text-main); margin: 12px 0 20px; letter-spacing: 1px; }
     .call-btn-group { display: flex; gap: 10px; width: 100%; }
     .btn-call-action { flex: 1; padding: 14px; border-radius: 8px; font-size: 13px; font-weight: bold; text-decoration: none; text-align: center; cursor: pointer; }
-   </style>
+  </style>
 </head>
 <body class="stop-scroll" oncontextmenu="return false" ondragstart="return false">
 
@@ -686,6 +704,7 @@ font-family: 'MaruBuri', sans-serif !important;
 </div>
 
 <div class="mobile-container">
+
   <!-- 1. MAIN COVER -->
   <div class="main-cover">
     <!-- 비동기 로딩을 위한 decoding 속성 추가 -->
@@ -831,9 +850,9 @@ font-family: 'MaruBuri', sans-serif !important;
     <div class="section-subtitle-en reveal">Guest Snap</div>
     <div class="guest-snap-box reveal">
       <p class="guest-snap-desc">
-        예식 날 하객 여러분께서 직접 찍어주신<br>소중한 사진과 영상을 공유해 주세요!<br>구글 드라이브 폴더에 편하게 업로드하실 수 있습니다.<br>카카오톡으로 보내주셔도 돼요!
+        예식 날 하객 여러분께서 직접 찍어주신<br>소중한 사진과 영상을 공유해 주세요!<br>구글 드라이브 폴더에<br>편하게 업로드하실 수 있습니다.<br>어려우시면<br>카카오톡으로 보내주셔도 돼요!
       </p>
-      <a href="https://drive.google.com/drive/folders/1G_odNXuw6VOvlnGoYj2c9FGfkFCgCFh-?usp=sharing" target="_blank" class="btn-pink">
+      <a href="https://drive.google.com/drive/folders/1G_odNXuw6VOvlnGoYj2c9FGfkFCgCFh-?usp=sharing" target="_blank" class="btn-pink" style="display: block; text-align: center; text-decoration: none; background-color: #eec8ce; color: #ffffff; border: none; border-radius: 8px; margin-top: 14px; padding: 12px; font-size: 14px; font-weight: bold; width: 100%; box-sizing: border-box;">
         📸 사진 올리러 가기 
       </a>
     </div>
@@ -872,79 +891,156 @@ font-family: 'MaruBuri', sans-serif !important;
       </div>
       
      <div class="transport-box">
-  <!-- 대중교통 안내 -->
-  <strong>대중교통 안내</strong>
-  <p style="line-height: 1.8; margin-bottom: 28px;">
-    <strong>🚉지하철 이용 시</strong>
-    <span style="font-size: 13px; color: var(--text-sub); letter-spacing: -0.4px;">7호선 상동역 8번 출구 앞 도보 3분</span><br>
-    <strong>🚌버스 이용 시</strong>
-    <span style="font-size: 13px; color: var(--text-sub); letter-spacing: -0.4px;">상동역 8번출구.세이브존 정류장 하차</span>
-  </p>
-</div>
-<div class="transport-box">
-  <!-- 자차 안내 -->
-  <strong>자차 안내</strong>
-  <p style="line-height: 1.8;">
-    <strong>🅿️제 1 주차장 : 다승프라자 (라포레 웨딩홀 건물)</strong>
-    <span style="font-size: 13px; color: var(--text-sub); letter-spacing: -0.4px;">경기 부천시 원미구 길주로 125 (3시간 무료)</span><br><br>
+      <!-- 대중교통 안내 -->
+      <strong>대중교통 안내</strong>
+      <p style="line-height: 1.8; margin-bottom: 28px;">
+        <strong>🚉지하철 이용 시</strong>
+        <span style="font-size: 13px; color: var(--text-sub); letter-spacing: -0.4px;">7호선 상동역 8번 출구 앞 도보 3분</span><br>
+        <strong>🚌버스 이용 시</strong>
+        <span style="font-size: 13px; color: var(--text-sub); letter-spacing: -0.4px;">상동역 8번출구.세이브존 정류장 하차</span>
+      </p>
+    </div>
+    <div class="transport-box">
+      <!-- 자차 안내 -->
+      <strong>자차 안내</strong>
+      <p style="line-height: 1.8;">
+        <strong>🅿️제 1 주차장 : 다승프라자 (라포레 웨딩홀 건물)</strong>
+        <span style="font-size: 13px; color: var(--text-sub); letter-spacing: -0.4px;">경기 부천시 원미구 길주로 125 (3시간 무료)</span><br><br>
 
-    <strong>🅿️제 2 주차장 : 부천테크노파크 2단지</strong>
-    <span style="font-size: 13px; color: var(--text-sub); letter-spacing: -0.4px;">경기 부천시 원미구 송내대로 388 (3시간 무료)</span><br><br>
+        <strong>🅿️제 2 주차장 : 부천테크노파크 2단지</strong>
+        <span style="font-size: 13px; color: var(--text-sub); letter-spacing: -0.4px;">경기 부천시 원미구 송내대로 388 (3시간 무료)</span><br><br>
 
-    ※ 예식장 주차장이 협소합니다.<br>
-    &nbsp;하객분들은 제2주차장에 주차하시고 셔틀버스 이용 부탁드립니다.<br>
-    🚌 셔틀버스 운행 : 예식 1시간 30분 전부터 상시 운행
-  </p>
-  <button class="btn-pink" style="margin-top: 14px; padding: 12px; font-size: 13px;" onclick="openParkingModal()">
-    🚗 주차장 및 대중교통 이용안내 
-  </button>
-</div>
+      <div style="text-align: center; margin-top: 16px; line-height: 1.8;">
+        ※ 예식장 주차장이 협소합니다.<br>
+        하객분들은 제2주차장에 주차하시고<br>셔틀버스 이용 부탁드립니다.<br>
+        🚌 셔틀버스 운행 : 예식 1시간 30분 전부터 상시 운행
+      </div>
+      <button class="btn-pink" style="background-color: #eec8ce; color: #ffffff; border: none; border-radius: 8px; margin-top: 14px; padding: 12px; font-size: 14px; font-weight: bold; width: 100%; box-sizing: border-box; cursor: pointer;" onclick="openParkingModal()">
+        🚗 주차장 및 대중교통 이용안내 
+      </button> 
+    </div>
   </section>
 
-  <!-- 7. ACCOUNT -->
+    <!-- 7. ACCOUNT -->
   <section class="section" style="background: #ffffff;">
-    <div class="section-title-pink reveal">마음 전하실 곳</div>
-    <div class="section-subtitle-en reveal">Account</div>
-    <div class="account-guide-text reveal">
-      참석이 어려우신 분들을 위해 조심스레 마음 전하실 곳을 남깁니다.<br>멀리서 보내주시는 축복도 잊지 않고 예쁘게 살겠습니다.
+   <div class="section-title-pink reveal">마음 전하실 곳</div>
+   <div class="section-subtitle-en reveal">ACCOUNT</div>
+    <p style="text-align: center; margin-bottom: 24px; font-size: 14px; line-height: 1.6; color: var(--text-sub);">
+      참석이 어려우신 분들을 위해 조심스레 마음 전하실 곳을 남깁니다.<br>
+      멀리서 보내주시는 축복도 잊지 않고 예쁘게 살겠습니다.
+    </p>
+
+    <!-- 🤵 신랑측 계좌 -->
+    <div class="acc-header" onclick="toggleAcc('groomAcc')">
+      <span>신랑측</span>
+      <span style="color: #d98b99;">▼</span>
+    </div>
+    <div class="acc-body" id="groomAcc">
+      
+      <!-- 신랑 본인 -->
+      <div class="acc-row" style="display: flex; justify-content: space-between; align-items: center;">
+        <div style="text-align: left;">
+          <p style="font-size: 12px; color: var(--text-sub); margin: 0 0 4px 0;">국민은행 | 예금주: 정민교 (신랑)</p>
+          <p style="font-weight: bold; font-size: 16px; margin: 0; letter-spacing: 0.5px;">000-000-000000</p>
+        </div>
+        <div style="display: flex; gap: 10px; align-items: center;">
+          <button onclick="copyAccount('000-000-000000', '신랑')" style="background: none; border: none; padding: 0; cursor: pointer; color: #555; display: flex; align-items: center;" title="복사">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+          </button>
+          <a href="#" target="_blank" style="display: flex; justify-content: center; align-items: center; width: 26px; height: 26px; background-color: #FEE500; border-radius: 6px; text-decoration: none;" title="카카오페이 송금">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="#000"><path d="M12 3c-5.5 0-10 3.5-10 7.8 0 2.8 1.8 5.2 4.5 6.5-.2 1-.9 3.2-.9 3.3 0 .1.1.2.2.2.1 0 .2 0 .3-.1.4-.3 3.5-2.4 4.1-2.8.6.1 1.2.1 1.8.1 5.5 0 10-3.5 10-7.8S17.5 3 12 3z"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <div style="height: 1px; background-color: #eee; margin: 16px 0;"></div> <!-- 연한 구분선 -->
+
+      <!-- 신랑 아버지 -->
+      <div class="acc-row" style="display: flex; justify-content: space-between; align-items: center;">
+        <div style="text-align: left;">
+          <p style="font-size: 12px; color: var(--text-sub); margin: 0 0 4px 0;">OO은행 | 예금주: 아버지성함 (혼주)</p>
+          <p style="font-weight: bold; font-size: 16px; margin: 0; letter-spacing: 0.5px;">111-111-111111</p>
+        </div>
+        <div style="display: flex; gap: 10px; align-items: center;">
+          <button onclick="copyAccount('111-111-111111', '신랑 아버지')" style="background: none; border: none; padding: 0; cursor: pointer; color: #555; display: flex; align-items: center;" title="복사">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+          </button>
+        </div>
+      </div>
+
+      <div style="height: 1px; background-color: #eee; margin: 16px 0;"></div> <!-- 연한 구분선 -->
+
+      <!-- 신랑 어머니 -->
+      <div class="acc-row" style="display: flex; justify-content: space-between; align-items: center;">
+        <div style="text-align: left;">
+          <p style="font-size: 12px; color: var(--text-sub); margin: 0 0 4px 0;">OO은행 | 예금주: 어머니성함 (혼주)</p>
+          <p style="font-weight: bold; font-size: 16px; margin: 0; letter-spacing: 0.5px;">222-222-222222</p>
+        </div>
+        <div style="display: flex; gap: 10px; align-items: center;">
+          <button onclick="copyAccount('222-222-222222', '신랑 어머니')" style="background: none; border: none; padding: 0; cursor: pointer; color: #555; display: flex; align-items: center;" title="복사">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+          </button>
+        </div>
+      </div>
+
     </div>
 
-    <div class="account-accordion reveal">
-      <div class="acc-header" onclick="toggleAcc('groomAcc')"><span>신랑측 계좌번호</span><span style="color: #d9939d;">▼</span></div>
-      <div class="acc-body" id="groomAcc">
-        <div class="acc-row">
-          <div>
-            <p style="font-size: 12px; color: var(--text-sub);">국민은행</p>
-            <p style="font-weight: bold; font-size: 14px;">000-000-000000</p>
-            <p style="font-size: 12px; color: var(--text-sub);">예금주: 정민교</p>
-          </div>
-          <button class="btn-outline" onclick="copyAccount('000-000-000000', '신랑측')">복사</button>
+    <!-- 👰 신부측 계좌 -->
+    <div class="acc-header" onclick="toggleAcc('brideAcc')">
+      <span>신부측</span>
+      <span style="color: #d98b99;">▼</span>
+    </div>
+    <div class="acc-body" id="brideAcc">
+      
+      <!-- 신부 본인 -->
+      <div class="acc-row" style="display: flex; justify-content: space-between; align-items: center;">
+        <div style="text-align: left;">
+          <p style="font-size: 12px; color: var(--text-sub); margin: 0 0 4px 0;">국민은행 | 예금주: 이윤서 (신부)</p>
+          <p style="font-weight: bold; font-size: 16px; margin: 0; letter-spacing: 0.5px;">000-000-000000</p>
         </div>
-        <!-- 신랑 카카오페이 버튼 -->
-        <a href="https://qr.kakaopay.com/Ej7qgmufV" target="_blank" class="btn-kakaopay">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3c-5.5 0-10 3.5-10 7.8 0 2.8 1.8 5.2 4.5 6.5-.2 1-.9 3.2-.9 3.3 0 .1.1.2.2.2.1 0 .2 0 .3-.1.4-.3 3.5-2.4 4.1-2.8.6.1 1.2.1 1.8.1 5.5 0 10-3.5 10-7.8S17.5 3 12 3z"/></svg> 
-          카카오페이 송금
-        </a>
+        <div style="display: flex; gap: 10px; align-items: center;">
+          <button onclick="copyAccount('000-000-000000', '신부')" style="background: none; border: none; padding: 0; cursor: pointer; color: #555; display: flex; align-items: center;" title="복사">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+          </button>
+          <a href="https://qr.kakaopay.com/Ej7qgmufV" target="_blank" style="display: flex; justify-content: center; align-items: center; width: 26px; height: 26px; background-color: #FEE500; border-radius: 6px; text-decoration: none;" title="카카오페이 송금">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="#000"><path d="M12 3c-5.5 0-10 3.5-10 7.8 0 2.8 1.8 5.2 4.5 6.5-.2 1-.9 3.2-.9 3.3 0 .1.1.2.2.2.1 0 .2 0 .3-.1.4-.3 3.5-2.4 4.1-2.8.6.1 1.2.1 1.8.1 5.5 0 10-3.5 10-7.8S17.5 3 12 3z"/></svg>
+          </a>
+        </div>
       </div>
 
-      <div class="acc-header" onclick="toggleAcc('brideAcc')"><span>신부측 계좌번호</span><span style="color: #d9939d;">▼</span></div>
-      <div class="acc-body" id="brideAcc">
-        <div class="acc-row">
-          <div>
-            <p style="font-size: 12px; color: var(--text-sub);">국민은행</p>
-            <p style="font-weight: bold; font-size: 14px;">000-000-000000</p>
-            <p style="font-size: 12px; color: var(--text-sub);">예금주: 이윤서</p>
-          </div>
-          <button class="btn-outline" onclick="copyAccount('000-000-000000', '신부측')">복사</button>
+      <div style="height: 1px; background-color: #eee; margin: 16px 0;"></div> <!-- 연한 구분선 -->
+
+      <!-- 신부 아버지 -->
+      <div class="acc-row" style="display: flex; justify-content: space-between; align-items: center;">
+        <div style="text-align: left;">
+          <p style="font-size: 12px; color: var(--text-sub); margin: 0 0 4px 0;">OO은행 | 예금주: 아버지성함 (혼주)</p>
+          <p style="font-weight: bold; font-size: 16px; margin: 0; letter-spacing: 0.5px;">333-333-333333</p>
         </div>
-        <!-- 신부 카카오페이 버튼 -->
-        <a href="https://qr.kakaopay.com/Ej7qgmufV" target="_blank" class="btn-kakaopay">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3c-5.5 0-10 3.5-10 7.8 0 2.8 1.8 5.2 4.5 6.5-.2 1-.9 3.2-.9 3.3 0 .1.1.2.2.2.1 0 .2 0 .3-.1.4-.3 3.5-2.4 4.1-2.8.6.1 1.2.1 1.8.1 5.5 0 10-3.5 10-7.8S17.5 3 12 3z"/></svg> 
-          카카오페이 송금
-        </a>
+        <div style="display: flex; gap: 10px; align-items: center;">
+          <button onclick="copyAccount('333-333-333333', '신부 아버지')" style="background: none; border: none; padding: 0; cursor: pointer; color: #555; display: flex; align-items: center;" title="복사">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+          </button>
+        </div>
       </div>
-  </div>
+
+      <div style="height: 1px; background-color: #eee; margin: 16px 0;"></div> <!-- 연한 구분선 -->
+
+      <!-- 신부 어머니 -->
+      <div class="acc-row" style="display: flex; justify-content: space-between; align-items: center;">
+        <div style="text-align: left;">
+          <p style="font-size: 12px; color: var(--text-sub); margin: 0 0 4px 0;">OO은행 | 예금주: 어머니성함 (혼주)</p>
+          <p style="font-weight: bold; font-size: 16px; margin: 0; letter-spacing: 0.5px;">444-444-444444</p>
+        </div>
+        <div style="display: flex; gap: 10px; align-items: center;">
+          <button onclick="copyAccount('444-444-444444', '신부 어머니')" style="background: none; border: none; padding: 0; cursor: pointer; color: #555; display: flex; align-items: center;" title="복사">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+          </button>
+        </div>
+      </div>
+
+    </div>
   </section>
+
 
   <!-- 8. RSVP SECTION & BUTTON -->
   <section class="section reveal">
@@ -952,9 +1048,11 @@ font-family: 'MaruBuri', sans-serif !important;
     <div class="section-subtitle-en">RSVP</div>
     <div class="rsvp-intro-box">
       <p class="rsvp-intro-desc">
-        저희의 새로운 시작을 함께해 주실<br>소중한 분들을 위해 정성껏 자리를 준비하려 합니다.<br>참석 여부를 미리 알려주시면 감사하겠습니다.
+        저희의 새로운 시작을 함께해 주실<br>소중한 분들을 위해<br>정성껏 자리를 준비하려 합니다.<br>참석 여부를 미리 알려주시면 감사하겠습니다.
       </p>
-      <button class="btn-pink" onclick="openRsvp()">참석 여부 전달하기</button>
+      <button class="btn-pink" onclick="openRsvp()" style="background-color: #eec8ce; color: #ffffff; border: none; border-radius: 8px; margin-top: 14px; padding: 12px; font-size: 14px; font-weight: bold; width: 100%; box-sizing: border-box; cursor: pointer;">
+        💌 참석 여부 전달하기
+      </button>
     </div>
   </section>
 
@@ -985,8 +1083,8 @@ font-family: 'MaruBuri', sans-serif !important;
     <div class="parking-modal-highlight">
       ※ 대중교통을 이용해 주시면 감사하겠습니다.
     </div>
-    <a href="https://www.laforetwedding.co.kr/info/" target="_blank" class="btn-pink" style="margin-bottom: 12px; display: block; text-decoration: none; font-family: 'Pretendard', -apple-system, sans-serif !important;">
-      🚗주차 및 대중교통 이용안내
+    <a href="https://www.laforetwedding.co.kr/info/" target="_blank" class="btn-pink" style="display: block; text-align: center; text-decoration: none; background-color: #eec8ce; color: #ffffff; border: none; border-radius: 8px; margin-bottom: 12px; padding: 14px; font-size: 15px; font-weight: bold; width: 100%; box-sizing: border-box; font-family: 'Pretendard', -apple-system, sans-serif !important;">
+      🚗 주차 및 대중교통 이용안내
     </a>
     <button class="btn-outline" onclick="closeParkingModal()" style="border: none; width: 100%; padding: 10px; font-family: 'Pretendard', -apple-system, sans-serif !important;">닫기</button>
   </div>
@@ -1016,7 +1114,9 @@ font-family: 'MaruBuri', sans-serif !important;
     <div class="intro-modal-desc">저희의 새로운 시작을 함께해 주실<br>소중한 분들을 위해 정성껏 자리를 준비하려 합니다.<br>참석 여부를 미리 알려주시면 감사하겠습니다.</div>
     <hr class="intro-modal-divider">
     <div class="intro-modal-info"><span style="color: #f6b0b9;">♥</span> 신랑 민교, 신부 윤서<br>📅 2026년 12월 12일 토요일 오후 12시 30분<br>📍 라포레 웨딩홀</div>
-    <button class="btn-pink" onclick="goToDetailedRsvp()">참석 여부 전달</button>
+    <button class="btn-pink" onclick="goToDetailedRsvp()" style="background-color: #eec8ce; color: #ffffff; border: none; border-radius: 8px; margin-top: 10px; padding: 14px; font-size: 15px; font-weight: bold; width: 100%; box-sizing: border-box; cursor: pointer;">
+      💌 참석 여부 전달
+    </button>
     <div class="intro-modal-footer">
       <label class="dont-show-today"><input type="checkbox" id="neverShowTodayIntro"><span>오늘 하루 보지 않기</span></label>
       <button class="btn-outline" onclick="closeIntroRsvp()" style="border: none; padding: 4px 8px;">닫기</button>
@@ -1053,7 +1153,7 @@ font-family: 'MaruBuri', sans-serif !important;
       <span class="rsvp-label">귀한 발걸음 해 주시는 분의 성함을 적어주세요.</span>
       <input type="text" id="guestName" class="rsvp-input-text" placeholder="참석자 본인 성함">
     </div>
-<div class="rsvp-group">
+    <div class="rsvp-group">
       <span class="rsvp-label">동명이인 구분을 위해 핸드폰 뒷번호(4자리)를 적어주세요.</span>
       <input type="text" id="guestPhone" class="rsvp-input-text" placeholder="예: 1234" maxlength="4">
     </div>
@@ -1061,7 +1161,9 @@ font-family: 'MaruBuri', sans-serif !important;
       <span class="rsvp-label">두 사람의 새로운 출발에 따뜻한 한마디를 남겨주세요.</span>
       <textarea id="guestMessage" class="rsvp-textarea" placeholder="축하 메시지나 전달사항을 적어주세요."></textarea>
     </div>
-    <button class="btn-pink" onclick="submitRsvp()" style="margin-top: 6px;">체크 완료하기</button>
+    <button class="btn-pink" onclick="submitRsvp()" style="background-color: #eec8ce; color: #ffffff; border: none; border-radius: 8px; margin-top: 10px; padding: 14px; font-size: 16px; font-weight: bold; width: 100%; box-sizing: border-box; cursor: pointer;">
+      체크 완료하기
+    </button>
     <div class="modal-footer">
       <label class="dont-show-today"><input type="checkbox" id="neverShowToday"><span>오늘 하루 보지 않기</span></label>
       <button class="btn-outline" onclick="closeRsvp()" style="border: none; padding: 4px 8px;">닫기</button>
@@ -1109,10 +1211,10 @@ font-family: 'MaruBuri', sans-serif !important;
               }
             });
           });
-          mapObserver.disconnect(); // 지도 로드 후에는 관찰 해제하여 메모리 확보
+          mapObserver.disconnect();
         }
       });
-    }, { rootMargin: '300px 0px' }); // 화면에 닿기 300px 전부터 미리 로드 시작
+    }, { rootMargin: '300px 0px' });
 
     mapObserver.observe(mapContainer);
   });
@@ -1179,7 +1281,6 @@ font-family: 'MaruBuri', sans-serif !important;
     }
     document.getElementById('introRsvpModal').classList.remove('active');
     
-    // 첫 번째 팝업(참석 여부)을 닫을 때 주차 안내 팝업을 순서대로 띄움
     setTimeout(() => {
       openParkingModal();
     }, 400);
@@ -1269,8 +1370,8 @@ font-family: 'MaruBuri', sans-serif !important;
   }
   function openMap(type) {
     const destination = encodeURIComponent("라포레웨딩홀");
-    const lat = "37.50537"; // 라포레 웨딩홀 위도
-    const lng = "126.76282"; // 라포레 웨딩홀 경도
+    const lat = "37.50537";
+    const lng = "126.76282";
 
     if (type === 'naver') {
       window.open(`https://map.naver.com/v5/search/${destination}`, '_blank');
@@ -1309,7 +1410,7 @@ font-family: 'MaruBuri', sans-serif !important;
   function submitRsvp() {
     const name = document.getElementById('guestName').value.trim();
     if (!name) { alert('성함을 입력해 주세요.'); return; }
-   const phone = document.getElementById('guestPhone').value.trim();
+    const phone = document.getElementById('guestPhone').value.trim();
     if (!phone) { alert('동명이인 구분을 위해 핸드폰 뒷번호 4자리를 입력해 주세요.'); return; }
     const side = document.querySelector('#sideGroup .btn-option.selected').getAttribute('data-value');
     const attend = document.querySelector('#attendGroup .btn-option.selected').getAttribute('data-value');
@@ -1334,8 +1435,8 @@ font-family: 'MaruBuri', sans-serif !important;
     })(document.createElement('form'));
     alert(`${name}님, 참석 여부가 성공적으로 전달되었습니다. 감사합니다!`);
     closeRsvp();
-    }
+  }
 </script>
 
 </body>
-</html>
+</html>\

@@ -644,7 +644,7 @@
     .intro-modal-close { position: absolute; top: 0; right: 0; background: none; border: none; font-size: 22px; color: var(--text-sub); cursor: pointer; }
     .intro-modal-desc { font-size: 13px; color: var(--text-sub); text-align: center; line-height: 1.7; margin-bottom: 20px; }
     .intro-modal-divider { border: none; border-top: 1px dashed var(--line-color); margin-bottom: 20px; }
-    .intro-modal-info { font-size: 13px; color: var(--text-main); line-height: 2.2; margin-bottom: 26px; }
+    .intro-modal-info { font-size: 13px; color: var(--text-main); line-height: 2.2; margin-bottom: 10px; }
     .intro-modal-footer { display: flex; justify-content: space-between; align-items: center; margin-top: 16px; padding-top: 12px; border-top: 1px solid var(--line-color); }
 
     .custom-modal {
@@ -736,7 +736,7 @@
     <div class="profile-grid">
       <!-- 신랑 프로필 -->
       <div class="profile-card reveal">
-        <div class="profile-img"><img src="images/photo-01.jpg" alt="신랑 사진"></div>
+        <div class="profile-img"><img src="images/profile-groom.jpg" alt="신랑 사진"></div>
         <div class="profile-info">
           <div class="profile-name-row">
             <div class="profile-name"><span class="profile-role">신랑</span> 민교</div>
@@ -755,7 +755,7 @@
 
       <!-- 신부 프로필 -->
       <div class="profile-card reverse reveal">
-        <div class="profile-img"><img src="images/photo-02.jpg" alt="신부 사진"></div>
+        <div class="profile-img"><img src="images/profile-bride.jpg" alt="신부 사진"></div>
         <div class="profile-info">
           <div class="profile-name-row">
             <div class="profile-actions">
@@ -816,12 +816,12 @@
     <div class="section-subtitle-en reveal">Gallery</div>
     <div class="gallery-grid-3x3 reveal" id="galleryGrid">
       <div class="photo-item" onclick="openLightbox(0)"><img src="images/photo-01.jpg" alt="갤러리1"></div>
-      <div class="photo-item" onclick="openLightbox(1)"><img src="images/photo-02.jpg" alt="갤러리2"></div>
+      <div class="photo-item" onclick="openLightbox(1)"><img src="images/my.png" alt="갤러리2"></div>
       <div class="photo-item" onclick="openLightbox(2)"><img src="images/photo-03.jpg" alt="갤러리3"></div>
       <div class="photo-item" onclick="openLightbox(3)"><img src="images/photo-04.jpg" alt="갤러리4"></div>
       <div class="photo-item" onclick="openLightbox(4)"><img src="images/photo-05.jpg" alt="갤러리5"></div>
       <div class="photo-item" onclick="openLightbox(5)"><img src="images/photo-06.jpg" alt="갤러리6"></div>
-      <div class="photo-item" onclick="openLightbox(6)"><img src="images/photo-07.jpg" alt="갤러리7"></div>
+      <div class="photo-item" onclick="openLightbox(6)"><img src="images/forever3.png" alt="갤러리7"></div>
       <div class="photo-item" onclick="openLightbox(7)"><img src="images/photo-08.jpg" alt="갤러리8"></div>
       <div class="photo-item" onclick="openLightbox(8)"><img src="images/photo-09.jpg" alt="갤러리9"></div>
       <div class="photo-item" onclick="openLightbox(9)"><img src="images/photo-10.jpg" alt="갤러리10"></div>
@@ -830,16 +830,16 @@
 
       <div class="photo-item gallery-expandable" onclick="openLightbox(12)"><img src="images/photo-13.jpg" alt="갤러리13"></div>
       <div class="photo-item gallery-expandable" onclick="openLightbox(13)"><img src="images/photo-14.jpg" alt="갤러리14"></div>
-      <div class="photo-item gallery-expandable" onclick="openLightbox(14)"><img src="images/photo-15.jpg" alt="갤러리15"></div>
+      <div class="photo-item gallery-expandable" onclick="openLightbox(14)"><img src="images/love3.png" alt="갤러리15"></div>
       <div class="photo-item gallery-expandable" onclick="openLightbox(15)"><img src="images/photo-16.jpg" alt="갤러리16"></div>
       <div class="photo-item gallery-expandable" onclick="openLightbox(16)"><img src="images/photo-17.jpg" alt="갤러리17"></div>
       <div class="photo-item gallery-expandable" onclick="openLightbox(17)"><img src="images/photo-18.jpg" alt="갤러리18"></div>
-      <div class="photo-item gallery-expandable" onclick="openLightbox(18)"><img src="images/photo-19.jpg" alt="갤러리19"></div>
+      <div class="photo-item gallery-expandable" onclick="openLightbox(18)"><img src="images/you3.png" alt="갤러리19"></div>
       <div class="photo-item gallery-expandable" onclick="openLightbox(19)"><img src="images/photo-20.jpg" alt="갤러리20"></div>
       <div class="photo-item gallery-expandable" onclick="openLightbox(20)"><img src="images/photo-21.jpg" alt="갤러리21"></div>
       <div class="photo-item gallery-expandable" onclick="openLightbox(21)"><img src="images/photo-22.jpg" alt="갤러리22"></div>
       <div class="photo-item gallery-expandable" onclick="openLightbox(22)"><img src="images/photo-23.jpg" alt="갤러리23"></div>
-      <div class="photo-item gallery-expandable" onclick="openLightbox(23)"><img src="images/photo-24.jpg" alt="갤러리24"></div>
+      <div class="photo-item gallery-expandable" onclick="openLightbox(23)"><img src="images/us3.png" alt="갤러리24"></div>
     </div>
     <button class="btn-gallery-toggle reveal" id="galleryToggleBtn" onclick="toggleGallery()">사진 더보기 ▼</button>
   </section>
@@ -926,7 +926,7 @@
    <div class="section-title-pink reveal">마음 전하실 곳</div>
    <div class="section-subtitle-en reveal">ACCOUNT</div>
     <p style="text-align: center; margin-bottom: 24px; font-size: 14px; line-height: 1.6; color: var(--text-sub);">
-      참석이 어려우신 분들을 위해 조심스레 마음 전하실 곳을 남깁니다.<br>
+      참석이 어려우신 분들을 위해<br>조심스레 마음 전하실 곳을 남깁니다.<br>
       멀리서 보내주시는 축복도 잊지 않고 예쁘게 살겠습니다.
     </p>
 
@@ -1051,7 +1051,7 @@
         저희의 새로운 시작을 함께해 주실<br>소중한 분들을 위해<br>정성껏 자리를 준비하려 합니다.<br>참석 여부를 미리 알려주시면 감사하겠습니다.
       </p>
       <button class="btn-pink" onclick="openRsvp()" style="background-color: #eec8ce; color: #ffffff; border: none; border-radius: 8px; margin-top: 14px; padding: 12px; font-size: 14px; font-weight: bold; width: 100%; box-sizing: border-box; cursor: pointer;">
-        💌 참석 여부 전달하기
+        💌 참석 여부 전달
       </button>
     </div>
   </section>
@@ -1295,14 +1295,14 @@
   function closeParkingModal() { document.getElementById('parkingModal').classList.remove('active'); }
 
   const galleryImages = [
-    'images/photo-01.jpg', 'images/photo-02.jpg', 'images/photo-03.jpg',
+    'images/photo-01.jpg', 'images/my.png', 'images/photo-03.jpg',
     'images/photo-04.jpg', 'images/photo-05.jpg', 'images/photo-06.jpg',
-    'images/photo-07.jpg', 'images/photo-08.jpg', 'images/photo-09.jpg',
+    'images/forever3.png', 'images/photo-08.jpg', 'images/photo-09.jpg',
     'images/photo-10.jpg', 'images/photo-11.jpg', 'images/photo-12.jpg',
-    'images/photo-13.jpg', 'images/photo-14.jpg', 'images/photo-15.jpg',
+    'images/photo-13.jpg', 'images/photo-14.jpg', 'images/love3.png',
     'images/photo-16.jpg', 'images/photo-17.jpg', 'images/photo-18.jpg',
-    'images/photo-19.jpg', 'images/photo-20.jpg', 'images/photo-21.jpg',
-    'images/photo-22.jpg', 'images/photo-23.jpg', 'images/photo-24.jpg'
+    'images/you3.png', 'images/photo-20.jpg', 'images/photo-21.jpg',
+    'images/photo-22.jpg', 'images/photo-23.jpg', 'images/us3.png'
   ];
   let currentGalleryIndex = 0;
 

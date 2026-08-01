@@ -8,13 +8,6 @@
   >
   <title>민교 & 윤서</title>
 
-  <!-- Fonts: Caveat, Komika Title (Pretendard와 MaruBuri는 아래 style 태그 내부에 적용) -->
-  <link
-    rel="stylesheet"
-    href="https://fonts.googleapis.com/css2?family=Caveat:wght@600&display=swap"
-  >
-  <link href="https://fonts.cdnfonts.com/css/komika-title" rel="stylesheet">
-
   <!-- 카카오 지도 API 스크립트 -->
   <script type="text/javascript" src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=44a60d269264bd371040375c428f38ee&libraries=services&autoload=false"></script>
 
@@ -31,8 +24,10 @@
     }
 
     .my-script-text {
-      font-family: 'Alex Brush', cursive !important;
-      font-size: 34px !important;
+      font-family: 'Allura', cursive !important;
+      font-size: 28px !important;
+      font-weight: 600 !important;
+      color: #777777; !important;           
     }
 
     :root {
@@ -244,12 +239,13 @@
     }
 
     .cover-script {
-      font-family: 'Komika Title', sans-serif !important;
-      font-size: 42px;
+      font-family: 'Parisienne', cursive !important;
+font-weight: normal;
+      font-size: 50px;
       color: #ffcad4;
       line-height: 1.15;
       letter-spacing: 1.5px;
-      font-weight: bold;
+      font-weight: normal;
       margin: 0 auto;
     }
 
@@ -695,13 +691,17 @@
     .dont-show-today { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--text-sub); cursor: pointer; }
 
     .call-modal-body { text-align: center; padding: 10px 0; }
-    .call-phone-num { font-size: 22px; font-weight: bold; color: var(--text-main); margin: 12px 0 20px; letter-spacing: 1px; }
-    .call-btn-group { display: flex; gap: 10px; width: 100%; }
-    .btn-call-action { flex: 1; padding: 14px; border-radius: 8px; font-size: 13px; font-weight: bold; text-decoration: none; text-align: center; cursor: pointer; }
+   .call-phone-num { font-size: 22px; font-weight: bold; color: var(--text-main); margin: 12px 0 20px; letter-spacing: 1px; }
+   .call-btn-group { display: flex; gap: 10px; width: 100%; }
+   .btn-call-action { flex: 1; padding: 14px; border-radius: 8px; font-size: 13px; font-weight: bold; text-decoration: none; text-align: center; cursor: pointer; }
   </style>
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&display=swap" rel="stylesheet"></head>
+  <link href="https://fonts.googleapis.com/css2?family=Parisienne&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Allura&display=swap" rel="stylesheet">
+
+</head>
 <body class="stop-scroll" oncontextmenu="return false" ondragstart="return false">
 
 <!-- 0. 오프닝 레이어 -->
@@ -954,7 +954,7 @@
           <button onclick="copyAccount('000-000-000000', '신랑')" style="background: none; border: none; padding: 0; cursor: pointer; color: #555; display: flex; align-items: center;" title="복사">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
           </button>
-          <a href="#" target="_blank" style="display: flex; justify-content: center; align-items: center; width: 26px; height: 26px; background-color: #FEE500; border-radius: 6px; text-decoration: none;" title="카카오페이 송금">
+          <a href="https://qr.kakaopay.com/Ej77hO5G1" target="_blank" style="display: flex; justify-content: center; align-items: center; width: 26px; height: 26px; background-color: #FEE500; border-radius: 6px; text-decoration: none;" title="카카오페이 송금">
             <svg width="15" height="15" viewBox="0 0 24 24" fill="#000"><path d="M12 3c-5.5 0-10 3.5-10 7.8 0 2.8 1.8 5.2 4.5 6.5-.2 1-.9 3.2-.9 3.3 0 .1.1.2.2.2.1 0 .2 0 .3-.1.4-.3 3.5-2.4 4.1-2.8.6.1 1.2.1 1.8.1 5.5 0 10-3.5 10-7.8S17.5 3 12 3z"/></svg>
           </a>
         </div>

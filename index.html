@@ -23,7 +23,7 @@
       font-style: normal;
     }
  
-.my-script-text {
+    .my-script-text {
       font-family: 'Allura', cursive !important;
       font-size: 28px !important;
       font-weight: 400 !important;
@@ -701,6 +701,18 @@
     body.large-text-mode .profile-name { font-size: 22px; }
     body.large-text-mode .profile-role { font-size: 16px; }
     body.large-text-mode .profile-parents { font-size: 16px; }
+
+    /* --- 예식 안내 & 달력 & 카운트다운 크게 보기 추가 세팅 --- */
+    body.large-text-mode .wedding-date-desc { font-size: 18px !important; line-height: 1.8 !important; }
+    body.large-text-mode .calendar-header { font-size: 25px !important; }
+    body.large-text-mode .calendar-grid { font-size: 16px !important; }
+    body.large-text-mode .calendar-grid div { height: 38px !important; }
+    body.large-text-mode .weekday { font-size: 14px !important; }
+    body.large-text-mode .wedding-day-heart::before { font-size: 38px !important; }
+    body.large-text-mode .dday-text { font-size: 18px !important; }
+    body.large-text-mode .circle-box { width: 72px !important; height: 72px !important; font-size: 22px !important; }
+    body.large-text-mode .circle-label { font-size: 13px !important; }
+
     body.large-text-mode .location-title { font-size: 22px; }
     body.large-text-mode .location-addr { font-size: 16px; }
     body.large-text-mode .transport-box { font-size: 16px; }
@@ -710,9 +722,8 @@
     body.large-text-mode .guest-snap-desc { font-size: 16px; }
     body.large-text-mode .rsvp-intro-desc { font-size: 16px; }
     body.large-text-mode .btn-pink { font-size: 17px; }
-    body.large-text-mode .wedding-date-info { font-size: 19px !important; line-height: 1.6; }
 
-    /* --- 팝업창(모달) 큰 글씨 모드 추가 --- */
+    /* --- 팝업창(모달) 큰 글씨 모드 --- */
     body.large-text-mode .custom-modal-content div,
     body.large-text-mode .custom-modal-content span,
     body.large-text-mode .custom-modal-content p {
@@ -821,7 +832,7 @@
   <section class="section" style="background: #ffffff;">
     <div class="section-title-pink reveal">예식 안내</div>
     <div class="section-subtitle-en reveal">Wedding Day</div>
-    <p class="reveal" style="font-size: 14px; margin-bottom: 24px;">
+    <p class="reveal wedding-date-desc" style="font-size: 14px; margin-bottom: 24px;">
       2026년 12월 12일 토요일 오후 12시 30분<br>라포레 웨딩홀
     </p>
 
@@ -841,7 +852,7 @@
       </div>
     </div>
 
-    <p class="reveal" style="margin-top: 40px; font-size: 15px;">
+    <p class="reveal dday-text" style="margin-top: 40px; font-size: 15px;">
       민교<span style="color: #f6b0b9;">♥</span>윤서의 결혼식까지 <span id="days" style="font-weight: bold; color: #f6b0b9;">0</span>일 남았습니다.
     </p>
 
@@ -1099,7 +1110,7 @@
   </section>
 
 
-<!-- 9. NOTICE -->
+  <!-- 9. NOTICE (전달사항) -->
   <section class="section reveal" style="background: #ffffff;">
     <div class="section-title-pink">전달사항</div>
     <div class="section-subtitle-en">NOTICE</div>
@@ -1265,7 +1276,6 @@
     const mapContainer = document.getElementById('map');
     let isMapLoaded = false;
 
-    // 지도가 화면에 보이기 직전에 로드되도록 Observer 설정
     const mapObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting && !isMapLoaded) {
@@ -1358,7 +1368,7 @@
     }
   }
 
-  /* 팝업 순서 제어 함수 흐름 변경: 큰글씨 -> 하객스냅 -> 주차안내 -> 참석여부 */
+  /* 팝업 순서 제어 스크립트: 큰글씨 -> 하객스냅 -> 주차안내 -> 참석여부 */
   
   // 1. 큰 글씨 선택 팝업 제어
   function openTextSizeModal() {
@@ -1368,6 +1378,7 @@
   function closeTextSizeModal(isLargeMode) {
     document.getElementById('textSizeModal').classList.remove('active');
     
+    // '크게 보기'를 눌렀을 때만 큰 글씨 모드 켜기
     if (isLargeMode) {
       document.body.classList.add('large-text-mode');
     }

@@ -22,12 +22,12 @@
       font-weight: normal;
       font-style: normal;
     }
-
-    .my-script-text {
+ 
+.my-script-text {
       font-family: 'Allura', cursive !important;
       font-size: 28px !important;
-      font-weight: 600 !important;
-      color: #777777; !important;           
+      font-weight: 400 !important;
+      color: #707070 !important;           
     }
 
     :root {
@@ -240,12 +240,11 @@
 
     .cover-script {
       font-family: 'Parisienne', cursive !important;
-font-weight: normal;
+      font-weight: normal;
       font-size: 50px;
       color: #ffcad4;
       line-height: 1.15;
       letter-spacing: 1.5px;
-      font-weight: normal;
       margin: 0 auto;
     }
 
@@ -571,7 +570,7 @@ font-weight: normal;
 
     .account-accordion { width: 100%; margin-top: 16px; }
     .acc-header { width: 100%; padding: 16px; background: #ffffff; border: 1px solid var(--line-color); border-radius: 8px; display: flex; justify-content: space-between; align-items: center; font-size: 15px; cursor: pointer; margin-bottom: 8px; }
-   .acc-body { 
+    .acc-body { 
       display: none; 
       width: 100%; 
       padding: 16px; 
@@ -691,9 +690,48 @@ font-weight: normal;
     .dont-show-today { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--text-sub); cursor: pointer; }
 
     .call-modal-body { text-align: center; padding: 10px 0; }
-   .call-phone-num { font-size: 22px; font-weight: bold; color: var(--text-main); margin: 12px 0 20px; letter-spacing: 1px; }
-   .call-btn-group { display: flex; gap: 10px; width: 100%; }
-   .btn-call-action { flex: 1; padding: 14px; border-radius: 8px; font-size: 13px; font-weight: bold; text-decoration: none; text-align: center; cursor: pointer; }
+    .call-phone-num { font-size: 22px; font-weight: bold; color: var(--text-main); margin: 12px 0 20px; letter-spacing: 1px; }
+    .call-btn-group { display: flex; gap: 10px; width: 100%; }
+    .btn-call-action { flex: 1; padding: 14px; border-radius: 8px; font-size: 13px; font-weight: bold; text-decoration: none; text-align: center; cursor: pointer; }
+
+    /* --- 큰 글씨 모드가 켜졌을 때 커질 글자들 세팅 --- */
+    body.large-text-mode .section-title-pink { font-size: 26px; }
+    body.large-text-mode .cover-date-banner { font-size: 17px; }
+    body.large-text-mode .invitation-text { font-size: 19px; line-height: 2.3; }
+    body.large-text-mode .profile-name { font-size: 22px; }
+    body.large-text-mode .profile-role { font-size: 16px; }
+    body.large-text-mode .profile-parents { font-size: 16px; }
+    body.large-text-mode .location-title { font-size: 22px; }
+    body.large-text-mode .location-addr { font-size: 16px; }
+    body.large-text-mode .transport-box { font-size: 16px; }
+    body.large-text-mode .transport-box span { font-size: 15px !important; }
+    body.large-text-mode .acc-header { font-size: 18px; }
+    body.large-text-mode .acc-body p { font-size: 15px !important; }
+    body.large-text-mode .guest-snap-desc { font-size: 16px; }
+    body.large-text-mode .rsvp-intro-desc { font-size: 16px; }
+    body.large-text-mode .btn-pink { font-size: 17px; }
+    body.large-text-mode .wedding-date-info { font-size: 19px !important; line-height: 1.6; }
+
+    /* --- 팝업창(모달) 큰 글씨 모드 추가 --- */
+    body.large-text-mode .custom-modal-content div,
+    body.large-text-mode .custom-modal-content span,
+    body.large-text-mode .custom-modal-content p {
+      font-size: 16px !important;
+      line-height: 1.7 !important;
+    }
+    body.large-text-mode .custom-modal-content .intro-modal-title,
+    body.large-text-mode .custom-modal-content .parking-modal-title {
+      font-size: 22px !important;
+      line-height: 1.4 !important;
+    }
+    body.large-text-mode .custom-modal-content .call-phone-num { font-size: 26px !important; }
+    body.large-text-mode .custom-modal-content .intro-modal-close { font-size: 26px !important; }
+    body.large-text-mode .custom-modal-content .btn-option,
+    body.large-text-mode .custom-modal-content .btn-outline { font-size: 15px !important; }
+    body.large-text-mode .custom-modal-content .rsvp-input-text,
+    body.large-text-mode .custom-modal-content .rsvp-textarea { font-size: 16px !important; }
+    body.large-text-mode .custom-modal-content .btn-pink { font-size: 17px !important; }
+    body.large-text-mode .dont-show-today span { font-size: 14px !important; }
   </style>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -714,7 +752,6 @@ font-weight: normal;
 
   <!-- 1. MAIN COVER -->
   <div class="main-cover">
-    <!-- 비동기 로딩을 위한 decoding 속성 추가 -->
     <img src="images/main.jpg" alt="메인 사진" class="main-cover-img" decoding="async">
     <div class="cover-overlay-text" id="mainCoverText">
       <div class="cover-script">We're getting<br>Married!</div>
@@ -784,7 +821,7 @@ font-weight: normal;
   <section class="section" style="background: #ffffff;">
     <div class="section-title-pink reveal">예식 안내</div>
     <div class="section-subtitle-en reveal">Wedding Day</div>
-    <p class="reveal" style="font-size: 14px; color: var(--text-sub); margin-bottom: 24px;">
+    <p class="reveal" style="font-size: 14px; margin-bottom: 24px;">
       2026년 12월 12일 토요일 오후 12시 30분<br>라포레 웨딩홀
     </p>
 
@@ -851,13 +888,12 @@ font-weight: normal;
   </section>
 
   <!-- 5. GUEST SNAP -->
-  <!-- 5. GUEST SNAP -->
   <section class="section" style="background: #ffffff;">
     <div class="section-title-pink reveal">하객 스냅</div>
     <div class="section-subtitle-en reveal">Guest Snap</div>
     <div class="guest-snap-box reveal">
       <p class="guest-snap-desc">
-        예식 날 하객 여러분께서 직접 찍어주신<br>소중한 사진과 영상을 공유해 주세요!<br>드롭박스 링크를 통해<br>편하게 업로드하실 수 있습니다.<br>어려우시면<br>카카오톡으로 보내주셔도 돼요!
+        예식 날 하객 여러분께서 직접 찍어주신<br>소중한 사진과 영상을 공유해 주세요!<br>아래버튼을 눌러 편하게 업로드하실 수 있습니다.<br>          카카오톡으로 보내주셔도 감사합니다♥
       </p>
       <a href="https://www.dropbox.com/request/iq5dleb189bjqpuvhwnw" target="_blank" class="btn-pink" style="display: block; text-align: center; text-decoration: none; background-color: #eec8ce; color: #ffffff; border: none; border-radius: 8px; margin-top: 14px; padding: 12px; font-size: 14px; font-weight: bold; width: 100%; box-sizing: border-box;">
         📸 사진 올리러 가기 
@@ -902,7 +938,7 @@ font-weight: normal;
       <strong>대중교통 안내</strong>
       <p style="line-height: 1.8; margin-bottom: 28px;">
         <strong>🚉지하철 이용 시</strong>
-        <span style="font-size: 13px; color: var(--text-sub); letter-spacing: -0.4px;">7호선 상동역 8번 출구 앞 도보 3분</span><br>
+        <span style="font-size: 13px; color: var(--text-sub); letter-spacing: -0.4px;">7호선 상동역 8번 출구 앞 도보 3분</span><br><br>
         <strong>🚌버스 이용 시</strong>
         <span style="font-size: 13px; color: var(--text-sub); letter-spacing: -0.4px;">상동역 8번출구.세이브존 정류장 하차</span>
       </p>
@@ -913,7 +949,6 @@ font-weight: normal;
       <p style="line-height: 1.8;">
         <strong>🅿️제 1 주차장 : 다승프라자 (라포레 웨딩홀 건물)</strong>
         <span style="font-size: 13px; color: var(--text-sub); letter-spacing: -0.4px;">경기 부천시 원미구 길주로 125 (3시간 무료)</span><br><br>
-
         <strong>🅿️제 2 주차장 : 부천테크노파크 2단지</strong>
         <span style="font-size: 13px; color: var(--text-sub); letter-spacing: -0.4px;">경기 부천시 원미구 송내대로 388 (3시간 무료)</span><br><br>
 
@@ -923,7 +958,7 @@ font-weight: normal;
         🚌 셔틀버스 운행 : 예식 1시간 30분 전부터 상시 운행
       </div>
       <button class="btn-pink" style="background-color: #eec8ce; color: #ffffff; border: none; border-radius: 8px; margin-top: 14px; padding: 12px; font-size: 14px; font-weight: bold; width: 100%; box-sizing: border-box; cursor: pointer;" onclick="openParkingModal()">
-        🚗 주차장 및 대중교통 이용안내 
+        🚗 하객 전용 주차장 & 대중교통 이용안내 
       </button> 
     </div>
   </section>
@@ -1063,6 +1098,20 @@ font-weight: normal;
     </div>
   </section>
 
+
+<!-- 9. NOTICE -->
+  <section class="section reveal" style="background: #ffffff;">
+    <div class="section-title-pink">전달사항</div>
+    <div class="section-subtitle-en">NOTICE</div>
+    <div class="rsvp-intro-box">
+      <p class="rsvp-intro-desc" style="margin-bottom: 0;">
+        화환은 정중히 사양합니다.<br>
+        따뜻한 마음만 감사히 받겠습니다.<br><br>
+        (여기에 원하시는 전달사항 내용을 자유롭게 수정해서 적어주세요.)
+      </p>
+    </div>
+  </section>
+
 </div>
 
 <!-- 모달창들 -->
@@ -1074,24 +1123,53 @@ font-weight: normal;
   <button class="lightbox-nav-btn next" onclick="nextImage()">❯</button>
 </div>
 
-<!-- 주차 및 대중교통 이용안내 팝업창 -->
+<!-- 1. 큰 글씨 안내 팝업창 -->
+<div class="custom-modal" id="textSizeModal">
+  <div class="custom-modal-content" style="text-align: center; max-width: 320px;">
+    <div class="intro-modal-title" style="margin-bottom: 16px;">큰 글씨로 보시겠습니까?</div>
+    <div style="font-family: 'Pretendard', sans-serif; font-size: 13px; color: var(--text-sub); line-height: 1.7; margin-bottom: 24px;">
+      화면의 글씨를 크게 확대하여<br>조금 더 편안하게 보실 수 있습니다.
+    </div>
+    <div style="display: flex; gap: 8px;">
+      <button class="btn-outline" onclick="closeTextSizeModal(false)" style="flex: 1; padding: 12px; border: 1px solid var(--line-color); color: var(--text-sub); font-family: 'Pretendard', sans-serif;">기본 크기</button>
+      <button class="btn-pink" onclick="closeTextSizeModal(true)" style="flex: 1; padding: 12px; font-size: 14px; font-weight: bold; background-color: #eec8ce; color: #ffffff; border: none; font-family: 'Pretendard', sans-serif;">크게 보기</button>
+    </div>
+  </div>
+</div>
+
+<!-- 2. 하객 스냅 안내 팝업창 -->
+<div class="custom-modal" id="guestSnapModal">
+  <div class="custom-modal-content" style="text-align: center;">
+    <div class="intro-modal-header">
+      <div class="intro-modal-title parking-modal-title">하객 스냅 안내</div>
+      <button class="intro-modal-close" onclick="closeGuestSnapModal()">✕</button>
+    </div>
+    <div style="font-family: 'Pretendard', -apple-system, sans-serif !important; font-size: 13px; color: var(--text-sub); line-height: 1.7; margin-bottom: 16px; text-align: center;">
+      예식 날 하객 여러분께서 직접 찍어주신<br>소중한 사진과 영상을 공유해 주세요!<br>아래버튼을 눌러 편하게 업로드하실 수 있습니다.<br>          카카오톡으로 보내주셔도 감사합니다♥
+    </div>
+    <a href="https://www.dropbox.com/request/iq5dleb189bjqpuvhwnw" target="_blank" class="btn-pink" style="display: block; text-align: center; text-decoration: none; background-color: #eec8ce; color: #ffffff; border: none; border-radius: 8px; margin-bottom: 12px; padding: 14px; font-size: 15px; font-weight: bold; width: 100%; box-sizing: border-box; font-family: 'Pretendard', -apple-system, sans-serif !important;">
+      📸 사진 올리러 가기
+    </a>
+    <button class="btn-outline" onclick="closeGuestSnapModal()" style="border: none; width: 100%; padding: 10px; font-family: 'Pretendard', -apple-system, sans-serif !important;">다음 안내 보기</button>
+  </div>
+</div>
+
+<!-- 3. 주차 & 대중교통 이용안내 팝업창 -->
 <div class="custom-modal" id="parkingModal">
   <div class="custom-modal-content" style="text-align: center;">
     <div class="intro-modal-header">
-      <div class="intro-modal-title parking-modal-title">주차장 및 대중교통 안내</div>
+      <div class="intro-modal-title parking-modal-title">주차 & 대중교통 이용안내</div>
       <button class="intro-modal-close" onclick="closeParkingModal()">✕</button>
     </div>
     <div style="font-family: 'Pretendard', -apple-system, sans-serif !important; font-size: 13px; color: var(--text-sub); line-height: 1.7; margin-bottom: 16px; text-align: center;">
       라포레 웨딩홀의 상세 주차장 및 대중교통 이용 안내를<br>확인하실 수 있습니다.
     </div>
-    <div style="margin-bottom: 20px;">
-      <img src="https://www.laforetwedding.co.kr/location/parking-qr.png" alt="주차 안내 QR코드" style="width: 140px; height: 140px; object-fit: contain; border-radius: 8px; border: 1px solid var(--line-color);">
-    </div>
+    
     <div class="parking-modal-highlight">
       ※ 대중교통을 이용해 주시면 감사하겠습니다.
     </div>
     <a href="https://www.laforetwedding.co.kr/info/" target="_blank" class="btn-pink" style="display: block; text-align: center; text-decoration: none; background-color: #eec8ce; color: #ffffff; border: none; border-radius: 8px; margin-bottom: 12px; padding: 14px; font-size: 15px; font-weight: bold; width: 100%; box-sizing: border-box; font-family: 'Pretendard', -apple-system, sans-serif !important;">
-      🚗 주차 및 대중교통 이용안내
+      🚗 하객 전용 주차장 & 대중교통 이용안내
     </a>
     <button class="btn-outline" onclick="closeParkingModal()" style="border: none; width: 100%; padding: 10px; font-family: 'Pretendard', -apple-system, sans-serif !important;">닫기</button>
   </div>
@@ -1112,6 +1190,7 @@ font-weight: normal;
   </div>
 </div>
 
+<!-- 4. 참석 여부 팝업창 (안내형 & 상세 입력형) -->
 <div class="custom-modal" id="introRsvpModal">
   <div class="custom-modal-content">
     <div class="intro-modal-header">
@@ -1275,11 +1354,60 @@ font-weight: normal;
     const hideUntil = localStorage.getItem('hideIntroRsvpUntil');
     const now = new Date().getTime();
     if (!hideUntil || now > parseInt(hideUntil)) {
-      setTimeout(() => { openIntroRsvp(); }, 1200);
+      setTimeout(() => { openTextSizeModal(); }, 1200);
     }
   }
 
-  function openIntroRsvp() { document.getElementById('introRsvpModal').classList.add('active'); }
+  /* 팝업 순서 제어 함수 흐름 변경: 큰글씨 -> 하객스냅 -> 주차안내 -> 참석여부 */
+  
+  // 1. 큰 글씨 선택 팝업 제어
+  function openTextSizeModal() {
+    document.getElementById('textSizeModal').classList.add('active');
+  }
+
+  function closeTextSizeModal(isLargeMode) {
+    document.getElementById('textSizeModal').classList.remove('active');
+    
+    if (isLargeMode) {
+      document.body.classList.add('large-text-mode');
+    }
+
+    // 큰글씨 팝업 닫힌 후 -> 2. 하객 스냅 팝업 호출
+    setTimeout(() => { 
+      openGuestSnapModal(); 
+    }, 400);
+  }
+
+  // 2. 하객 스냅 안내 모달 제어
+  function openGuestSnapModal() { 
+    document.getElementById('guestSnapModal').classList.add('active'); 
+  }
+  function closeGuestSnapModal() { 
+    document.getElementById('guestSnapModal').classList.remove('active');
+
+    // 하객스냅 팝업 닫힌 후 -> 3. 주차 안내 팝업 호출
+    setTimeout(() => {
+      openParkingModal();
+    }, 400);
+  }
+
+  // 3. 주차 안내 모달 제어
+  function openParkingModal() { 
+    document.getElementById('parkingModal').classList.add('active'); 
+  }
+  function closeParkingModal() { 
+    document.getElementById('parkingModal').classList.remove('active'); 
+
+    // 주차안내 팝업 닫힌 후 -> 4. 참석 여부(Intro) 팝업 호출
+    setTimeout(() => {
+      openIntroRsvp();
+    }, 400);
+  }
+
+  // 4. 참석 여부 관련 팝업 제어
+  function openIntroRsvp() { 
+    document.getElementById('introRsvpModal').classList.add('active'); 
+  }
   function closeIntroRsvp() {
     const chk = document.getElementById('neverShowTodayIntro');
     if (chk && chk.checked) {
@@ -1287,19 +1415,11 @@ font-weight: normal;
       localStorage.setItem('hideIntroRsvpUntil', expireTime);
     }
     document.getElementById('introRsvpModal').classList.remove('active');
-    
-    setTimeout(() => {
-      openParkingModal();
-    }, 400);
   }
   function goToDetailedRsvp() {
     document.getElementById('introRsvpModal').classList.remove('active');
     setTimeout(() => { openRsvp(); }, 300);
   }
-
-  /* 주차 안내 모달 제어 함수 */
-  function openParkingModal() { document.getElementById('parkingModal').classList.add('active'); }
-  function closeParkingModal() { document.getElementById('parkingModal').classList.remove('active'); }
 
   const galleryImages = [
     'images/photo-01.jpg', 'images/my.png', 'images/photo-03.jpg',
@@ -1446,4 +1566,4 @@ font-weight: normal;
 </script>
 
 </body>
-</html>\
+</html>

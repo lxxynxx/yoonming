@@ -777,7 +777,7 @@
 
   <!-- 2. INVITATION & PROFILE -->
   <section class="section" style="padding-top: 60px;">
-    <div class="section-title-pink reveal">저희 결혼합니다</div>
+    <div class="section-title-pink reveal">초대합니다</div>
     <div class="section-subtitle-en reveal">Invitation</div>
     <div class="invitation-text reveal">
       눈부신 겨울 햇살 아래,<br>
@@ -1227,14 +1227,14 @@
     <div class="rsvp-group">
       <span class="rsvp-label">신랑 민교, 신부 윤서 중 어느 분과의 인연이신가요?</span>
       <div class="option-buttons" id="sideGroup">
-        <button class="btn-option selected" onclick="selectOption(this)" data-value="신랑측">신랑측</button>
-        <button class="btn-option" onclick="selectOption(this)" data-value="신부측">신부측</button>
+        <button class="btn-option selected" onclick="selectOption(this)" data-value="신랑 측">신랑측</button>
+        <button class="btn-option" onclick="selectOption(this)" data-value="신부 측">신부측</button>
       </div>
     </div>
     <div class="rsvp-group">
       <span class="rsvp-label">12월 12일 토요일, 예식에 함께해 주실 수 있나요?</span>
       <div class="option-buttons" id="attendGroup">
-        <button class="btn-option selected" onclick="selectOption(this)" data-value="참석할게요">참석할게요</button>
+        <button class="btn-option selected" onclick="selectOption(this)" data-value="참석 할게요">참석할게요</button>
         <button class="btn-option" onclick="selectOption(this)" data-value="참석이 어려워요">참석이 어려워요</button>
       </div>
     </div>
@@ -1555,7 +1555,7 @@
     const meal = document.querySelector('#mealGroup .btn-option.selected').getAttribute('data-value');
     const message = document.getElementById('guestMessage').value.trim();
 
-    const formActionUrl = "https://docs.google.com/forms/d/e/1FAIpQLSdcaOzy7_-6suxzgx-MccjhcBfSIqz1lGh-prDds1Bko2l8TA/formResponse";
+    const formActionUrl = "https://docs.google.com/forms/d/1tN8btDPECFlPzMtfk4Pi8OQSBHhnCa8FqAk797CnQj0/formResponse";
     (form => {
       form.method = 'POST'; form.action = formActionUrl; form.target = 'hidden_iframe';
       const data = {

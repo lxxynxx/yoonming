@@ -1382,7 +1382,7 @@
     }
   }
 
-  /* 팝업 순서 제어 스크립트: 큰글씨 -> 하객스냅 -> 주차안내 -> 참석여부 */
+/* 팝업 순서 제어 스크립트: 큰글씨 -> 하객스냅 -> 주차안내 -> 참석여부 */
   
   // 1. 큰 글씨 선택 팝업 제어
   function openTextSizeModal() {
@@ -1402,35 +1402,60 @@
       openGuestSnapModal(); 
     }, 400);
   }
+// (이 변수를 추가해서 자동 팝업인지 수동 팝업인지 기억하게 합니다)
+  let isAutoSequence = false;
 
   // 2. 하객 스냅 안내 모달 제어
   function openGuestSnapModal() { 
     document.getElementById('guestSnapModal').classList.add('active'); 
   }
+
   function closeGuestSnapModal() { 
     document.getElementById('guestSnapModal').classList.remove('active');
-
-    // 하객스냅 팝업 닫힌 후 -> 3. 주차 안내 팝업 호출
+    
+    // 👇 오프닝 순서로 열릴 때는 'true'를 넣어서 자동 팝업임을 표시
     setTimeout(() => {
-      openParkingModal();
+      openParkingModal(true);
     }, 400);
   }
 
   // 3. 주차 안내 모달 제어
-  function openParkingModal() { 
+  function openParkingModal(isAuto = false) { 
+    isAutoSequence = isAuto; // 자동으로 열렸는지 기억해 둡니다.
+
+    const parkingDeadline = new Date("2026-12-12T12:30:00"); 
+    const now = new Date();
+    
+    // 오프닝 순서로 열렸는데 기한이 지났다면 조용히 패스!
+    if (isAuto && now > parkingDeadline) {
+      openIntroRsvp(); 
+      return; 
+    }
+    
+    // 하객이 직접 메뉴에서 버튼을 눌렀거나, 기한 전이면 오픈!
     document.getElementById('parkingModal').classList.add('active'); 
   }
+
   function closeParkingModal() { 
     document.getElementById('parkingModal').classList.remove('active'); 
-
-    // 주차안내 팝업 닫힌 후 -> 4. 참석 여부(Intro) 팝업 호출
-    setTimeout(() => {
-      openIntroRsvp();
-    }, 400);
+  
+    // 👇 오프닝 순서로 열렸을 때만(true) 이어서 참석 여부 팝업을 엽니다!
+    if (isAutoSequence) {
+      setTimeout(() => { openIntroRsvp(); }, 400);
+      isAutoSequence = false; // 수동 클릭을 위해 다시 초기화
+    }
   }
 
-  // 4. 참석 여부 관련 팝업 제어
+  // 4. 참석 여부 관련 팝업 제어 (Intro)
   function openIntroRsvp() { 
+    const rsvpDeadline = new Date("2026-12-02T23:59:59"); 
+    const now = new Date();
+    
+    // 👇 시간이 지났으면 알림창(alert) 없이 조용히 아무것도 안 하고 끝냅니다!
+    if (now > rsvpDeadline) {
+      return;
+    }
+    
     document.getElementById('introRsvpModal').classList.add('active'); 
   }
   function closeIntroRsvp() {
@@ -1441,6 +1466,7 @@
     }
     document.getElementById('introRsvpModal').classList.remove('active');
   }
+
   function goToDetailedRsvp() {
     document.getElementById('introRsvpModal').classList.remove('active');
     setTimeout(() => { openRsvp(); }, 300);
@@ -1547,7 +1573,17 @@
   function copyPhoneNumber(no) {
     navigator.clipboard.writeText(no).then(() => { alert('웨딩홀 전화번호가 복사되었습니다.'); });
   }
-  function openRsvp() { document.getElementById('rsvpModal').classList.add('active'); }
+  
+  function openRsvp() { 
+    const rsvpDeadline = new Date("2026-12-12T23:59:59"); 
+    const now = new Date();
+    if (now > rsvpDeadline) {
+      alert("참석 여부 전달이 마감되었습니다. 따뜻한 축하 마음에 감사드립니다!");
+      return;
+    }
+    document.getElementById('rsvpModal').classList.add('active'); 
+  }
+
   function closeRsvp() {
     const chk = document.getElementById('neverShowToday');
     if (chk && chk.checked) {

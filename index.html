@@ -744,6 +744,25 @@
     body.large-text-mode .custom-modal-content .btn-pink { font-size: 17px !important; }
     body.large-text-mode .dont-show-today span { font-size: 14px !important; }
     body.large-text-mode .footer-maker-text { font-size: 15px !important; }
+
+
+/* BGM 컨트롤 버튼 스타일 */
+    .bgm-btn {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      z-index: 9000;
+      background: transparent;
+      border: none;
+      padding: 0;
+      cursor: pointer;
+      font-size: 22px;
+      color: #ffcad4;
+     ransform: scaleX(0.55);
+     transform-origin: right center;
+    }
+
+
   </style>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -761,6 +780,11 @@
 </div>
 
 <div class="mobile-container">
+
+<audio id="wedding-bgm" loop>
+    <source src="romantic.mp3" type="audio/mpeg">
+  </audio>
+  <button id="bgm-toggle" class="bgm-btn" onclick="toggleBgm()">♬</button>
 
   <!-- 1. MAIN COVER -->
   <div class="main-cover">
@@ -1375,6 +1399,10 @@
     overlay.classList.add('fade-out');
     document.body.classList.remove('stop-scroll');
 
+const bgm = document.getElementById('wedding-bgm');
+    if(bgm) bgm.play().catch(e => console.log(e));
+
+
     const hideUntil = localStorage.getItem('hideIntroRsvpUntil');
     const now = new Date().getTime();
     if (!hideUntil || now > parseInt(hideUntil)) {
@@ -1635,6 +1663,21 @@
     alert(`${name}님, 참석 여부가 성공적으로 전달되었습니다. 감사합니다!`);
     closeRsvp();
   }
+
+/* BGM 끄기/켜기 기능 */
+  function toggleBgm() {
+    const bgm = document.getElementById('wedding-bgm');
+    const bgmBtn = document.getElementById('bgm-toggle');
+    
+    if (bgm.paused) {
+      bgm.play();
+      bgmBtn.style.opacity = '1'; // 켜졌을 때: 선명하게
+    } else {
+      bgm.pause();
+      bgmBtn.style.opacity = '0.3'; // 껐을 때: 아이콘이 흐려짐
+    }
+  }
+
 </script>
 
 

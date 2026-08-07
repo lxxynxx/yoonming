@@ -713,6 +713,12 @@
     body.large-text-mode .profile-role { font-size: 16px; }
     body.large-text-mode .profile-parents { font-size: 16px; }
 
+/* --- 마음 전하실 곳(계좌 안내) 크게 보기 세팅 추가 --- */
+    body.large-text-mode .section + .section p[style*="text-align: center"] { font-size: 16px !important; line-height: 1.8 !important; }
+    body.large-text-mode .acc-header { font-size: 17px !important; padding: 14px 12px !important; }
+    body.large-text-mode .acc-body p { font-size: 15px !important; }
+    body.large-text-mode .acc-body p[style*="font-weight: bold"] { font-size: 17px !important; }
+
     /* --- 예식 안내 & 달력 & 카운트다운 크게 보기 추가 세팅 --- */
     body.large-text-mode .wedding-date-desc { font-size: 18px !important; line-height: 1.8 !important; }
     body.large-text-mode .calendar-header { font-size: 25px !important; }
@@ -769,7 +775,7 @@
       cursor: pointer;
       font-size: 22px;
       color: #ffcad4;
-     transform: scaleX(0.55);
+     transform: scaleX(0.75);
      transform-origin: right center;
     }
 
@@ -1342,6 +1348,7 @@
 
 <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"></iframe>
 
+
 <script>
   /* 카카오 지도 주소 검색 및 지연 로딩(최적화) 스크립트 */
   window.addEventListener('DOMContentLoaded', () => {
@@ -1433,9 +1440,8 @@
     overlay.classList.add('fade-out');
     document.body.classList.remove('stop-scroll');
 
-const bgm = document.getElementById('wedding-bgm');
+    const bgm = document.getElementById('wedding-bgm');
     if(bgm) bgm.play().catch(e => console.log(e));
-
 
     const hideUntil = localStorage.getItem('hideIntroRsvpUntil');
     const now = new Date().getTime();
@@ -1444,7 +1450,7 @@ const bgm = document.getElementById('wedding-bgm');
     }
   }
 
-/* 팝업 순서 제어 스크립트: 큰글씨 -> 하객스냅 -> 주차안내 -> 참석여부 */
+  /* 팝업 순서 제어 스크립트: 큰글씨 -> 하객스냅 -> (주차 건너뜀) -> 참석여부 */
   
   // 1. 큰 글씨 선택 팝업 제어
   function openTextSizeModal() {
@@ -1454,7 +1460,6 @@ const bgm = document.getElementById('wedding-bgm');
   function closeTextSizeModal(isLargeMode) {
     document.getElementById('textSizeModal').classList.remove('active');
     
-    // '크게 보기'를 눌렀을 때만 큰 글씨 모드 켜기
     if (isLargeMode) {
       document.body.classList.add('large-text-mode');
     }
@@ -1464,8 +1469,6 @@ const bgm = document.getElementById('wedding-bgm');
       openGuestSnapModal(); 
     }, 400);
   }
-// (이 변수를 추가해서 자동 팝업인지 수동 팝업인지 기억하게 합니다)
-  let isAutoSequence = false;
 
   // 2. 하객 스냅 안내 모달 제어
   function openGuestSnapModal() { 
@@ -1475,37 +1478,19 @@ const bgm = document.getElementById('wedding-bgm');
   function closeGuestSnapModal() { 
     document.getElementById('guestSnapModal').classList.remove('active');
     
-    // 👇 오프닝 순서로 열릴 때는 'true'를 넣어서 자동 팝업임을 표시
+    // 👇 오프닝 순서일 때 주차 팝업을 건너뛰고 바로 참석 여부 팝업으로 연결!
     setTimeout(() => {
-      openParkingModal(true);
+      openIntroRsvp();
     }, 400);
   }
 
-  // 3. 주차 안내 모달 제어
-  function openParkingModal(isAuto = false) { 
-    isAutoSequence = isAuto; // 자동으로 열렸는지 기억해 둡니다.
-
-    const parkingDeadline = new Date("2026-12-12T12:30:00"); 
-    const now = new Date();
-    
-    // 오프닝 순서로 열렸는데 기한이 지났다면 조용히 패스!
-    if (isAuto && now > parkingDeadline) {
-      openIntroRsvp(); 
-      return; 
-    }
-    
-    // 하객이 직접 메뉴에서 버튼을 눌렀거나, 기한 전이면 오픈!
+  // 3. 주차 안내 모달 제어 (버튼 클릭 시 정상 오픈)
+  function openParkingModal() { 
     document.getElementById('parkingModal').classList.add('active'); 
   }
 
   function closeParkingModal() { 
     document.getElementById('parkingModal').classList.remove('active'); 
-  
-    // 👇 오프닝 순서로 열렸을 때만(true) 이어서 참석 여부 팝업을 엽니다!
-    if (isAutoSequence) {
-      setTimeout(() => { openIntroRsvp(); }, 400);
-      isAutoSequence = false; // 수동 클릭을 위해 다시 초기화
-    }
   }
 
   // 4. 참석 여부 관련 팝업 제어 (Intro)
@@ -1513,13 +1498,13 @@ const bgm = document.getElementById('wedding-bgm');
     const rsvpDeadline = new Date("2026-12-02T23:59:59"); 
     const now = new Date();
     
-    // 👇 시간이 지났으면 알림창(alert) 없이 조용히 아무것도 안 하고 끝냅니다!
     if (now > rsvpDeadline) {
       return;
     }
     
     document.getElementById('introRsvpModal').classList.add('active'); 
   }
+  
   function closeIntroRsvp() {
     const chk = document.getElementById('neverShowTodayIntro');
     if (chk && chk.checked) {
@@ -1583,7 +1568,7 @@ const bgm = document.getElementById('wedding-bgm');
     } else { btn.textContent = '접기 ▲'; }
   }
 
- const weddingDate = new Date('2026-12-12T12:30:00+09:00').getTime();
+  const weddingDate = new Date('2026-12-12T12:30:00+09:00').getTime();
   const weddingDayOnly = new Date('2026-12-12T00:00:00+09:00').getTime();
 
   function updateCountdown() {
@@ -1612,6 +1597,7 @@ const bgm = document.getElementById('wedding-bgm');
   
   updateCountdown();
   setInterval(updateCountdown, 1000);
+
   function toggleAcc(id) {
     const el = document.getElementById(id);
     el.style.display = el.style.display === 'block' ? 'none' : 'block';
@@ -1619,6 +1605,7 @@ const bgm = document.getElementById('wedding-bgm');
   function copyAccount(no, side) {
     navigator.clipboard.writeText(no).then(() => { alert(`${side} 계좌번호가 복사되었습니다.`); });
   }
+
   function openMap(type) {
     const destination = encodeURIComponent("라포레웨딩홀");
     const lat = "37.50537";
@@ -1641,8 +1628,10 @@ const bgm = document.getElementById('wedding-bgm');
       }
     }
   }
+
   function openCallModal() { document.getElementById('callModal').classList.add('active'); }
   function closeCallModal() { document.getElementById('callModal').classList.remove('active'); }
+  
   function copyPhoneNumber(no) {
     navigator.clipboard.writeText(no).then(() => { alert('웨딩홀 전화번호가 복사되었습니다.'); });
   }
@@ -1664,10 +1653,12 @@ const bgm = document.getElementById('wedding-bgm');
     }
     document.getElementById('rsvpModal').classList.remove('active');
   }
+
   function selectOption(btn) {
     btn.parentElement.querySelectorAll('.btn-option').forEach(b => b.classList.remove('selected'));
     btn.classList.add('selected');
   }
+
   function submitRsvp() {
     const name = document.getElementById('guestName').value.trim();
     if (!name) { alert('성함을 입력해 주세요.'); return; }
@@ -1698,22 +1689,21 @@ const bgm = document.getElementById('wedding-bgm');
     closeRsvp();
   }
 
-/* BGM 끄기/켜기 기능 */
+  /* BGM 끄기/켜기 기능 */
   function toggleBgm() {
     const bgm = document.getElementById('wedding-bgm');
     const bgmBtn = document.getElementById('bgm-toggle');
     
     if (bgm.paused) {
       bgm.play();
-      bgmBtn.style.opacity = '1'; // 켜졌을 때: 선명하게
+      bgmBtn.style.opacity = '1'; 
     } else {
       bgm.pause();
-      bgmBtn.style.opacity = '0.3'; // 껐을 때: 아이콘이 흐려짐
+      bgmBtn.style.opacity = '0.3'; 
     }
   }
 
-
-// 카카오 공유 API 로드 및 초기화
+  // 카카오 공유 API 로드 및 초기화
   const kakaoScript = document.createElement('script');
   kakaoScript.src = 'https://t1.kakaocdn.net/kakao_js_sdk/2.7.2/kakao.min.js';
   kakaoScript.onload = () => {
@@ -1728,34 +1718,33 @@ const bgm = document.getElementById('wedding-bgm');
       objectType: 'feed',
       content: {
         title: '민교 💖 윤서 결혼합니다',
-      description: '2026년 12월 12일 토요일 오후 12시 30분\n라포레 웨딩홀',
-      imageUrl: 'https://lxxynxx.github.io/yoonming/images/main.jpg',
-      link: {
-        mobileWebUrl: 'https://lxxynxx.github.io/yoonming/',
-        webUrl: 'https://lxxynxx.github.io/yoonming/',
+        description: '2026년 12월 12일 토요일 오후 12시 30분\n라포레 웨딩홀',
+        imageUrl: 'https://lxxynxx.github.io/yoonming/images/main.jpg',
+        link: {
+          mobileWebUrl: 'https://lxxynxx.github.io/yoonming/',
+          webUrl: 'https://lxxynxx.github.io/yoonming/',
+        },
       },
-    },
       buttons: [
         {
           title: '청첩장',
           link: {
             mobileWebUrl: 'https://lxxynxx.github.io/yoonming/',
             webUrl: 'https://lxxynxx.github.io/yoonming/',
-         },
+          },
         },
         {
           title: '주차',
           link: {
             mobileWebUrl: 'https://www.laforetwedding.co.kr/info/',
             webUrl: 'https://www.laforetwedding.co.kr/info/',
-
           },
         },
       ],
     });
   }
 
-function copyLink() {
+  function copyLink() {
     const url = 'https://lxxynxx.github.io/yoonming/';
     
     if (navigator.clipboard && navigator.clipboard.writeText) {
@@ -1782,11 +1771,7 @@ function copyLink() {
     }
     document.body.removeChild(t);
   }
-
-
-
 </script>
 
 
-</body>
-</html>
+

@@ -1739,14 +1739,47 @@ const bgm = document.getElementById('wedding-bgm');
           link: {
             mobileWebUrl: 'https://lxxynxx.github.io/yoonming/',
             webUrl: 'https://lxxynxx.github.io/yoonming/',
+         },
+        },
+        {
+          title: '위치보기',
+          link: {
+            // 위치보기 버튼을 누르면 네이버 지도(또는 원하는 길찾기 주소)로 바로 연결됩니다
+            mobileWebUrl: 'https://map.naver.com/p/search/라포레웨딩홀',
+            webUrl: 'https://map.naver.com/p/search/라포레웨딩홀',
           },
         },
       ],
     });
   }
 
+function copyLink() {
+    const url = 'https://lxxynxx.github.io/yoonming/';
+    
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(url).then(() => {
+        alert('청첩장 주소가 복사되었습니다! 원하는 곳에 붙여넣기 해주세요.');
+      }).catch(err => {
+        fallbackCopyText(url);
+      });
+    } else {
+      fallbackCopyText(url);
+    }
+  }
 
-
+  function fallbackCopyText(text) {
+    const t = document.createElement("textarea");
+    t.value = text;
+    document.body.appendChild(t);
+    t.select();
+    try {
+      document.execCommand('copy');
+      alert('청첩장 주소가 복사되었습니다! 원하는 곳에 붙여넣기 해주세요.');
+    } catch (err) {
+      alert('링크 복사에 실패했습니다. 주소창의 URL을 직접 복사해 주세요.');
+    }
+    document.body.removeChild(t);
+  }
 
 
 

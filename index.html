@@ -1,6 +1,17 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
+
+<!-- 카카오톡 공유 시 미리보기(오픈그래프) 설정 -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="민교 ♥ 윤서 결혼합니다">
+  <meta property="og:description" content="12월 12일 토요일 오후 12시 30분, 라포레 웨딩홀">
+  <meta property="og:image" content="https://lxxynxx.github.io/yoonming/images/main.jpg"> 
+  <meta property="og:url" content="https://lxxynxx.github.io/yoonming/"> <!-- 실제 청첩장 주소로 변경 필요 -->
+
+
+
+
   <meta charset="UTF-8">
   <meta
     name="viewport"
@@ -1153,6 +1164,17 @@
     </div>
   </section>
 
+
+<!-- 카카오톡 공유 버튼 -->
+  <section class="section" style="padding-top: 10px; padding-bottom: 40px; text-align: center;">
+    <button class="btn-pink" onclick="shareKakao()" style="background-color: #FEE500; color: #191919; border: none; border-radius: 8px; padding: 14px; font-size: 15px; font-weight: bold; width: 100%; box-sizing: border-box; cursor: pointer; display: flex; justify-content: center; align-items: center; gap: 8px;">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="#000"><path d="M12 3c-5.5 0-10 3.5-10 7.8 0 2.8 1.8 5.2 4.5 6.5-.2 1-.9 3.2-.9 3.3 0 .1.1.2.2.2.1 0 .2 0 .3-.1.4-.3 3.5-2.4 4.1-2.8.6.1 1.2.1 1.8.1 5.5 0 10-3.5 10-7.8S17.5 3 12 3z"/></svg>
+      카카오톡으로 청첩장 공유하기
+    </button>
+  </section>
+
+
+
 <section class="section" style="padding: 40px 20px; text-align: center; ">
   <p class="footer-maker-text" style="font-family: 'Pretendard', sans-serif; font-size: 13px; color: #999999; margin: 0; letter-spacing: 0.5px;">
     💌신부 윤서가 한 땀 한 땀 직접 만든 청첩장입니다.<br>
@@ -1677,6 +1699,46 @@ const bgm = document.getElementById('wedding-bgm');
       bgmBtn.style.opacity = '0.3'; // 껐을 때: 아이콘이 흐려짐
     }
   }
+
+
+// 카카오 공유 API 로드 및 초기화
+  const kakaoScript = document.createElement('script');
+  kakaoScript.src = 'https://t1.kakaocdn.net/kakao_js_sdk/2.7.2/kakao.min.js';
+  kakaoScript.onload = () => {
+    if (!Kakao.isInitialized()) {
+      Kakao.init('44a60d269264bd371040375c428f38ee'); // 기존 지도 앱키 재사용
+    }
+  };
+  document.head.appendChild(kakaoScript);
+
+  function shareKakao() {
+    Kakao.Share.sendDefault({
+      objectType: 'feed',
+      content: {
+        title: '민교 ♥ 윤서 결혼합니다',
+        description: '2026년 12월 12일 토요일 오후 12시 30분\n라포레 웨딩홀',
+        imageUrl: 'https://lxxynxx.github.io/yoonming/images/main.jpg', // 썸네일 이미지 주소
+        link: {
+          mobileWebUrl: 'https://lxxynxx.github.io/yoonming/',
+          webUrl: 'https://lxxynxx.github.io/yoonming/',
+        },
+      },
+      buttons: [
+        {
+          title: '청첩장 보기',
+          link: {
+            mobileWebUrl: 'https://lxxynxx.github.io/yoonming/',
+            webUrl: 'https://lxxynxx.github.io/yoonming/',
+          },
+        },
+      ],
+    });
+  }
+
+
+
+
+
 
 </script>
 

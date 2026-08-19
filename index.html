@@ -722,7 +722,22 @@
     body.large-text-mode .acc-header { font-size: 17px !important; padding: 14px 12px !important; }
     body.large-text-mode .acc-body p { font-size: 15px !important; }
     body.large-text-mode .acc-body p[style*="font-weight: bold"] { font-size: 17px !important; }
-body.large-text-mode .acc-body p.long-acc { font-size: 14.5px !important; letter-spacing: -1.2px !important; }
+  
+
+ /* 1. 글자가 아주 긴 계좌 (신랑, 신부 어머니 등)는 기존처럼 바짝 조이기 */
+body.large-text-mode .acc-body p.long-acc { 
+  font-size: 16px !important; 
+  letter-spacing: -1.4px !important; 
+  white-space: nowrap !important; 
+}
+
+/* 2. 신부측처럼 여유가 있는 계좌는 자간을 아주 조금만 띄워주기 (-0.8px) */
+body.large-text-mode .acc-body p.bride-acc { 
+  font-size: 16px !important; 
+  letter-spacing: -0.3px !important; 
+  white-space: nowrap !important; 
+}
+
 
     /* --- 예식 안내 & 달력 & 카운트다운 크게 보기 추가 세팅 --- */
     body.large-text-mode .wedding-date-desc { font-size: 18px !important; line-height: 1.8 !important; }
@@ -792,6 +807,11 @@ body.large-text-mode .acc-body p.long-acc { font-size: 14.5px !important; letter
      transform: scale(0.95, 0.9);
      transform-origin: right center;
     }
+
+/* 큰 글씨 모드일 때 주차장 안내 주소 글자 크기 통일 */
+body.large-text-mode [style*="3시간 무료"] {
+  font-size: 16px !important;
+}
 
 
   </style>
@@ -1026,8 +1046,8 @@ body.large-text-mode .acc-body p.long-acc { font-size: 14.5px !important; letter
       <div style="margin-top: 16px; padding: 20px 16px; background: #ffffff; border: 1px solid var(--line-color); border-radius: 12px; text-align: center;">
         <p style="font-size: 13px; color: var(--text-sub); line-height: 1.8; margin-bottom: 16px; word-break: keep-all; letter-spacing: -0.5px;">
           ※ 예식장 주차장이 협소합니다.<br>
-          하객분들은 대중교통 이용 또는<br>제2주차장에 주차하시고<br>셔틀버스 이용 부탁드립니다.<br>
-          🚌 셔틀버스 운행 : 예식 1시간 30분 전부터 상시 운행
+          하객분들은 대중교통 이용 또는<br>제2주차장에 주차하시고 셔틀버스 이용 부탁드립니다.<br>
+          🚌 셔틀버스 운행 : 예식 1시간 30분 전부터 <span style="white-space: nowrap;">상시 운행</span>
         </p>
 
         <button class="btn-pink" style="background-color: var(--pink-main); color: #ffffff; border: none; border-radius: 8px; padding: 14px 12px; font-size: 14px; font-weight: bold; width: 100%; box-sizing: border-box; cursor: pointer;" onclick="openParkingModal()">
@@ -1068,7 +1088,7 @@ body.large-text-mode .acc-body p.long-acc { font-size: 14.5px !important; letter
             </div>
             <!-- 아랫줄: 계좌번호 + 복사버튼 -->
             <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: nowrap; gap: 4px;">
-              <p style="font-weight: bold; font-size: 14px; margin: 0; letter-spacing: -0.8px;">110-411-446184</p>
+              <p class="long-acc" style="font-weight: bold; font-size: 14px; margin: 0; letter-spacing: -0.8px;">110-411-446184</p>
               <button onclick="copyAccount('110-411-446184', '신랑')" style="background: none; border: none; padding: 0; cursor: pointer; color: #777; display: flex; align-items: center; flex-shrink: 0;" title="복사">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
               </button>
@@ -1082,7 +1102,7 @@ body.large-text-mode .acc-body p.long-acc { font-size: 14.5px !important; letter
               <p style="font-size: 13px; color: var(--text-sub); margin: 0;">우체국 | 정성덕</p>
             </div>
             <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: nowrap; gap: 2px;">
-              <p style="font-weight: bold; font-size: 14px; margin: 0; letter-spacing: -0.3px;">104752-02-190913</p>
+              <p class="long-acc" style="font-weight: bold; font-size: 14px; margin: 0; letter-spacing: -0.3px;">104752-02-190913</p>
               <button onclick="copyAccount('104752-02-190913', '신랑 아버지')" style="background: none; border: none; padding: 0; cursor: pointer; color: #777; display: flex; align-items: center;" title="복사">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
               </button>
@@ -1124,7 +1144,7 @@ body.large-text-mode .acc-body p.long-acc { font-size: 14.5px !important; letter
             </div>
             <!-- 아랫줄: 계좌번호 + 복사버튼 -->
             <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: nowrap; gap: 2px;">
-  <p style="font-weight: bold; font-size: 14px; margin: 0; letter-spacing: -0.8px; white-space: nowrap;">99205135664</p>
+  <p class="bride-acc" style="font-weight: bold; font-size: 14px; margin: 0; letter-spacing: 0px; white-space: nowrap;">99205135664</p>
   <button onclick="copyAccount('99205135664', '신부')" style="background: none; border: none; padding: 0; cursor: pointer; color: #777; display: flex; align-items: center; flex-shrink: 0;" title="복사">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
               </button>
@@ -1138,7 +1158,7 @@ body.large-text-mode .acc-body p.long-acc { font-size: 14.5px !important; letter
               <p style="font-size: 13px; color: var(--text-sub); margin: 0;">하나 | 이상열</p>
             </div>
             <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: nowrap; gap: 2px;">
-              <p style="font-weight: bold; font-size: 14px; margin: 0; letter-spacing: -0.3px;">589-910235-05207</p>
+              <p class="long-acc" style="font-weight: bold; font-size: 14px; margin: 0; letter-spacing: -0.3px;">589-910235-05207</p>
               <button onclick="copyAccount('589-910235-05207', '신부 아버지')" style="background: none; border: none; padding: 0; cursor: pointer; color: #777; display: flex; align-items: center;" title="복사">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
               </button>
@@ -1151,7 +1171,7 @@ body.large-text-mode .acc-body p.long-acc { font-size: 14.5px !important; letter
               <p style="font-size: 13px; color: var(--text-sub); margin: 0;">국민 | 김남준</p>
             </div>
              <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: nowrap; gap: 2px;">
-              <p style="font-weight: bold; font-size: 14px; margin: 0; letter-spacing: -0.3px;">591901-01-400140</p>
+              <p class="long-acc" style="font-weight: bold; font-size: 14px; margin: 0; letter-spacing: -0.3px;">591901-01-400140</p>
               <button onclick="copyAccount('591901-01-400140', '신부 어머니')" style="background: none; border: none; padding: 0; cursor: pointer; color: #777; display: flex; align-items: center; flex-shrink: 0;" title="복사">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
               </button>

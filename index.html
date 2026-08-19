@@ -400,11 +400,11 @@
       z-index: -1;
     }
 
-    .circle-countdown { display: flex; justify-content: center; gap: 16px; margin-top: 36px; width: 100%; }
+ .circle-countdown { display: flex; justify-content: center; gap: 12px; margin-top: 36px; width: 100%; }
     .circle-item { display: flex; flex-direction: column; align-items: center; }
-   .circle-box { width: 65px; height: 65px; color: #ffffff; display: flex; justify-content: center; align-items: center; font-size: 18px; font-weight: bold; position: relative; z-index: 1; padding-bottom: 6px; }
-.circle-box::before { content: '♥'; position: absolute; top: 48%; left: 50%; transform: translate(-50%, -50%); font-size: 70px; color: #eec8ce; z-index: -1; filter: drop-shadow(0 4px 10px rgba(230, 160, 175, 0.2)); }
-
+   .circle-box { width: 65px; height: 65px; color: #ffffff; display: flex; justify-content: center; align-items: center; font-size: 18px; font-weight: bold; position: relative; z-index: 1; }
+.circle-box::before { content: '♥'; position: absolute; top: 48%; left: 50%; transform: translate(-50%, -50%); font-size: 85px; color: #eec8ce; z-index: -1; filter: drop-shadow(0 4px 10px rgba(230, 160, 175, 0.2)); }
+.circle-label { margin-top: 8px; font-size: 11px; color: var(--text-sub); }
 .circle-label { margin-top: 8px; font-size: 11px; color: var(--text-sub); }
 
     .gallery-grid-3x3 { 
@@ -731,7 +731,7 @@
     body.large-text-mode .wedding-day-heart::before { font-size: 38px !important; }
     body.large-text-mode .dday-text { font-size: 18px !important; }
     body.large-text-mode .circle-box { width: 72px !important; height: 72px !important; font-size: 22px !important; }
-    body.large-text-mode .circle-box::before { font-size: 80px !important; }
+    body.large-text-mode .circle-box::before { font-size: 95px !important; }
     body.large-text-mode .circle-label { font-size: 13px !important; }
 
     body.large-text-mode .location-title { font-size: 22px; }
@@ -1396,7 +1396,7 @@
                 });
                 infowindow.open(map, marker);
 
-                const adjustedCenter = new kakao.maps.LatLng(result[0].y, parseFloat(result[0].x) - 0.002);
+                const adjustedCenter = new kakao.maps.LatLng(result[0].y, parseFloat(result[0].x) - 0.02);
                 map.setCenter(adjustedCenter);
               }
             });

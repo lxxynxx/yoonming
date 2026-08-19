@@ -402,7 +402,7 @@
 
  .circle-countdown { display: flex; justify-content: center; gap: 12px; margin-top: 36px; width: 100%; }
     .circle-item { display: flex; flex-direction: column; align-items: center; }
-   .circle-box { width: 65px; height: 65px; color: #ffffff; display: flex; justify-content: center; align-items: center; font-size: 18px; font-weight: bold; position: relative; z-index: 1; }
+   .circle-box { width: 65px; height: 65px; color: #ffffff; display: flex; justify-content: center; align-items: center; font-size: 18px; font-weight: bold; position: relative; z-index: 1; padding-bottom: 6px; }
 .circle-box::before { content: '♥'; position: absolute; top: 48%; left: 50%; transform: translate(-50%, -50%); font-size: 85px; color: #eec8ce; z-index: -1; filter: drop-shadow(0 4px 10px rgba(230, 160, 175, 0.2)); }
 .circle-label { margin-top: 8px; font-size: 11px; color: var(--text-sub); }
 .circle-label { margin-top: 8px; font-size: 11px; color: var(--text-sub); }
@@ -1396,7 +1396,7 @@
                 });
                 infowindow.open(map, marker);
 
-                const adjustedCenter = new kakao.maps.LatLng(result[0].y, parseFloat(result[0].x) - 0.02);
+                const adjustedCenter = new kakao.maps.LatLng(result[0].y, parseFloat(result[0].x) - 0.002);
                 map.setCenter(adjustedCenter);
               }
             });

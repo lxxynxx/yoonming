@@ -9,9 +9,6 @@
   <meta property="og:image" content="https://lxxynxx.github.io/yoonming/images/main.jpg"> 
   <meta property="og:url" content="https://lxxynxx.github.io/yoonming">
 
-
-
-
   <meta charset="UTF-8">
   <meta
     name="viewport"
@@ -270,8 +267,8 @@
       width: 100%;
       max-width: 320px;
       padding: 28px 0;
-      border-top: 1px solid #555555;
-      border-bottom: 1px solid #555555;
+      border-top: none !important;
+      border-bottom: none !important;
       text-align: center;
       font-size: 14px;
       color: #333333;
@@ -400,12 +397,11 @@
       z-index: -1;
     }
 
- .circle-countdown { display: flex; justify-content: center; gap: 16px; margin-top: 36px; width: 100%; }
+    .circle-countdown { display: flex; justify-content: center; gap: 16px; margin-top: 36px; width: 100%; }
     .circle-item { display: flex; flex-direction: column; align-items: center; }
-   .circle-box { width: 65px; height: 65px; color: #ffffff; display: flex; justify-content: center; align-items: center; font-size: 18px; font-weight: bold; position: relative; z-index: 1; padding-bottom: 6px; }
-.circle-box::before { content: '♥'; position: absolute; top: 48%; left: 50%; transform: translate(-50%, -50%); font-size: 70px; color: #eec8ce; z-index: -1; filter: drop-shadow(0 4px 10px rgba(230, 160, 175, 0.2)); }
-.circle-label { margin-top: 8px; font-size: 11px; color: var(--text-sub); }
-.circle-label { margin-top: 8px; font-size: 11px; color: var(--text-sub); }
+    .circle-box { width: 65px; height: 65px; color: #ffffff; display: flex; justify-content: center; align-items: center; font-size: 18px; font-weight: bold; position: relative; z-index: 1; padding-bottom: 6px; }
+    .circle-box::before { content: '♥'; position: absolute; top: 48%; left: 50%; transform: translate(-50%, -50%); font-size: 70px; color: #eec8ce; z-index: -1; filter: drop-shadow(0 4px 10px rgba(230, 160, 175, 0.2)); }
+    .circle-label { margin-top: 8px; font-size: 11px; color: var(--text-sub); }
 
     .gallery-grid-3x3 { 
       display: grid; 
@@ -715,29 +711,33 @@
     body.large-text-mode .profile-role { font-size: 16px; }
     body.large-text-mode .profile-parents { font-size: 16px; }
     body.large-text-mode .parking-desc-text { font-size: 14.5px !important; letter-spacing: -0.8px !important; }
+    body.large-text-mode .cover-date-banner span:first-child { 
+      font-size: 32px !important; 
+      line-height: 1.4 !important;
+    }
 
+    body.large-text-mode .cover-date-banner span:last-child { 
+      font-size: 18px !important; 
+      line-height: 1.6 !important;
+    }
 
-/* --- 마음 전하실 곳(계좌 안내) 크게 보기 세팅 추가 --- */
+    /* --- 마음 전하실 곳(계좌 안내) 크게 보기 세팅 추가 --- */
     body.large-text-mode .section + .section p[style*="text-align: center"] { font-size: 16px !important; line-height: 1.8 !important; }
     body.large-text-mode .acc-header { font-size: 17px !important; padding: 14px 12px !important; }
     body.large-text-mode .acc-body p { font-size: 15px !important; }
     body.large-text-mode .acc-body p[style*="font-weight: bold"] { font-size: 17px !important; }
   
+    body.large-text-mode .acc-body p.long-acc { 
+      font-size: 16px !important; 
+      letter-spacing: -1.4px !important; 
+      white-space: nowrap !important; 
+    }
 
- /* 1. 글자가 아주 긴 계좌 (신랑, 신부 어머니 등)는 기존처럼 바짝 조이기 */
-body.large-text-mode .acc-body p.long-acc { 
-  font-size: 16px !important; 
-  letter-spacing: -1.4px !important; 
-  white-space: nowrap !important; 
-}
-
-/* 2. 신부측처럼 여유가 있는 계좌는 자간을 아주 조금만 띄워주기 (-0.8px) */
-body.large-text-mode .acc-body p.bride-acc { 
-  font-size: 16px !important; 
-  letter-spacing: -0.3px !important; 
-  white-space: nowrap !important; 
-}
-
+    body.large-text-mode .acc-body p.bride-acc { 
+      font-size: 16px !important; 
+      letter-spacing: -0.3px !important; 
+      white-space: nowrap !important; 
+    }
 
     /* --- 예식 안내 & 달력 & 카운트다운 크게 보기 추가 세팅 --- */
     body.large-text-mode .wedding-date-desc { font-size: 18px !important; line-height: 1.8 !important; }
@@ -791,8 +791,7 @@ body.large-text-mode .acc-body p.bride-acc {
     body.large-text-mode .footer-maker-text { font-size: 16px !important; }
     body.large-text-mode .footer-maker-text span { font-size: 14px !important; }
 
-
-/* BGM 컨트롤 버튼 스타일 */
+    /* BGM 컨트롤 버튼 스타일 */
     .bgm-btn {
       position: absolute;
       top: 20px;
@@ -802,18 +801,15 @@ body.large-text-mode .acc-body p.bride-acc {
       border: none;
       padding: 0;
       cursor: pointer;
-      font-size: 22px;
+      font-size: 18px;
       color: #ffcad4;
-     transform: scale(0.95, 0.9);
-     transform-origin: right center;
+      font-family: sans-serif !important;
     }
 
-/* 큰 글씨 모드일 때 주차장 안내 주소 글자 크기 통일 */
-body.large-text-mode [style*="3시간 무료"] {
-  font-size: 16px !important;
-}
-
-
+    body.large-text-mode .transport-box span {
+      font-size: 15.5px !important; 
+      letter-spacing: -0.4px !important;
+    }
   </style>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -832,10 +828,10 @@ body.large-text-mode [style*="3시간 무료"] {
 
 <div class="mobile-container">
 
-<audio id="wedding-bgm" loop>
+  <audio id="wedding-bgm" loop>
     <source src="invisible.mp3" type="audio/mpeg">
   </audio>
-  <button id="bgm-toggle" class="bgm-btn" onclick="toggleBgm()">♬</button>
+  <button id="bgm-toggle" class="bgm-btn" onclick="toggleBgm()">♪</button>
 
   <!-- 1. MAIN COVER -->
   <div class="main-cover">
@@ -845,9 +841,17 @@ body.large-text-mode [style*="3시간 무료"] {
     </div>
   </div>
 
+<!-- 처음에 숨겨져 있다가 오프닝 끝나면 나타나는 크기 조절 버튼 -->
+<div id="textSizeBtnWrapper" style="position: fixed; bottom: 24px; right: 20px; z-index: 9999; transition: opacity 0.3s ease; opacity: 0; pointer-events: none;">
+    <button id="textSizeBtn" onclick="toggleTextMode()" style="background: transparent; border: none; padding: 8px; cursor: pointer; font-size: 22px; font-weight: bold; color: #ffcad4; text-shadow: 0 2px 4px rgba(0,0,0,0.15); -webkit-tap-highlight-color: transparent;">
+      +
+    </button>
+  </div>>
+
   <div class="cover-date-banner-wrapper reveal">
-    <div class="cover-date-banner my-script-text" style="text-align: center;">
-      My forever begins with you.
+    <div class="cover-date-banner" style="text-align: center; border: none !important;">
+      <span style="font-family: 'Allura', cursive !important; font-size: 28px; display: block; margin-bottom: 8px; color: #707070;">My forever begins with you.</span>
+      <span style="font-size: 13px; color: #777777; letter-spacing: -0.3px; font-family: 'Pretendard', sans-serif !important;">나의 영원은 당신과 함께 시작됩니다.</span>
     </div>
   </div>
 
@@ -881,7 +885,7 @@ body.large-text-mode [style*="3시간 무료"] {
               </a>
             </div>
           </div>
-          <div class="profile-parents">정성덕 · 이희정 의 차남</div>
+          <div class="profile-parents">정성덕 · 이희정 의 아들</div>
         </div>
       </div>
 
@@ -900,7 +904,7 @@ body.large-text-mode [style*="3시간 무료"] {
             </div>
             <div class="profile-name"><span class="profile-role">신부</span> 윤서</div>
           </div>
-          <div class="profile-parents">이상열 · 김남준 의 장녀</div>
+          <div class="profile-parents">이상열 · 김남준 의 딸</div>
         </div>
       </div>
     </div>
@@ -1042,7 +1046,7 @@ body.large-text-mode [style*="3시간 무료"] {
         <span style="font-size: 13px; color: var(--text-sub); letter-spacing: -0.4px;">경기 부천시 원미구 송내대로 388 (3시간 무료)</span>
       </p>
 
-      <!-- 👇 흰색 배경에 분홍색 테두리 박스 스타일 적용 (버튼 포함) -->
+      <!-- 흰색 배경에 분홍색 테두리 박스 스타일 적용 (버튼 포함) -->
       <div style="margin-top: 16px; padding: 20px 16px; background: #ffffff; border: 1px solid var(--line-color); border-radius: 12px; text-align: center;">
         <p style="font-size: 13px; color: var(--text-sub); line-height: 1.8; margin-bottom: 16px; word-break: keep-all; letter-spacing: -0.5px;">
           ※ 예식장 주차장이 협소합니다.<br>
@@ -1079,14 +1083,12 @@ body.large-text-mode [style*="3시간 무료"] {
         <div class="acc-body" id="groomAcc" style="padding: 12px 10px;">
           <!-- 신랑 본인 -->
           <div style="text-align: left; margin-bottom: 0;">
-            <!-- 윗줄: 이름 + 카카오페이 -->
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
               <p style="font-size: 13px; color: var(--text-sub); margin: 0;">신한 | 정민교</p>
               <a href="https://qr.kakaopay.com/Ej77hO5G1" target="_blank" style="display: flex; justify-content: center; align-items: center; width: 22px; height: 22px; background-color: #FEE500; border-radius: 4px; text-decoration: none;" title="카카오페이 송금">
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="#000"><path d="M12 3c-5.5 0-10 3.5-10 7.8 0 2.8 1.8 5.2 4.5 6.5-.2 1-.9 3.2-.9 3.3 0 .1.1.2.2.2.1 0 .2 0 .3-.1.4-.3 3.5-2.4 4.1-2.8.6.1 1.2.1 1.8.1 5.5 0 10-3.5 10-7.8S17.5 3 12 3z"/></svg>
               </a>
             </div>
-            <!-- 아랫줄: 계좌번호 + 복사버튼 -->
             <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: nowrap; gap: 4px;">
               <p class="long-acc" style="font-weight: bold; font-size: 14px; margin: 0; letter-spacing: -0.8px;">110-411-446184</p>
               <button onclick="copyAccount('110-411-446184', '신랑')" style="background: none; border: none; padding: 0; cursor: pointer; color: #777; display: flex; align-items: center; flex-shrink: 0;" title="복사">
@@ -1133,19 +1135,17 @@ body.large-text-mode [style*="3시간 무료"] {
         </div>
         
         <div class="acc-body" id="brideAcc" style="padding: 12px 10px;">
-       <!-- 신부 본인 -->
+          <!-- 신부 본인 -->
           <div style="text-align: left; margin-bottom: 0;">
-            <!-- 윗줄: 이름 + 카카오페이 -->
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
               <p style="font-size: 13px; color: var(--text-sub); margin: 0;">국민 | 이윤서</p>
               <a href="https://qr.kakaopay.com/Ej7qgmufV" target="_blank" style="display: flex; justify-content: center; align-items: center; width: 22px; height: 22px; background-color: #FEE500; border-radius: 4px; text-decoration: none;" title="카카오페이 송금">
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="#000"><path d="M12 3c-5.5 0-10 3.5-10 7.8 0 2.8 1.8 5.2 4.5 6.5-.2 1-.9 3.2-.9 3.3 0 .1.1.2.2.2.1 0 .2 0 .3-.1.4-.3 3.5-2.4 4.1-2.8.6.1 1.2.1 1.8.1 5.5 0 10-3.5 10-7.8S17.5 3 12 3z"/></svg>
               </a>
             </div>
-            <!-- 아랫줄: 계좌번호 + 복사버튼 -->
             <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: nowrap; gap: 2px;">
-  <p class="bride-acc" style="font-weight: bold; font-size: 14px; margin: 0; letter-spacing: 0px; white-space: nowrap;">99205135664</p>
-  <button onclick="copyAccount('99205135664', '신부')" style="background: none; border: none; padding: 0; cursor: pointer; color: #777; display: flex; align-items: center; flex-shrink: 0;" title="복사">
+              <p class="bride-acc" style="font-weight: bold; font-size: 14px; margin: 0; letter-spacing: 0px; white-space: nowrap;">99205135664</p>
+              <button onclick="copyAccount('99205135664', '신부')" style="background: none; border: none; padding: 0; cursor: pointer; color: #777; display: flex; align-items: center; flex-shrink: 0;" title="복사">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
               </button>
             </div>
@@ -1166,7 +1166,8 @@ body.large-text-mode [style*="3시간 무료"] {
           </div>
           <div style="height: 1px; background-color: #eee; margin: 12px 0;"></div>
 
-        <div style="text-align: left; margin-bottom: 0;">
+          <!-- 신부 어머니 -->
+          <div style="text-align: left; margin-bottom: 0;">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; min-height: 22px;">
               <p style="font-size: 13px; color: var(--text-sub); margin: 0;">국민 | 김남준</p>
             </div>
@@ -1197,7 +1198,6 @@ body.large-text-mode [style*="3시간 무료"] {
     </div>
   </section>
 
-
   <!-- 9. NOTICE (전달사항) -->
   <section class="section reveal" style="background: #ffffff;">
     <div class="section-title-pink">전달사항</div>
@@ -1211,8 +1211,7 @@ body.large-text-mode [style*="3시간 무료"] {
     </div>
   </section>
 
-
-<!-- 카카오톡 & 링크 복사 공유 버튼 -->
+  <!-- 카카오톡 & 링크 복사 공유 버튼 -->
   <section class="section" style="padding-top: 10px; padding-bottom: 40px; text-align: center;">
     <div style="display: flex; gap: 10px; width: 100%; margin-top: 10px;">
       
@@ -1231,14 +1230,13 @@ body.large-text-mode [style*="3시간 무료"] {
     </div>
   </section>
 
-<section class="section" style="padding: 40px 20px; text-align: center; ">
-  <p class="footer-maker-text" style="font-family: 'Pretendard', sans-serif; font-size: 13px; color: #999999; margin: 0; letter-spacing: 0.5px;">
-    💌신부 윤서가 직접 디자인하고 개발한 청첩장입니다.<br>
-    <span style="font-size: 11px; color: #bbbbbb;">Designed & Developed by Yoonseo</span><br>
-    <span style="font-size: 11px; color: #bbbbbb;">© 2026. 12. 12. 윤서 & 민교 All rights reserved.</span>
-  </p>
-</section>
- 
+  <section class="section" style="padding: 40px 20px; text-align: center; ">
+    <p class="footer-maker-text" style="font-family: 'Pretendard', sans-serif; font-size: 13px; color: #999999; margin: 0; letter-spacing: 0.5px;">
+      💌신부 윤서가 직접 디자인하고 개발한 청첩장입니다.<br>
+      <span style="font-size: 11px; color: #bbbbbb;">Designed & Developed by Yoonseo</span><br>
+      <span style="font-size: 11px; color: #bbbbbb;">© 윤서 & 민교 All rights reserved.</span>
+    </p>
+  </section>
 
 </div>
 
@@ -1249,20 +1247,6 @@ body.large-text-mode [style*="3시간 무료"] {
   <button class="lightbox-nav-btn prev" onclick="prevImage()">❮</button>
   <div class="lightbox-img-wrapper" id="lightboxWrapper"><img src="" id="lightboxImg" alt="확대 사진"></div>
   <button class="lightbox-nav-btn next" onclick="nextImage()">❯</button>
-</div>
-
-<!-- 1. 큰 글씨 안내 팝업창 -->
-<div class="custom-modal" id="textSizeModal">
-  <div class="custom-modal-content" style="text-align: center; max-width: 320px;">
-    <div class="intro-modal-title" style="margin-bottom: 16px;">큰 글씨로 보시겠습니까?</div>
-    <div style="font-family: 'Pretendard', sans-serif; font-size: 13px; color: var(--text-sub); line-height: 1.7; margin-bottom: 24px;">
-      화면의 글씨를 크게 확대하여<br>조금 더 편안하게 보실 수 있습니다.
-    </div>
-    <div style="display: flex; gap: 8px;">
-      <button class="btn-outline" onclick="closeTextSizeModal(false)" style="flex: 1; padding: 12px; border: 1px solid var(--line-color); color: var(--text-sub); font-family: 'Pretendard', sans-serif;">기본 크기</button>
-      <button class="btn-pink" onclick="closeTextSizeModal(true)" style="flex: 1; padding: 12px; font-size: 14px; font-weight: bold; background-color: #eec8ce; color: #ffffff; border: none; font-family: 'Pretendard', sans-serif;">크게 보기</button>
-    </div>
-  </div>
 </div>
 
 <!-- 2. 하객 스냅 안내 팝업창 -->
@@ -1387,7 +1371,6 @@ body.large-text-mode [style*="3시간 무료"] {
 
 <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"></iframe>
 
-
 <script>
   /* 카카오 지도 주소 검색 및 지연 로딩(최적화) 스크립트 */
   window.addEventListener('DOMContentLoaded', () => {
@@ -1414,13 +1397,13 @@ body.large-text-mode [style*="3시간 무료"] {
                   position: weddingCoords
                 });
 
-               const customContent = '<div style="background:#ffffff; padding:6px 14px; border-radius:20px; border:1px solid #d9939d; font-size:13px; font-weight:bold; color:#d9939d; box-shadow: 0 2px 4px rgba(0,0,0,0.1); margin-bottom: 40px;">라포레 웨딩홀</div>';
-const customOverlay = new kakao.maps.CustomOverlay({
-  map: map,
-  position: weddingCoords,
-  content: customContent,
-  yAnchor: 1
-});
+                const customContent = '<div style="background:#ffffff; padding:6px 14px; border-radius:20px; border:1px solid #d9939d; font-size:13px; font-weight:bold; color:#d9939d; box-shadow: 0 2px 4px rgba(0,0,0,0.1); margin-bottom: 40px;">라포레 웨딩홀</div>';
+                const customOverlay = new kakao.maps.CustomOverlay({
+                  map: map,
+                  position: weddingCoords,
+                  content: customContent,
+                  yAnchor: 1
+                });
 
                 const adjustedCenter = new kakao.maps.LatLng(result[0].y, parseFloat(result[0].x) - 0.0014);
                 map.setCenter(adjustedCenter);
@@ -1434,6 +1417,32 @@ const customOverlay = new kakao.maps.CustomOverlay({
 
     mapObserver.observe(mapContainer);
   });
+
+  window.addEventListener('scroll', () => {
+    const wrapper = document.getElementById('textSizeBtnWrapper');
+    if (!wrapper) return;
+
+    if (window.scrollY > 200) {
+      wrapper.style.opacity = '0';
+      wrapper.style.pointerEvents = 'none';
+    } else {
+      wrapper.style.opacity = '1';
+      wrapper.style.pointerEvents = 'auto';
+    }
+  });
+
+  function toggleTextMode() {
+    const body = document.body;
+    const btn = document.getElementById('textSizeBtn');
+    
+    if (body.classList.contains('large-text-mode')) {
+      body.classList.remove('large-text-mode');
+      if (btn) btn.textContent = '+';
+    } else {
+      body.classList.add('large-text-mode');
+      if (btn) btn.textContent = '-';
+    }
+  }
 
   /* SCROLL REVEAL OBSERVER */
   const observerOptions = { root: null, rootMargin: '0px 0px -40px 0px', threshold: 0.1 };
@@ -1457,7 +1466,6 @@ const customOverlay = new kakao.maps.CustomOverlay({
   function typeWriter() {
     if (charIndex <= openingText.length) {
       let currentText = openingText.substring(0, charIndex);
-
       currentText = currentText.replace('♥', '<span style="color: #f6b0b9;">♥</span>');
       typingElement.innerHTML = currentText;
       charIndex++;
@@ -1484,48 +1492,35 @@ const customOverlay = new kakao.maps.CustomOverlay({
     const bgm = document.getElementById('wedding-bgm');
     if(bgm) bgm.play().catch(e => console.log(e));
 
+    // 👇 [추가] 오프닝이 닫히는 순간 우측 하단 버튼을 스르륵 나타나게 함!
+    const btnWrapper = document.getElementById('textSizeBtnWrapper');
+    if (btnWrapper) {
+      btnWrapper.style.opacity = '1';
+      btnWrapper.style.pointerEvents = 'auto';
+    }
+
     const hideUntil = localStorage.getItem('hideIntroRsvpUntil');
     const now = new Date().getTime();
     if (!hideUntil || now > parseInt(hideUntil)) {
-      setTimeout(() => { openTextSizeModal(); }, 1200);
+      setTimeout(() => { openGuestSnapModal(); }, 1200);
     }
   }
 
-  /* 팝업 순서 제어 스크립트: 큰글씨 -> 하객스냅 -> (주차 건너뜀) -> 참석여부 */
+  /* 팝업 순서 제어 스크립트: 하객스냅 -> 참석여부 */
   
-  // 1. 큰 글씨 선택 팝업 제어
-  function openTextSizeModal() {
-    document.getElementById('textSizeModal').classList.add('active');
-  }
-
-  function closeTextSizeModal(isLargeMode) {
-    document.getElementById('textSizeModal').classList.remove('active');
-    
-    if (isLargeMode) {
-      document.body.classList.add('large-text-mode');
-    }
-
-    // 큰글씨 팝업 닫힌 후 -> 2. 하객 스냅 팝업 호출
-    setTimeout(() => { 
-      openGuestSnapModal(); 
-    }, 400);
-  }
-
-  // 2. 하객 스냅 안내 모달 제어
+  // 1. 하객 스냅 안내 모달 제어
   function openGuestSnapModal() { 
     document.getElementById('guestSnapModal').classList.add('active'); 
   }
 
   function closeGuestSnapModal() { 
     document.getElementById('guestSnapModal').classList.remove('active');
-    
-    // 👇 오프닝 순서일 때 주차 팝업을 건너뛰고 바로 참석 여부 팝업으로 연결!
     setTimeout(() => {
       openIntroRsvp();
     }, 400);
   }
 
-  // 3. 주차 안내 모달 제어 (버튼 클릭 시 정상 오픈)
+  // 2. 주차 안내 모달 제어 (버튼 클릭 시 정상 오픈)
   function openParkingModal() { 
     document.getElementById('parkingModal').classList.add('active'); 
   }
@@ -1534,7 +1529,7 @@ const customOverlay = new kakao.maps.CustomOverlay({
     document.getElementById('parkingModal').classList.remove('active'); 
   }
 
-  // 4. 참석 여부 관련 팝업 제어 (Intro)
+  // 3. 참석 여부 관련 팝업 제어 (Intro)
   function openIntroRsvp() { 
     const rsvpDeadline = new Date("2026-12-02T23:59:59"); 
     const now = new Date();
@@ -1814,5 +1809,5 @@ const customOverlay = new kakao.maps.CustomOverlay({
   }
 </script>
 
-
-
+</body>
+</html>

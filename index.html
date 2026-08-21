@@ -14,10 +14,10 @@
     name="viewport"
     content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
   >
-  <title>민교 & 윤서</title>
+  <title>민교 &amp; 윤서</title>
 
   <!-- 카카오 지도 API 스크립트 -->
-  <script type="text/javascript" src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=44a60d269264bd371040375c428f38ee&libraries=services&autoload=false"></script>
+  <script type="text/javascript" src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=44a60d269264bd371040375c428f38ee&amp;libraries=services&amp;autoload=false"></script>
 
   <style>
     /* 1. 프리텐다드 웹 폰트 불러오기 (최상단에 위치해야 함) */
@@ -29,13 +29,6 @@
       src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10-21@1.0/MaruBuri-Regular.woff') format('woff');
       font-weight: normal;
       font-style: normal;
-    }
- 
-    .my-script-text {
-      font-family: 'Allura', cursive !important;
-      font-size: 28px !important;
-      font-weight: 400 !important;
-      color: #707070 !important;           
     }
 
     :root {
@@ -590,8 +583,7 @@
       text-align: left; 
       box-sizing: border-box; 
     }
-    .acc-body.active { display: block; }
-    .acc-row { 
+    .acc-row {
       display: flex; 
       justify-content: space-between; 
       align-items: center; 
@@ -710,8 +702,7 @@
     body.large-text-mode .profile-name { font-size: 22px; }
     body.large-text-mode .profile-role { font-size: 16px; }
     body.large-text-mode .profile-parents { font-size: 16px; }
-    body.large-text-mode .parking-desc-text { font-size: 14.5px !important; letter-spacing: -0.8px !important; }
-    body.large-text-mode .cover-date-banner span:first-child { 
+    body.large-text-mode .cover-date-banner span:first-child {
       font-size: 32px !important; 
       line-height: 1.4 !important;
     }
@@ -754,12 +745,9 @@
     body.large-text-mode .location-title { font-size: 22px; }
     body.large-text-mode .location-addr { font-size: 16px; }
     body.large-text-mode .transport-box { font-size: 16px; }
-    body.large-text-mode .transport-box span { font-size: 15px !important; }
     body.large-text-mode .transport-box p { font-size: 16px !important; line-height: 1.8 !important; }
     body.large-text-mode .transport-box div p { font-size: 16px !important; line-height: 1.8 !important; }
     body.large-text-mode .transport-box .btn-pink { font-size: 17px !important; padding: 16px 12px !important; }
-    body.large-text-mode .acc-header { font-size: 18px; }
-    body.large-text-mode .acc-body p { font-size: 15px !important; }
     body.large-text-mode .guest-snap-desc { font-size: 16px; }
     body.large-text-mode .guest-snap-box .btn-pink { font-size: 17px !important; padding: 16px 12px !important; }
     body.large-text-mode .rsvp-intro-box .btn-pink { font-size: 17px !important; padding: 16px 12px !important; }
@@ -787,7 +775,6 @@
     body.large-text-mode .custom-modal-content .rsvp-textarea { font-size: 16px !important; }
     body.large-text-mode .custom-modal-content .btn-pink { font-size: 17px !important; }
     body.large-text-mode .dont-show-today span { font-size: 14px !important; }
-    body.large-text-mode .footer-maker-text { font-size: 15px !important; }
     body.large-text-mode .footer-maker-text { font-size: 16px !important; }
     body.large-text-mode .footer-maker-text span { font-size: 14px !important; }
 
@@ -977,7 +964,7 @@
       <div class="photo-item gallery-expandable" onclick="openLightbox(22)"><img src="images/photo-23.jpg" alt="갤러리23"></div>
       <div class="photo-item gallery-expandable" onclick="openLightbox(23)"><img src="images/us3.png" alt="갤러리24"></div>
     </div>
-    <button class="btn-gallery-toggle reveal" id="galleryToggleBtn" onclick="toggleGallery()">더보기 ▼</button>
+    <button class="btn-gallery-toggle reveal" id="galleryToggleBtn" onclick="toggleGallery()">사진 더보기 ▼</button>
   </section>
 
   <!-- 5. GUEST SNAP -->
@@ -1013,15 +1000,15 @@
 
       <div class="map-btn-group">
         <button class="btn-map" onclick="openMap('naver')">
-          <img src="https://play-lh.googleusercontent.com/FZCOcEqapjBkvBmv2RkIMlJ1mteGJh8eq4239jAm-4QgpzvCa9sBj4msNlUBsWvf3hX69-fJoTnFZR2pFdZdwxY" alt="네이버 지도" style="width: 15px; height: 15px; object-fit: contain; border-radius: 3px;">
+          <img src="images/navermap.png" alt="네이버 지도" style="width: 15px; height: 15px; object-fit: contain; border-radius: 3px;">
           네이버 지도
         </button>
         <button class="btn-map" onclick="openMap('kakao')">
-          <img src="https://developers.kakao.com/tool/resource/static/img/logo/map/kakaomap_basic.png" alt="카카오맵" style="width: 15px; height: 15px; object-fit: contain; border-radius: 3px;">
+          <img src="images/kakaomap.png" alt="카카오맵" style="width: 15px; height: 15px; object-fit: contain; border-radius: 3px;">
           카카오맵
         </button>
         <button class="btn-map" onclick="openMap('tmap')">
-          <img src="https://play-lh.googleusercontent.com/49iwmmjM20TL_OlZucUw1y3xxA3ZmjO7ZDV_8vcGi8Ef4yq0naS7rLantFLxyUDUCBMBTzuROn1kOWvbPZAo" alt="티맵" style="width: 15px; height: 15px; object-fit: contain; border-radius: 3px;">
+          <img src="images/tmap.png" alt="티맵" style="width: 15px; height: 15px; object-fit: contain; border-radius: 3px;">
           티맵
         </button>
       </div>
@@ -1422,12 +1409,17 @@
     const wrapper = document.getElementById('textSizeBtnWrapper');
     if (!wrapper) return;
 
-    if (window.scrollY > 200) {
-      wrapper.style.opacity = '0';
-      wrapper.style.pointerEvents = 'none';
-    } else {
+    const nearTop = window.scrollY <= 200;
+    const scrollBottom = window.scrollY + window.innerHeight;
+    const pageHeight = document.documentElement.scrollHeight;
+    const nearBottom = scrollBottom >= pageHeight - 150;
+
+    if (nearTop || nearBottom) {
       wrapper.style.opacity = '1';
       wrapper.style.pointerEvents = 'auto';
+    } else {
+      wrapper.style.opacity = '0';
+      wrapper.style.pointerEvents = 'none';
     }
   });
 
@@ -1455,6 +1447,9 @@
       }
     });
   }, observerOptions);
+
+  /* 참석 여부(RSVP) 접수 마감일 - 공용 상수 */
+  const RSVP_DEADLINE = new Date("2026-12-02T23:59:59");
 
   /* 타이핑 스크립트 */
   const openingText = "민교♥윤서 결혼식에 초대합니다.";
@@ -1530,15 +1525,14 @@
   }
 
   // 3. 참석 여부 관련 팝업 제어 (Intro)
-  function openIntroRsvp() { 
-    const rsvpDeadline = new Date("2026-12-02T23:59:59"); 
+  function openIntroRsvp() {
     const now = new Date();
-    
-    if (now > rsvpDeadline) {
+
+    if (now > RSVP_DEADLINE) {
       return;
     }
-    
-    document.getElementById('introRsvpModal').classList.add('active'); 
+
+    document.getElementById('introRsvpModal').classList.add('active');
   }
   
   function closeIntroRsvp() {
@@ -1672,14 +1666,13 @@
     navigator.clipboard.writeText(no).then(() => { alert('웨딩홀 전화번호가 복사되었습니다.'); });
   }
   
-  function openRsvp() { 
-    const rsvpDeadline = new Date("2026-12-02T23:59:59"); 
+  function openRsvp() {
     const now = new Date();
-    if (now > rsvpDeadline) {
+    if (now > RSVP_DEADLINE) {
       alert("참석 여부 전달이 마감되었습니다. 따뜻한 축하 마음에 감사드립니다!");
       return;
     }
-    document.getElementById('rsvpModal').classList.add('active'); 
+    document.getElementById('rsvpModal').classList.add('active');
   }
 
   function closeRsvp() {

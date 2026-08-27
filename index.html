@@ -281,6 +281,12 @@
       line-height: 1.15;
       letter-spacing: 1.5px;
       margin: 0 auto;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+    }
+
+    .cover-script.font-ready {
+      opacity: 1;
     }
 
     .cover-date-banner-wrapper {
@@ -875,6 +881,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Parisienne&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Allura&display=swap" rel="stylesheet">
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Parisienne&display=swap">
 
 </head>
 <body class="stop-scroll" oncontextmenu="return false" ondragstart="return false">
@@ -1505,6 +1512,26 @@
 <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"></iframe>
 
 <script>
+  /* 메인 커버 스크립트 폰트(Parisienne) 로딩 완료 후에만 문구를 표시 -
+     폰트가 늦게 로드되면 기본 폰트로 먼저 그려졌다가 실제 폰트로 순간 교체되면서
+     잔상(번인)처럼 보이는 현상(FOUT)을 막기 위한 처리. 최대 2.5초까지만 대기하고,
+     그 이상 걸리면 로딩 실패로 간주해 어차피 문구를 표시함. */
+  (function revealCoverScriptWhenFontReady() {
+    const show = () => {
+      document.querySelectorAll('.cover-script').forEach(el => el.classList.add('font-ready'));
+    };
+    if (document.fonts && document.fonts.load) {
+      const fontLoad = Promise.all([
+        document.fonts.load('50px Parisienne'),
+        document.fonts.ready
+      ]);
+      const timeout = new Promise(resolve => setTimeout(resolve, 2500));
+      Promise.race([fontLoad, timeout]).then(show).catch(show);
+    } else {
+      show();
+    }
+  })();
+
   /* 카카오 지도 주소 검색 및 지연 로딩(최적화) 스크립트 */
   window.addEventListener('DOMContentLoaded', () => {
     const mapContainer = document.getElementById('map');

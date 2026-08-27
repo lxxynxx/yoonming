@@ -821,6 +821,7 @@
     body.large-text-mode .guest-snap-box .btn-pink { font-size: 17px !important; padding: 16px 12px !important; }
     body.large-text-mode .rsvp-intro-box .btn-pink { font-size: 17px !important; padding: 16px 12px !important; }
     body.large-text-mode .rsvp-intro-desc { font-size: 16px; }
+    body.large-text-mode .thanks-text { font-size: 16px !important; line-height: 1.9 !important; } /* 감사인사 큰 글씨 적용 */
     body.large-text-mode .btn-pink { font-size: 17px; }
     body.large-text-mode .btn-map { font-size: 15px !important; }
 
@@ -1273,7 +1274,7 @@
     <div class="section-subtitle-en">THANKS</div>
     <div style="width: 100%; text-align: center;">
       <img src="images/thanks.jpg" alt="감사인사" style="width: 100%; height: auto; border-radius: 8px; margin-bottom: 20px; object-fit: contain;">
-      <p style="font-family: 'Pretendard', -apple-system, sans-serif !important; font-size: 13px; color: var(--text-sub); line-height: 1.8; margin-bottom: 0; word-break: keep-all;">
+      <p class="thanks-text" style="font-family: 'Pretendard', -apple-system, sans-serif !important; font-size: 13px; color: var(--text-sub); line-height: 1.8; margin-bottom: 0; word-break: keep-all;">
         축하해주셔서 감사합니다.<br>
         행복하게 잘 살겠습니다.
       </p>
@@ -1326,7 +1327,7 @@
       <button class="intro-modal-close" onclick="closeGuestSnapModal()">✕</button>
     </div>
     <div style="font-family: 'Pretendard', -apple-system, sans-serif !important; font-size: 13px; color: var(--text-sub); line-height: 1.7; margin-bottom: 16px; text-align: center;">
-      예식 날 하객 여러분께서 직접 찍어주신<br>소중한 사진과 영상을 공유해 주세요!<br>아래버튼을 눌러 편하게 업로드하실 수 있습니다.<br>          카카오톡으로 보내주셔도 감사합니다♥
+      예식 날 하객 여러분께서 직접 찍어주신<br>소중한 사진과 영상을 공유해 주세요!<br>아래 버튼을 눌러 편하게 업로드하실 수 있습니다.<br>카카오톡으로 보내주셔도 감사합니다♥
     </div>
     <a href="https://www.dropbox.com/request/iq5dleb189bjqpuvhwnw" target="_blank" class="btn-pink" style="display: block; text-align: center; text-decoration: none; background-color: #eec8ce; color: #ffffff; border: none; border-radius: 8px; margin-bottom: 12px; padding: 14px; font-size: 15px; font-weight: bold; width: 100%; box-sizing: border-box; font-family: 'Pretendard', -apple-system, sans-serif !important;">
       📸 사진 올리러 가기
@@ -1631,7 +1632,7 @@
     setTimeout(() => {
       if (photoSkipped) return;
       skipPhotoOpening();
-    }, 2500); // 2.5초간 사진 보여준 후 스르르 사라지게
+    }, 1000); // 1초간 사진 보여준 후 스르르 사라지게
   }
 
   function skipPhotoOpening() {
@@ -1755,13 +1756,30 @@
   function prevImage() { currentGalleryIndex = (currentGalleryIndex - 1 + galleryImages.length) % galleryImages.length; updateLightbox(); }
 
   let touchStartX = 0, touchEndX = 0;
+  let lightboxSwiped = false;
   const wrapper = document.getElementById('lightboxWrapper');
   wrapper.addEventListener('touchstart', (e) => { touchStartX = e.changedTouches[0].screenX; }, { passive: true });
   wrapper.addEventListener('touchend', (e) => {
     touchEndX = e.changedTouches[0].screenX;
-    if (touchEndX < touchStartX - 40) nextImage();
-    if (touchEndX > touchStartX + 40) prevImage();
+    const diff = touchStartX - touchEndX;
+    if (Math.abs(diff) > 40) {
+      lightboxSwiped = true;
+      if (diff > 0) nextImage(); else prevImage();
+      setTimeout(() => { lightboxSwiped = false; }, 300);
+    }
   }, { passive: true });
+
+  /* 사진 좌/우 탭 클릭으로도 넘기기: 스와이프 제스처 없이 오른쪽 클릭=다음, 왼쪽 클릭=이전 */
+  wrapper.addEventListener('click', (e) => {
+    if (lightboxSwiped) return; // 방금 스와이프한 동작이 클릭으로 중복 발생하는 것 방지
+    const rect = wrapper.getBoundingClientRect();
+    const tapX = e.clientX - rect.left;
+    if (tapX < rect.width / 2) {
+      prevImage();
+    } else {
+      nextImage();
+    }
+  });
 
   function toggleGallery() {
     const expandables = document.querySelectorAll('.gallery-expandable');

@@ -138,6 +138,40 @@
       transform: translate3d(0, 0, 0);
     }
 
+    /* 새로 추가된 사진 오프닝 오버레이 */
+    .photo-overlay {
+      position: fixed;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
+      max-width: 430px;
+      height: 100vh;
+      background: var(--bg-color); /* 뒤의 핑크색을 완벽히 가리기 위한 배경 */
+      z-index: 10000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      opacity: 1; /* 누르자마자 100% 보이게 설정 */
+      visibility: visible;
+      transition: opacity 1.2s ease, visibility 1.2s ease;
+      cursor: pointer;
+    }
+    
+    /* 사진 원본 비율 유지 설정 */
+    .photo-overlay img {
+      max-width: 100%;
+      max-height: 100%;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+    }
+
+    .photo-overlay.fade-out {
+      opacity: 0;
+      visibility: hidden;
+    }
+
     .opening-overlay {
       position: fixed;
       top: 0;
@@ -842,6 +876,11 @@
 </head>
 <body class="stop-scroll" oncontextmenu="return false" ondragstart="return false">
 
+<!-- 새로 추가된 사진 오프닝 레이어 -->
+<div class="photo-overlay" id="photoOverlay" onclick="skipPhotoOpening()">
+  <img src="images/open.jpg" alt="오프닝 사진">
+</div>
+
 <!-- 0. 오프닝 레이어 -->
 <div class="opening-overlay" id="openingOverlay" onclick="closeOpening()">
   <div class="typing-text" id="typingText"></div>
@@ -877,19 +916,23 @@
     </div>
   </div>
 
-  <!-- 2. INVITATION & PROFILE -->
+
+
+
+<!-- 2. INVITATION & PROFILE -->
   <section class="section" style="padding-top: 60px;">
     <div class="section-title-pink reveal">초대합니다</div>
     <div class="section-subtitle-en reveal">Invitation</div>
-    <div class="invitation-text reveal">
-      하얀 눈꽃처럼 맑은 사람을 만나<br>
-      서로의 세상을 따뜻한 색으로<br>
-      물들여 가고 있습니다.<br>
-      평생을 함께하고 싶은 소중한 인연과<br>
-      변치 않을 아름다운 약속을 맺습니다.<br>
-      저희의 설레는 첫걸음을<br>
-      따뜻하게 축복해 주세요.
+    <div class="invitation-text reveal" style="text-align: center;">
+      잔잔한 <strong style="color: var(--pink-dark);">윤</strong>슬처럼 서로의 하루에 스며들어<br>
+      어느덧 가장 편안한 안식처가 되었습니다.<br>
+      기쁨과 작은 고<strong style="color: var(--pink-dark);">민</strong>까지 함께 나누며<br>
+      평생 <strong style="color: var(--pink-dark);">서</strong>로에게 든든한 사람이 되어주겠습니다.<br>
+      두 사람의 삶이 다정하게 <strong style="color: var(--pink-dark);">교</strong>차하는 소중한 시작에<br>
+      귀한 걸음으로 함께하시어<br>
+      축복해 주시면 감사하겠습니다.
     </div>
+
 
    <div class="profile-grid">
       <!-- 신랑 프로필 (왼쪽) -->
@@ -978,12 +1021,12 @@
     <div class="section-subtitle-en reveal">Gallery</div>
     <div class="gallery-grid-3x3 reveal" id="galleryGrid">
       <div class="photo-item" onclick="openLightbox(0)"><img src="images/photo-01.jpg" alt="갤러리1"></div>
-      <div class="photo-item" onclick="openLightbox(1)"><img src="images/my.png" alt="갤러리2"></div>
+      <div class="photo-item" onclick="openLightbox(1)"><img src="images/photo-02.png" alt="갤러리2"></div>
       <div class="photo-item" onclick="openLightbox(2)"><img src="images/photo-03.jpg" alt="갤러리3"></div>
       <div class="photo-item" onclick="openLightbox(3)"><img src="images/photo-04.jpg" alt="갤러리4"></div>
       <div class="photo-item" onclick="openLightbox(4)"><img src="images/photo-05.jpg" alt="갤러리5"></div>
       <div class="photo-item" onclick="openLightbox(5)"><img src="images/photo-06.jpg" alt="갤러리6"></div>
-      <div class="photo-item" onclick="openLightbox(6)"><img src="images/forever3.png" alt="갤러리7"></div>
+      <div class="photo-item" onclick="openLightbox(6)"><img src="images/photo-07.jpg" alt="갤러리7"></div>
       <div class="photo-item" onclick="openLightbox(7)"><img src="images/photo-08.jpg" alt="갤러리8"></div>
       <div class="photo-item" onclick="openLightbox(8)"><img src="images/photo-09.jpg" alt="갤러리9"></div>
       <div class="photo-item" onclick="openLightbox(9)"><img src="images/photo-10.jpg" alt="갤러리10"></div>
@@ -992,16 +1035,16 @@
 
       <div class="photo-item gallery-expandable" onclick="openLightbox(12)"><img src="images/photo-13.jpg" alt="갤러리13"></div>
       <div class="photo-item gallery-expandable" onclick="openLightbox(13)"><img src="images/photo-14.jpg" alt="갤러리14"></div>
-      <div class="photo-item gallery-expandable" onclick="openLightbox(14)"><img src="images/love3.png" alt="갤러리15"></div>
+      <div class="photo-item gallery-expandable" onclick="openLightbox(14)"><img src="images/photo-15.jpg" alt="갤러리15"></div>
       <div class="photo-item gallery-expandable" onclick="openLightbox(15)"><img src="images/photo-16.jpg" alt="갤러리16"></div>
       <div class="photo-item gallery-expandable" onclick="openLightbox(16)"><img src="images/photo-17.jpg" alt="갤러리17"></div>
       <div class="photo-item gallery-expandable" onclick="openLightbox(17)"><img src="images/photo-18.jpg" alt="갤러리18"></div>
-      <div class="photo-item gallery-expandable" onclick="openLightbox(18)"><img src="images/you3.png" alt="갤러리19"></div>
+      <div class="photo-item gallery-expandable" onclick="openLightbox(18)"><img src="images/photo-19.jpg" alt="갤러리19"></div>
       <div class="photo-item gallery-expandable" onclick="openLightbox(19)"><img src="images/photo-20.jpg" alt="갤러리20"></div>
       <div class="photo-item gallery-expandable" onclick="openLightbox(20)"><img src="images/photo-21.jpg" alt="갤러리21"></div>
       <div class="photo-item gallery-expandable" onclick="openLightbox(21)"><img src="images/photo-22.jpg" alt="갤러리22"></div>
       <div class="photo-item gallery-expandable" onclick="openLightbox(22)"><img src="images/photo-23.jpg" alt="갤러리23"></div>
-      <div class="photo-item gallery-expandable" onclick="openLightbox(23)"><img src="images/us3.png" alt="갤러리24"></div>
+      <div class="photo-item gallery-expandable" onclick="openLightbox(23)"><img src="images/photo-24.jpg" alt="갤러리24"></div>
     </div>
     <button class="btn-gallery-toggle reveal" id="galleryToggleBtn" onclick="toggleGallery()">사진 더보기 ▼</button>
   </section>
@@ -1224,15 +1267,15 @@
     </div>
   </section>
 
-  <!-- 9. NOTICE (전달사항) -->
+  <!-- 9. THANKS (감사인사) -->
   <section class="section reveal" style="background: #ffffff;">
-    <div class="section-title-pink">전달사항</div>
-    <div class="section-subtitle-en">NOTICE</div>
-    <div style="width: 100%; background: #ffffff; border: 1px solid var(--line-color); border-radius: 12px; padding: 24px 20px; text-align: center;">
-      <p style="font-size: 13px; color: var(--text-sub); line-height: 1.7; margin-bottom: 0; word-break: keep-all;">
-        화환은 정중히 사양합니다.<br>
-        따뜻한 마음만 감사히 받겠습니다.<br><br>
-        (여기에 원하시는 전달사항 내용을 자유롭게 수정해서 적어주세요.)
+    <div class="section-title-pink">감사인사</div>
+    <div class="section-subtitle-en">THANKS</div>
+    <div style="width: 100%; text-align: center;">
+      <img src="images/thanks.jpg" alt="감사인사" style="width: 100%; height: auto; border-radius: 8px; margin-bottom: 20px; object-fit: contain;">
+      <p style="font-family: 'Pretendard', -apple-system, sans-serif !important; font-size: 13px; color: var(--text-sub); line-height: 1.8; margin-bottom: 0; word-break: keep-all;">
+        축하해주셔서 감사합니다.<br>
+        행복하게 잘 살겠습니다.
       </p>
     </div>
   </section>
@@ -1562,12 +1605,13 @@
   /* 참석 여부(RSVP) 접수 마감일 - 공용 상수 */
   const RSVP_DEADLINE = new Date("2026-12-02T23:59:59");
 
-  /* 타이핑 스크립트 */
-  const openingText = "정민교, 그리고 이윤서";
+  /* 오프닝 및 타이핑 스크립트 */
+  const openingText = "정민교 ♥ 이윤서";
   const typingElement = document.getElementById("typingText");
   let charIndex = 0;
   let typingTimer = null;
   let isClosed = false;
+  let photoSkipped = false;
 
   function typeWriter() {
     if (charIndex <= openingText.length) {
@@ -1582,8 +1626,29 @@
     }
   }
 
+  function startPhotoOpening() {
+    // 투명도 조절 없이 페이지 로딩 시부터 무조건 100% 보이므로 바로 대기시간 진행
+    setTimeout(() => {
+      if (photoSkipped) return;
+      skipPhotoOpening();
+    }, 2500); // 2.5초간 사진 보여준 후 스르르 사라지게
+  }
+
+  function skipPhotoOpening() {
+    if (photoSkipped) return;
+    photoSkipped = true;
+    const photoOverlay = document.getElementById('photoOverlay');
+    photoOverlay.classList.add('fade-out');
+    
+    // 사진이 사라지는 효과에 맞춰 약 1.2초 후 뒤에 있던 핑크색 배경과 타이핑 텍스트 나타남
+    setTimeout(() => {
+      typeWriter();
+    }, 1200); 
+  }
+
   window.addEventListener('DOMContentLoaded', () => {
-    typeWriter();
+    // 기존 typeWriter() 대신 사진 오프닝을 먼저 시작
+    startPhotoOpening();
     document.querySelectorAll('.reveal').forEach(el => { revealObserver.observe(el); });
   });
 
@@ -1661,14 +1726,14 @@
   }
 
   const galleryImages = [
-    'images/photo-01.jpg', 'images/my.png', 'images/photo-03.jpg',
+    'images/photo-01.jpg', 'images/photo-02.png', 'images/photo-03.jpg',
     'images/photo-04.jpg', 'images/photo-05.jpg', 'images/photo-06.jpg',
-    'images/forever3.png', 'images/photo-08.jpg', 'images/photo-09.jpg',
+    'images/photo-07.jpg', 'images/photo-08.jpg', 'images/photo-09.jpg',
     'images/photo-10.jpg', 'images/photo-11.jpg', 'images/photo-12.jpg',
-    'images/photo-13.jpg', 'images/photo-14.jpg', 'images/love3.png',
+    'images/photo-13.jpg', 'images/photo-14.jpg', 'images/photo-15.jpg',
     'images/photo-16.jpg', 'images/photo-17.jpg', 'images/photo-18.jpg',
-    'images/you3.png', 'images/photo-20.jpg', 'images/photo-21.jpg',
-    'images/photo-22.jpg', 'images/photo-23.jpg', 'images/us3.png'
+    'images/photo-19.jpg', 'images/photo-20.jpg', 'images/photo-21.jpg',
+    'images/photo-22.jpg', 'images/photo-23.jpg', 'images/photo-24.jpg'
   ];
   let currentGalleryIndex = 0;
 

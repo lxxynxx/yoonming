@@ -138,76 +138,233 @@
       transform: translate3d(0, 0, 0);
     }
 
-    /* 새로 추가된 사진 오프닝 오버레이 */
-    .photo-overlay {
+   /* 편지봉투 오프닝 전체 화면 */
+    .envelope-overlay {
       position: fixed;
-      top: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 100%;
-      max-width: 430px;
-      height: 100vh;
-      background: var(--bg-color); /* 뒤의 핑크색을 완벽히 가리기 위한 배경 */
+      top: 0; left: 50%; transform: translateX(-50%);
+      width: 100%; max-width: 430px; height: 100vh;
+      background: var(--bg-color);
       z-index: 10000;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      opacity: 1; /* 누르자마자 100% 보이게 설정 */
-      visibility: visible;
-      transition: opacity 1.2s ease, visibility 1.2s ease;
+      display: flex; flex-direction: column; justify-content: center; align-items: center;
+      transition: opacity 1.8s ease, visibility 1.8s ease;
       cursor: pointer;
     }
     
-    /* 사진 원본 비율 유지 설정 */
-    .photo-overlay img {
-      max-width: 100%;
-      max-height: 100%;
-      width: auto;
-      height: auto;
-      object-fit: contain;
-    }
-
-    .photo-overlay.fade-out {
+    .envelope-overlay.fade-out {
       opacity: 0;
       visibility: hidden;
     }
 
-    .opening-overlay {
-      position: fixed;
-      top: 0;
-      left: 50%;
-      transform: translateX(-50%);
+    /* 편지봉투 뼈대 - 화면 꽉 차게, 사진 비율(288:420)은 그대로 유지 */
+    .envelope {
+      position: relative;
+      width: clamp(300px, 92vw, 400px); 
+      aspect-ratio: 288 / 420;
+      perspective: 1200px;
+    transition: transform 1.2s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+
+   /* 🤎 띤또레또 종이 질감 & 색상 (징그러운 무늬 축소, 미세한 결 표현) */
+    .paper-texture {
+      background-color: #3a2317; 
+      /* baseFrequency를 0.04 -> 0.8로 올려서 무늬 입자를 아주 작게 만들고, 명암(slope)을 자연스럽게 낮췄습니다 */
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3CfeComponentTransfer%3E%3CfeFuncA type='linear' slope='0.12'/%3E%3C/feComponentTransfer%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    }
+
+    /* 봉투 뒷면 */
+    .env-back {
+      position: absolute; inset: 0;
+      border-radius: 4px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+    }
+
+    /* 🚨 실수로 지워졌던 편지지(사진) 제어 코드 복구 🚨 */
+    .env-letter {
+      position: absolute; 
+      left: 5%; right: 5%; bottom: 4%; 
+      height: 90%; 
+      background: #ffffff;
+      border-radius: 2px;
+      overflow: hidden;
+      display: flex; justify-content: center; align-items: flex-start;
+      padding: 6px; box-sizing: border-box;
+      z-index: 2; 
+      transition: transform 1.2s cubic-bezier(0.25, 1, 0.5, 1), height 1.2s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.5s ease;
+    }
+    
+    .env-letter img {
+      width: 100%; height: 100%; object-fit: cover; border-radius: 2px;
+    }
+
+    /* 봉투 앞면 (접힌 밑단) - 💡 주황색 선 요청 부분 (경계선 뚜렷하게) */
+    .env-front {
+      position: absolute; inset: 0;
+      clip-path: polygon(0 0, 50% 50%, 100% 0, 100% 100%, 0 100%);
+      border-radius: 4px;
+      z-index: 3;
+      /* V자로 파인 경계선에 직접적으로 짙은 윤곽선과 그림자를 생성합니다 */
+      filter: drop-shadow(0px -1px 2px rgba(0,0,0,0.9)) drop-shadow(0px -3px 8px rgba(0,0,0,0.4));
+    }
+
+    /* 봉투 덮개 뼈대 - 💡 주황색 선 요청 부분 (경계선 뚜렷하게) */
+    .env-flap-wrapper {
+      position: absolute; top: 0; left: 0;
+      width: 100%; height: 55%;
+      transform-origin: top; 
+    transition: transform 0.8s ease-in-out;
+      z-index: 4; 
+      /* 덮개가 겹치는 V자 아랫선에 짙은 윤곽선과 그림자를 생성합니다 */
+      filter: drop-shadow(0px 1px 2px rgba(0,0,0,0.9)) drop-shadow(0px 4px 10px rgba(0,0,0,0.5));
+    }
+
+    /* 실제 V자 덮개 모양 */
+    .env-flap-shape {
+      width: 100%; height: 100%;
+      clip-path: polygon(0 0, 100% 0, 50% 100%);
+      border-radius: 4px 4px 0 0;
+    }
+
+ /* 🥈 실제 촬영한 왁스씰 사진을 그대로 사용 (my 이니셜이 정면으로 보이도록 회전 보정된 이미지) */
+    .wax-seal {
+      position: absolute;
+      bottom: 0; left: 50%;
+      transform: translate(-50%, 50%);
+      width: 20%; height: auto;
+      z-index: 5;
+      transition: opacity 0.3s ease;
+      filter: drop-shadow(0 4px 7px rgba(0,0,0,0.4));
+    }
+
+    .wax-seal-img {
       width: 100%;
-      max-width: 430px;
-      height: 100vh;
-      background: linear-gradient(to bottom, #fdf8f5 0%, #fbe3e7 100%);
-      z-index: 9999;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      transition: opacity 1.5s cubic-bezier(0.4, 0, 0.2, 1), visibility 1.5s ease;
+      height: auto;
+      display: block;
+      pointer-events: none;
+      -webkit-user-drag: none;
+    }
+
+  /* ==== 애니메이션 동작 상태 ==== */
+    .envelope.open .env-flap-wrapper { 
+      transform: rotateX(180deg); 
+      z-index: 1; 
+      /* 뚜껑이 열리는 동안 사진 뒤로 자연스럽게 넘어가도록 0.3초 지연 유지 */
+      transition: transform 0.8s ease-in-out, z-index 0s 0.3s;
+    }
+    
+    .envelope.open .wax-seal {
+      opacity: 0; 
+    }
+    
+    .envelope.slide-up .env-letter {
+      transform: translateY(-67%); 
+      height: 120%;
+      /* 💡 복구: 사진이 봉투 앞주머니 밖으로 빠져나오게 맨 앞으로(z-index: 5) 당겨줍니다! */
+      z-index: 5; 
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+      /* 💡 디테일: 봉투에서 절반쯤 뽑혔을 때(0.4초 뒤) 앞으로 나오도록 지연시켜서 어색하게 뚫고 나오는 현상 방지 */
+      transition: transform 1.2s cubic-bezier(0.25, 1, 0.5, 1), height 1.2s cubic-bezier(0.25, 1, 0.5, 1), z-index 0s 0.4s;
+    }
+    
+    .envelope.slide-up {
+      transform: translateY(34%);
+    }
+
+    /* 사진이 다시 화면 중앙 쪽으로 내려와 자리잡는 상태 */
+    .envelope.letter-down .env-letter {
+      transform: translateY(-14%);
+      height: 120%;
+      /* 💡 복구: 내려왔을 때도 봉투 앞면보다 앞에 있도록 유지합니다 */
+      z-index: 5;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
       cursor: pointer;
-      padding: 0 24px;
     }
 
-    .opening-overlay.fade-out {
-      opacity: 0;
-      visibility: hidden;
+    .envelope.letter-down {
+      transform: translateY(21%);
     }
 
-    .typing-text {
-      font-size: 17px;
+    /* 하단 터치 유도 문구 */
+    .env-hint {
+      position: absolute;
+      left: 50%;
+      bottom: 36px;
+      transform: translateX(-50%);
+      z-index: 20;
+      padding: 9px 20px;
+      border-radius: 999px;
+      background: rgba(58, 35, 23, 0.6);
+      font-family: 'MaruBuri', sans-serif !important;
+      font-size: 13px;
+      color: #fdf8f5;
+      white-space: nowrap;
+      animation: blink 1.5s infinite;
+      transition: opacity 0.5s;
+      pointer-events: none;
+    }
+
+    /* 깜빡임 애니메이션이 opacity를 계속 되돌리므로, 숨길 때는 애니메이션 자체를 꺼야 함 */
+    .env-hint.is-hidden {
+      opacity: 0 !important;
+      animation: none;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+
+    /* 편지지 카드 뒤집기 구조: 앞면 = 사진, 뒷면 = 이름 타이핑 문구 */
+    .env-letter {
+      perspective: 1200px;
+    }
+
+    .env-letter-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transition: transform 0.9s cubic-bezier(0.4, 0, 0.2, 1);
+      transform-style: preserve-3d;
+    }
+
+    .env-letter.flipped .env-letter-inner {
+      transform: rotateY(180deg);
+    }
+
+    .env-letter-front,
+    .env-letter-back {
+      position: absolute;
+      inset: 0;
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+      border-radius: 2px;
+      overflow: hidden;
+    }
+
+    .env-letter-front img {
+      width: 100%; height: 100%; object-fit: cover; border-radius: 2px;
+    }
+
+    .env-letter-back {
+      transform: rotateY(180deg);
+      background: linear-gradient(to bottom, #fdf8f5 0%, #fbe3e7 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    .typing-text-back {
+      font-family: 'MaruBuri', sans-serif !important;
+      font-size: 15px;
       color: #222222;
       letter-spacing: -0.3px;
       line-height: 1.6;
       word-break: keep-all;
       text-align: center;
-      min-height: 28px;
-      font-family: 'MaruBuri', sans-serif !important;
+      min-height: 22px;
     }
 
-    .typing-text::after {
+    .typing-text-back::after {
       content: '|';
       display: inline-block;
       margin-left: 3px;
@@ -216,21 +373,8 @@
       animation: blink 0.7s infinite;
     }
 
-    .typing-text.done::after {
+    .typing-text-back.done::after {
       display: none;
-    }
-
-    @keyframes blink {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0; }
-    }
-
-    .skip-hint {
-      position: absolute;
-      bottom: 35px;
-      font-size: 10px;
-      color: #a88d92;
-      letter-spacing: 1.5px;
     }
 
     .section {
@@ -336,7 +480,7 @@
     }
 
     .profile-img {
-      width: 100%; 
+      width: 82%; 
       aspect-ratio: 3 / 4; /* 스마트폰 화면 크기에 맞춰 3:4 비율로 자동 조절 */
       height: auto;
       border-radius: 12px;
@@ -886,18 +1030,40 @@
 </head>
 <body class="stop-scroll" oncontextmenu="return false" ondragstart="return false">
 
-<!-- 새로 추가된 사진 오프닝 레이어 -->
-<div class="photo-overlay" id="photoOverlay" onclick="skipPhotoOpening()">
-  <img src="images/open.jpg" alt="오프닝 사진">
-</div>
+<!-- 새로 추가된 세로형 편지봉투 오프닝 레이어 -->
+<div class="envelope-overlay" id="envelopeOverlay" onclick="openEnvelope()">
+  <div class="envelope" id="envelopeObj">
+    <!-- 봉투 뒷면 -->
+    <div class="env-back paper-texture"></div>
 
-<!-- 0. 오프닝 레이어 -->
-<div class="opening-overlay" id="openingOverlay" onclick="closeOpening()">
-  <div class="typing-text" id="typingText"></div>
-  <div class="skip-hint">TOUCH TO SKIP</div>
+    <!-- 봉투 안의 사진(편지지) - 터치 이벤트 제거 -->
+    <div class="env-letter" id="envLetter">
+      <div class="env-letter-inner" id="envLetterInner">
+        <div class="env-letter-front">
+          <img src="images/open.jpg" alt="오프닝 사진">
+        </div>
+        <div class="env-letter-back">
+          <div class="typing-text-back" id="typingTextBack"></div>
+        </div>
+      </div>
+    </div>
+    <!-- 봉투 앞면 (접힌 부분) -->
+    <div class="env-front paper-texture"></div>
+   <!-- 봉투 덮개 뼈대 (분리) -->
+    <div class="env-flap-wrapper" id="envFlap">
+      <!-- V자 모양 종이 -->
+      <div class="env-flap-shape paper-texture"></div>
+      <!-- 왁스 씰(도장) - 실제 촬영 사진 사용 -->
+      <div class="wax-seal">
+        <img src="images/wax-seal.png" alt="my 이니셜 왁스씰" class="wax-seal-img">
+      </div>
+    </div>
+  </div>
+  <div class="env-hint" id="envHint">봉투를 터치해 열어보세요</div>
 </div>
 
 <div class="mobile-container">
+
 
   <audio id="wedding-bgm" loop>
     <source src="invisible.mp3" type="audio/mpeg">
@@ -939,7 +1105,7 @@
       기쁨과 작은 고<strong style="color: var(--pink-dark);">민</strong>까지 함께 나누며<br>
       평생 <strong style="color: var(--pink-dark);">서</strong>로에게 든든한 사람이 되어주겠습니다.<br>
       <span style="white-space: nowrap;">두 사람의 삶이 다정하게 <strong style="color: var(--pink-dark);">교</strong>차하는 소중한 시작에</span><br>
-      귀한 걸음으로 함께하시어<br>축복해 주시면 감사하겠습니다.
+      귀한 걸음으로 함께하시어 축복해 주시면 감사하겠습니다.
     </div>
 
 
@@ -1260,7 +1426,7 @@
     <div class="section-subtitle-en">RSVP</div>
     <div class="rsvp-intro-box">
       <p class="rsvp-intro-desc">
-        저희의 새로운 시작을 함께해 주실<br>소중한 분들을 위해<br>정성껏 자리를 준비하려 합니다.<br>참석 여부를 미리 알려주시면 감사하겠습니다.
+        저희의 새로운 시작을 함께해 주실 소중한 분들을 위해<br>정성껏 자리를 준비하려 합니다.<br>참석 여부를 미리 알려주시면 감사하겠습니다.
       </p>
       <button class="btn-pink" onclick="openRsvp()" style="background-color: #eec8ce; color: #ffffff; border: none; border-radius: 8px; margin-top: 14px; padding: 12px; font-size: 14px; font-weight: bold; width: 100%; box-sizing: border-box; cursor: pointer;">
         💌 참석 여부 전달
@@ -1575,7 +1741,7 @@
       });
     }, { rootMargin: '300px 0px' });
 
-    mapObserver.observe(mapContainer);
+    if(mapContainer) mapObserver.observe(mapContainer);
   });
 
   window.addEventListener('scroll', () => {
@@ -1624,59 +1790,82 @@
   /* 참석 여부(RSVP) 접수 마감일 - 공용 상수 */
   const RSVP_DEADLINE = new Date("2026-12-02T23:59:59");
 
-  /* 오프닝 및 타이핑 스크립트 */
+  /* 오프닝 및 타이핑 스크립트 - 이제 편지지 뒷면에 타이핑됨 */
   const openingText = "정민교 ♥ 이윤서";
-  const typingElement = document.getElementById("typingText");
+  const typingElement = document.getElementById("typingTextBack");
   let charIndex = 0;
   let typingTimer = null;
   let isClosed = false;
-  let photoSkipped = false;
 
   function typeWriter() {
     if (charIndex <= openingText.length) {
       let currentText = openingText.substring(0, charIndex);
       currentText = currentText.replace('♥', '<span style="color: #f6b0b9;">♥</span>');
-      typingElement.innerHTML = currentText;
+      if(typingElement) typingElement.innerHTML = currentText;
       charIndex++;
       typingTimer = setTimeout(typeWriter, 110);
     } else {
-      typingElement.classList.add("done");
-      setTimeout(() => { closeOpening(); }, 700);
+      if(typingElement) typingElement.classList.add("done");
+      setTimeout(() => { closeOpening(); }, 900);
     }
   }
 
-  function startPhotoOpening() {
-    // 투명도 조절 없이 페이지 로딩 시부터 무조건 100% 보이므로 바로 대기시간 진행
-    setTimeout(() => {
-      if (photoSkipped) return;
-      skipPhotoOpening();
-    }, 1000); // 1초간 사진 보여준 후 스르르 사라지게
-  }
+ /* 편지 봉투 애니메이션 스크립트 */
+  let envelopeOpened = false;
 
-  function skipPhotoOpening() {
-    if (photoSkipped) return;
-    photoSkipped = true;
-    const photoOverlay = document.getElementById('photoOverlay');
-    photoOverlay.classList.add('fade-out');
+  function openEnvelope() {
+    if (envelopeOpened) return; // 중복 클릭 방지
+    envelopeOpened = true;
+
+    // 1. 하단 힌트 문구 숨기기 & 봉투 덮개 열기
+    const envHint = document.getElementById('envHint');
+    if (envHint) {
+      envHint.style.animation = 'none'; 
+      envHint.style.opacity = '0';
+    }
     
-    // 사진이 사라지는 효과에 맞춰 약 1.2초 후 뒤에 있던 핑크색 배경과 타이핑 텍스트 나타남
+    const envelope = document.getElementById('envelopeObj');
+    if (envelope) envelope.classList.add('open');
+
+    // 2. 0.7초 뒤 덮개가 다 열릴 즈음, 사진을 위로 스르륵 밀어 올리기
     setTimeout(() => {
-      typeWriter();
-    }, 1200); 
+      if (envelope) envelope.classList.add('slide-up');
+    }, 700);
+
+    // 3. 사진이 끝까지 올라간 후(1.2초 소요) 살짝 머물렀다가 중앙으로 부드럽게 내려옵니다
+    setTimeout(() => {
+      if (envelope) {
+        envelope.classList.remove('slide-up');
+        envelope.classList.add('letter-down');
+      }
+    }, 2100); 
+
+    // 4. 💡 대기 시간 삭제! 사진이 다 내려오자마자(3.3초) 지체 없이 바로 뒤집기!
+    setTimeout(() => {
+      const envLetter = document.getElementById('envLetter');
+      if (envLetter) envLetter.classList.add('flipped');
+
+      // 5. 카드가 뒤집어지는 도중 타이핑 시작
+      setTimeout(() => {
+        typeWriter();
+      }, 500);
+    }, 3300); // 👈 3800을 3300으로 줄였습니다
   }
 
   window.addEventListener('DOMContentLoaded', () => {
-    // 기존 typeWriter() 대신 사진 오프닝을 먼저 시작
-    startPhotoOpening();
+    // 스크롤 감지 옵저버 실행
     document.querySelectorAll('.reveal').forEach(el => { revealObserver.observe(el); });
   });
 
+  // 5. 타이핑이 끝나면 봉투 레이어 전체가 서서히 사라지며 메인화면 + BGM 노출
   function closeOpening() {
     if (isClosed) return;
     isClosed = true;
     if (typingTimer) clearTimeout(typingTimer);
-    const overlay = document.getElementById('openingOverlay');
-    overlay.classList.add('fade-out');
+    
+    const overlay = document.getElementById('envelopeOverlay');
+    if(overlay) overlay.classList.add('fade-out');
+    
     document.body.classList.remove('stop-scroll');
 
     const bgm = document.getElementById('wedding-bgm');
@@ -1695,6 +1884,8 @@
       setTimeout(() => { openGuestSnapModal(); }, 1200);
     }
   }
+
+  /* 팝업 순서 제어 스크립트: 하객스냅 -> 참석여부 */
 
   /* 팝업 순서 제어 스크립트: 하객스냅 -> 참석여부 */
   

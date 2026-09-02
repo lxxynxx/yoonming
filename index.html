@@ -194,10 +194,10 @@
       box-shadow: 0 0 15px rgba(255, 255, 255, 0.9), inset 0 2px 5px rgba(0,0,0,0.05);
     }
 
-    .booth-top-light span {
-      font-family: 'MaruBuri', sans-serif !important;
+   .booth-top-light span {
+      font-family: 'Pretendard', sans-serif !important; /* 마루부리 대신 프리텐다드 폰트 강제 적용 */
       font-size: 16px;
-      font-weight: bold;
+      font-weight: 700; /* 굵기를 확실하게 잡아줌 */
       color: #d9939d;
       letter-spacing: 2px;
     }
@@ -341,7 +341,8 @@
     /* 타이핑 문구 스타일 - 항상 1줄로 표시 */
    .typing-text-back {
       font-family: 'MaruBuri', sans-serif !important; /* 마루부리체 적용 */
-      font-size: 18px; /* 폰트 크기 축소 (원하는 크기로 조절 가능) */
+      font-size: 13px; /* 폰트 크기 축소 (원하는 크기로 조절 가능) */
+      font-weight: bold !important;
       color: #707070; 
       letter-spacing: 1px;
       line-height: 1.1;
@@ -1749,7 +1750,7 @@ object-position: center 20%; /* 숫자를 조절하여 위아래 초점 위치�
   const RSVP_DEADLINE = new Date("2026-12-02T23:59:59");
 
   /* 오프닝 및 타이핑 스크립트 */
-  const openingText = "2026.12.12";  // 💡 네컷사진 하단 문구 변경
+  const openingText = "2026.12.12 SAT PM12:30";  // 💡 네컷사진 하단 문구 변경
   const typingElement = document.getElementById("typingTextBack");
   let charIndex = 0;
   let typingTimer = null; 
@@ -1795,7 +1796,7 @@ let isPrinting = false;
       const scale = getTypingFitScale();
       typingElement.style.transform = `scale(${scale})`;
       // 사진이 내려오는 순간(지연 시간 없이) 바로 날짜를 띄움
-      typingElement.innerHTML = "2026.12.12";
+      typingElement.innerHTML = "2026.12.12 SAT PM12:30";
       typingElement.classList.add("done");
     }
 

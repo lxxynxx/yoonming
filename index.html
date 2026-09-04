@@ -142,7 +142,7 @@
       flex-direction: column; 
       justify-content: flex-start; 
       align-items: center;
-      padding-top: 130px;
+      padding-top: 80px;
       overflow-y: auto;
       transition: opacity 1.8s ease, visibility 1.8s ease;
       cursor: pointer;
@@ -864,6 +864,18 @@ object-position: center 20%; /* 숫자를 조절하여 위아래 초점 위치�
     body.large-text-mode .acc-header { font-size: 17px !important; padding: 14px 12px !important; }
     body.large-text-mode .acc-body p { font-size: 15px !important; }
     body.large-text-mode .acc-body p[style*="font-weight: bold"] { font-size: 17px !important; }
+
+/* 기본 모드 계좌번호 한 줄 고정 및 자간 조절 */
+    .acc-body p.long-acc {
+      white-space: nowrap !important;
+      letter-spacing: -0.8px !important;
+    }
+    
+    .acc-body p.bride-acc {
+      white-space: nowrap !important;
+    }
+
+
   
     body.large-text-mode .acc-body p.long-acc { 
       font-size: 16px !important; 
@@ -1149,7 +1161,8 @@ object-position: center 20%; /* 숫자를 조절하여 위아래 초점 위치�
     <div class="section-subtitle-en reveal">Guest Snap</div>
     <div class="guest-snap-box reveal">
       <p class="guest-snap-desc">
-        예식 날 하객 여러분께서 직접 찍어주신<br>소중한 사진과 영상을 공유해 주세요!<br>아래 버튼을 눌러 편하게 업로드하실 수 있습니다.<br>카카오톡으로 보내주셔도 감사합니다♥
+      예식 날 하객 여러분께서 직접 찍어주신<br>소중한 사진과 영상을 공유해 주세요!<br>아래 버튼을 눌러 편하게 <span style="white-space: nowrap;">업로드하실 수 있습니다.</span><br>카카오톡으로 보내주셔도 감사합니다♥
+    </p>
       </p>
       <a href="https://www.dropbox.com/request/iq5dleb189bjqpuvhwnw" target="_blank" class="btn-pink" style="display: block; text-align: center; text-decoration: none; background-color: #eec8ce; color: #ffffff; border: none; border-radius: 8px; margin-top: 14px; padding: 12px; font-size: 14px; font-weight: bold; width: 100%; box-sizing: border-box;">
         📸 사진 올리러 가기 
@@ -1228,10 +1241,10 @@ object-position: center 20%; /* 숫자를 조절하여 위아래 초점 위치�
   <section class="section" style="background: #ffffff;">
    <div class="section-title-pink reveal">마음 전하실 곳</div>
    <div class="section-subtitle-en reveal">ACCOUNT</div>
-    <p style="text-align: center; margin-bottom: 24px; font-size: 13px; line-height: 1.6; color: var(--text-sub);">
+    <p style="text-align: center; margin-bottom: 24px; font-size: 13px; line-height: 1.6; color: var(--text-sub); word-break: keep-all;">
       참석이 어려우신 분들을 위해<br>조심스레 마음 전하실 곳을 남깁니다.<br>
       멀리서 보내주시는 축복도 잊지 않고 예쁘게 살겠습니다.
-    </p>
+    </p>>
 
     <!-- 🤵👰 신랑측 / 신부측 기둥 양옆 배치 -->
     <div style="display: flex; gap: 10px; width: 100%; align-items: flex-start;">
@@ -1394,7 +1407,7 @@ object-position: center 20%; /* 숫자를 조절하여 위아래 초점 위치�
   </section>
 
   <section class="section" style="padding: 40px 20px; text-align: center; ">
-    <p class="footer-maker-text" style="font-family: 'Pretendard', sans-serif; font-size: 13px; color: #999999; margin: 0; letter-spacing: 0.5px;">
+    <p class="footer-maker-text" style="font-family: 'Pretendard', sans-serif; font-size: 13px; color: #999999; margin: 0; letter-spacing: 0.5px; word-break: keep-all;">
       💌신부 윤서가 직접 디자인하고 개발한 청첩장입니다.<br>
       <span style="font-size: 11px; color: #bbbbbb;">Designed & Developed by Yoonseo</span><br>
       <span style="font-size: 11px; color: #bbbbbb;">© 윤서 & 민교 All rights reserved.</span>
@@ -1572,15 +1585,7 @@ object-position: center 20%; /* 숫자를 조절하여 위아래 초점 위치�
         <button class="btn-option" onclick="selectOption(this)" data-value="참석이 어려워요">참석이 어려워요</button>
       </div>
     </div>
-    <div class="rsvp-group">
-      <span class="rsvp-label">식사를 하고 가실 수 있나요?</span>
-      <div class="option-buttons" id="mealGroup">
-        <button class="btn-option selected" onclick="selectOption(this)" data-value="네">네</button>
-        <button class="btn-option" onclick="selectOption(this)" data-value="아니오">아니오</button>
-        <button class="btn-option" onclick="selectOption(this)" data-value="미정">미정</button>
-      </div>
-    </div>
-    <div class="rsvp-group">
+        <div class="rsvp-group">
       <span class="rsvp-label">귀한 발걸음 해 주시는 분의 성함을 적어주세요.</span>
       <input type="text" id="guestName" class="rsvp-input-text" placeholder="참석자 본인 성함">
     </div>
@@ -2022,15 +2027,15 @@ let isPrinting = false;
     if (!phone) { alert('동명이인 구분을 위해 핸드폰 뒷번호 4자리를 입력해 주세요.'); return; }
     const side = document.querySelector('#sideGroup .btn-option.selected').getAttribute('data-value');
     const attend = document.querySelector('#attendGroup .btn-option.selected').getAttribute('data-value');
-    const meal = document.querySelector('#mealGroup .btn-option.selected').getAttribute('data-value');
     const message = document.getElementById('guestMessage').value.trim();
 
     const formActionUrl = "https://docs.google.com/forms/d/1tN8btDPECFlPzMtfk4Pi8OQSBHhnCa8FqAk797CnQj0/formResponse";
     (form => {
       form.method = 'POST'; form.action = formActionUrl; form.target = 'hidden_iframe';
+      // 식사 데이터(entry.655889088)가 완전히 삭제된 전송 데이터
       const data = {
         'entry.905820418': side, 'entry.1273835771': attend,
-        'entry.655889088': meal, 'entry.1400007732': name, 'entry.1654440028': phone, 'entry.2088337592': message
+        'entry.1400007732': name, 'entry.1654440028': phone, 'entry.2088337592': message
       };
       for (let key in data) {
         const input = document.createElement('input');

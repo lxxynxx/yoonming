@@ -263,21 +263,73 @@
     }
 
     /* ====== 챕터 2 스타일 (웨딩홀 테마) ====== */
-    #chapter2{ position:absolute; inset:0; z-index:45; background:linear-gradient(180deg,#fcf8f2 0%, #f4eae1 100%); opacity:0; visibility:hidden; transition:opacity .9s ease; overflow:hidden; }
+    #chapter2{
+      position:absolute; inset:0; z-index:45;
+      background:linear-gradient(180deg,#fcf8f2 0%, #f4eae1 100%);
+      opacity:0; visibility:hidden; transition:opacity .9s ease; overflow:hidden;
+      --c2-center-y: calc(50% + 10px);
+      --c2-floor-top: calc(var(--c2-center-y) + 54px);
+    }
     #chapter2.show{ opacity:1; visibility:visible; }
     
     /* 줄무늬 제거 및 밝고 화사한 스튜디오 배경 */
-    .studio-wall{ position:absolute; left:0; right:0; top:0; bottom:150px; background: linear-gradient(180deg,#ffffff 0%, #f0e6dd 100%); }
-    .studio-floor{ position:absolute; left:0; right:0; bottom:0; height:150px; background:linear-gradient(180deg,#e8dfd5 0%, #dcd1c7 100%); border-top:4px solid #d4c5b9; }
-    .studio-floor::before{ content:''; position:absolute; inset:0; background:repeating-linear-gradient(90deg, rgba(255,255,255,0.4) 0 1px, transparent 1px 40px); } /* 넓고 은은한 대리석 타일 느낌 */
+    .studio-wall{
+      position:absolute; left:0; right:0; top:0;
+      bottom: calc(100% - var(--c2-floor-top));
+      background: linear-gradient(180deg,#ffffff 0%, #f0e6dd 100%);
+    }
+    .studio-floor{
+      position:absolute; left:0; right:0;
+      top: var(--c2-floor-top);
+      bottom:0;
+      background:linear-gradient(180deg,#e8dfd5 0%, #dcd1c7 100%);
+      border-top:4px solid #d4c5b9;
+    }
+    .studio-floor::before{
+      content:''; position:absolute; inset:0;
+      background:repeating-linear-gradient(90deg, rgba(255,255,255,0.4) 0 1px, transparent 1px 40px);
+    }
     
-    .string-lights{ position:absolute; left:0; right:0; top:78px; height:24px; }
-    .string-lights .wire{ position:absolute; left:0; right:0; top:0; height:2px; background:rgba(0,0,0,0.08); } /* 밝은 배경에 맞게 선 색상 조절 */
-    .bulb{ position:absolute; top:4px; width:6px; height:6px; border-radius:50%; animation:bulbPulse 2.4s ease-in-out infinite; }
+    /* 상단 UI 및 전구 줄조명(선), 퀘스트 문구의 유기적 배치 */
+    .c2-hud{
+      position:absolute; top:0; left:0; right:0;
+      padding: max(14px, env(safe-area-inset-top, 14px)) 16px 0;
+      z-index:14; display:flex; flex-direction:column; align-items:center;
+    }
+    .c2-hud .hud-row{ width:100%; display:flex; align-items:flex-start; justify-content:space-between; }
+    .c2-hud .chapter-tag { color: #5a4b4b; background: rgba(255,255,255,0.85); border: 2px solid rgba(217,147,157,0.6); }
+    .c2-hud .heart-count { background: rgba(255,255,255,0.85); border: 2px solid rgba(217,147,157,0.6); }
+    .c2-hud .n { color: #5a4b4b; }
+    
+    /* 전구 줄조명 (선): 상단 태그 바로 아래에 안정적인 수평선 유지 */
+    .string-lights{
+      position:relative; width:100%; height:16px; margin:8px 0 4px 0;
+    }
+    .string-lights .wire{
+      position:absolute; left:-16px; right:-16px; top:2px; height:2px; background:rgba(0,0,0,0.08);
+    }
+    .bulb{
+      position:absolute; top:4px; width:6px; height:6px; border-radius:50%; animation:bulbPulse 2.4s ease-in-out infinite;
+    }
     @keyframes bulbPulse{ 0%,100%{opacity:.6; box-shadow:0 0 3px currentColor;} 50%{opacity:1; box-shadow:0 0 9px currentColor;} }
     
-    .booth{ position:absolute; left:50%; transform:translateX(-50%); bottom:180px; width:126px; z-index:4; }
-    .booth-cabinet{ width:100%; background:linear-gradient(180deg,#fdf6f2 0%, #efe2dc 100%); border:4px solid #2b2036; border-bottom:none; border-radius:10px 10px 0 0; padding:12px 10px 14px 10px; display:flex; flex-direction:column; align-items:center; gap:9px; box-shadow:0 -6px 18px rgba(0,0,0,0.15); }
+    /* 퀘스트 문구: 전구 줄조명(선) 아래에 항상 안정적인 간격으로 표시 */
+    .c2-quest{
+      font-size:clamp(10.5px, 2.9vw, 11px); color:#5a4b4b; text-align:center; letter-spacing:.5px; line-height:1.5; margin:0; padding:0; white-space:nowrap;
+    }
+    .c2-quest b{ color: #d9939d; }
+
+    /* 인생네컷 기계: 화면 정중앙 영역에 항상 안정적으로 균형감 있게 배치 */
+    .booth{
+      position:absolute; left:50%; top:var(--c2-center-y);
+      transform:translate(-50%, -50%); width:126px; z-index:4;
+    }
+    .booth-cabinet{
+      width:100%; background:linear-gradient(180deg,#fdf6f2 0%, #efe2dc 100%);
+      border:4px solid #2b2036; border-bottom:none; border-radius:10px 10px 0 0;
+      padding:12px 10px 14px 10px; display:flex; flex-direction:column; align-items:center; gap:9px;
+      box-shadow:0 -6px 18px rgba(0,0,0,0.15);
+    }
     .booth-sign{ width:92%; background:#fff; border:3px solid #2b2036; border-radius:12px; padding:5px 0; text-align:center; font-size:8px; color:#d9939d; letter-spacing:1px; box-shadow:0 0 12px rgba(255,214,224,0.9); }
     .booth-lens-big{ width:22px; height:22px; border-radius:50%; background:#1a1420; border:3px solid #cbb9c4; display:flex; align-items:center; justify-content:center; box-shadow:0 2px 5px rgba(0,0,0,0.15); }
     .booth-lens-big i{ display:block; width:8px; height:8px; border-radius:50%; background:#000; box-shadow:inset 1px 1px 2px rgba(255,255,255,0.5); }
@@ -289,47 +341,46 @@
     .strip-cell{ width:100%; height:38px; background:#f0e3dd; position:relative; overflow:hidden; }
     .strip-cap{ text-align:center; font-size:6px; color:#8a7a80; padding:3px 0 2px; letter-spacing:0.5px; }
     
-    .c2-sprite{ position:absolute; bottom:100px; z-index:8; transition:left .5s ease, bottom .5s ease, transform .5s ease; image-rendering:pixelated; pointer-events:none; }
+    /* 신랑/신부 스프라이트: 기계와 완벽히 동기화된 기준점 공유 */
+    .c2-sprite{
+      position:absolute;
+      top:calc(var(--c2-center-y) + 29px);
+      z-index:8;
+      transition:left .5s ease, transform .5s ease;
+      image-rendering:pixelated;
+      pointer-events:none;
+    }
     #c2Player{ width:100px; height:140px; transform:translateY(-10px); }
     #c2Partner{ width:100px; height:140px; transform:translateY(-10px); }
-    #c2PlayerSprite{ background-image:url('pretty_sprites.png'); background-repeat:no-repeat; background-position: -110px 0; width:100px; height:140px; }
-    #c2PartnerSprite{ background-image:url('pretty_sprites.png'); background-repeat:no-repeat; background-position: 0 0; width:100px; height:140px; }
+    #c2PlayerSprite{ width:40px; height:48px; }
+    #c2PartnerSprite{ width:40px; height:48px; }
     
     .c2-shadow{ display: none; }
     
-    /* 상단 UI 어두운 텍스트로 덮어쓰기 */
-    .c2-hud{ position:absolute; top:0; left:0; right:0; padding:16px 16px 0; z-index:14; display:flex; flex-direction:column; gap:8px; }
-    .c2-hud .chapter-tag { color: #5a4b4b; background: rgba(255,255,255,0.8); border: 2px solid rgba(217,147,157,0.6); }
-    .c2-hud .heart-count { background: rgba(255,255,255,0.8); border: 2px solid rgba(217,147,157,0.6); }
-    .c2-hud .n { color: #5a4b4b; }
-    
-    .c2-quest{ font-size:11px; color:#5a4b4b; text-align:center; letter-spacing:.5px; line-height:1.6; }
-    .c2-quest b{ color: #d9939d; }
-    
-    .c2-controls{ position:absolute; left:0; right:0; bottom:20px; z-index:16; display:flex; justify-content:center; }
+    /* 하단 촬영 컨트롤 */
+    .c2-controls{
+      position:absolute; left:0; right:0;
+      bottom:clamp(14px, 3vh, 26px);
+      z-index:16; display:flex; justify-content:center;
+    }
     
     /* 촬영 버튼을 밝은 느낌의 핑크 둥근 테두리 버튼으로 변경 */
-    .shutter-btn{ background:var(--pink-main); border:3px solid #fff; color:#5a4b4b; font-size:11px; letter-spacing:1px; padding:14px 26px; border-radius:12px; cursor:pointer; font-weight:bold; box-shadow:0 4px 12px rgba(0,0,0,0.1); }
+    .shutter-btn{
+      background:var(--pink-main); border:3px solid #fff; color:#5a4b4b;
+      font-size:11px; letter-spacing:1px;
+      padding:clamp(11px, 1.8vh, 14px) clamp(20px, 6vw, 28px);
+      border-radius:12px; cursor:pointer; font-weight:bold; box-shadow:0 4px 12px rgba(0,0,0,0.1);
+    }
     .shutter-btn:active{ transform:scale(0.95); background:var(--pink-dark); color:#fff; }
     .shutter-btn:disabled{ opacity:.4; cursor:default; }
     .flash{ position:absolute; inset:0; background:#fff; opacity:0; pointer-events:none; z-index:40; }
 
-    /* 세로 높이가 짧은 기기에서 챕터 2 최적화 */
-    @media (max-height: 680px) {
-      .c2-hud { padding: 10px 14px 0; gap: 4px; }
-      .c2-quest { margin-top: 14px !important; }
-      .booth { bottom: 145px; }
-      .c2-sprite { bottom: 75px; }
-      .c2-controls { bottom: 12px; }
-      .shutter-btn { padding: 10px 20px; font-size: 10px; }
-    }
-    @media (max-height: 570px) {
-      .c2-hud { padding: 6px 10px 0; gap: 2px; }
-      .c2-quest { margin-top: 6px !important; font-size: 10px; }
-      .booth { bottom: 125px; transform: translateX(-50%) scale(0.9); }
-      .c2-sprite { bottom: 58px; transform: translateY(-10px) scale(0.9); }
-      .c2-controls { bottom: 8px; }
-      .shutter-btn { padding: 8px 16px; font-size: 9px; }
+    /* 초소형 세로 화면(540px 이하) 전용 스케일 */
+    @media (max-height: 540px) {
+      #chapter2 { --c2-center-y: calc(50% + 4px); }
+      .booth { transform: translate(-50%, -50%) scale(0.9); }
+      #c2Player, #c2Partner { transform: translateY(-10px) scale(0.9); }
+      .shutter-btn { padding: 8px 18px; font-size: 10px; }
     }
 
 
@@ -642,7 +693,6 @@
 
     <div id="chapter2">
       <div class="studio-wall"></div>
-      <div class="string-lights" id="stringLights"><div class="wire"></div></div>
       <div class="studio-floor"></div>
       <div class="booth">
         <div class="booth-cabinet">
@@ -661,7 +711,7 @@
       </div>
       <div class="c2-sprite" id="c2Player" style="left:calc(50% - 155px);"><div class="sprite" id="c2PlayerSprite"></div><div class="c2-shadow"></div></div>
       <div class="c2-sprite" id="c2Partner" style="left:calc(50% + 115px);"><div class="sprite" id="c2PartnerSprite"></div><div class="c2-shadow"></div></div>
-   <div class="c2-hud">
+      <div class="c2-hud">
         <div class="hud-row">
           <div class="chapter-tag pixel">CHAPTER 02</div>
           <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 4px;">
@@ -669,8 +719,8 @@
             <button onclick="resetToChapter1()" style="border: 2px solid rgba(217,147,157,0.8); background: rgba(255,255,255,0.8); padding: 4px 10px; border-radius: 0px; font-size: 10px; color: #d9939d; font-weight: bold; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 3px; width: 64px; box-sizing: border-box;"><span>🔙</span>이전</button>
           </div>
         </div>
-        <!-- 여백을 조금 더 늘려서 아래로 내림 -->
-        <div class="c2-quest" id="c2Quest" style="margin-top: 22px;">촬영 버튼을 눌러 네컷을 찍어보세요</div>
+        <div class="string-lights" id="stringLights"><div class="wire"></div></div>
+        <div class="c2-quest" id="c2Quest">촬영 버튼을 눌러 네컷을 찍어보세요</div>
       </div>
       <div class="c2-controls" style="justify-content: center;">
         <button class="shutter-btn pixel" id="shutterBtn">📷 촬영</button>
@@ -1457,7 +1507,7 @@ function resetToChapter1() {
   shooting = false;
   document.getElementById('shotN').textContent = '0/' + MAX_SHOT;
   document.getElementById('boothScreen').textContent = 'READY';
-  document.getElementById('c2Quest').textContent = '네컷 사진을 찍어보세요';
+  document.getElementById('c2Quest').innerHTML = '촬영 버튼을 눌러 <b>네컷</b>을 찍어보세요';
   
   const shutterBtn = document.getElementById('shutterBtn');
   shutterBtn.textContent = '📷 촬영';

@@ -416,12 +416,11 @@
     
     .acc-header { width: 100%; padding: 16px; background: #ffffff; border: 1px solid var(--line-color); border-radius: 8px; display: flex; justify-content: space-between; align-items: center; font-size: 15px; cursor: pointer; margin-bottom: 8px; }
     .acc-body { display: none; width: 100%; padding: 16px; background: #ffffff; border: 1px solid var(--line-color); border-radius: 8px; margin-bottom: 12px; text-align: left; box-sizing: border-box; }
-    /* 계좌 줄: 휴대폰 글자 크기를 키워도 계좌번호는 한 줄 유지 (공간이 부족하면 이름·은행이 윗줄로 올라감) */
-    .acc-row { display: flex; flex-wrap: wrap; align-items: center; column-gap: 14px; row-gap: 2px; margin: 6px 0; }
-    .acc-name { font-size: 13px; color: var(--text-sub); margin: 0; flex: 0 0 auto; min-width: 85px; white-space: nowrap; }
-    .acc-num { font-family: 'MaruBuri', sans-serif !important; font-weight: bold; font-size: 13.5px; margin: 0; color: var(--text-main); letter-spacing: 0.3px; flex: 1 1 auto; min-width: 0; text-align: left; white-space: nowrap; overflow: hidden; }
+    /* 계좌 줄: 이름·계좌번호·버튼을 항상 한 줄로. 휴대폰 글자가 커서 넘치면 JS가 --acc-scale로 글자를 줄임 */
+    .acc-row { display: flex; align-items: center; column-gap: 14px; margin: 6px 0; }
+    .acc-name { font-size: calc(13px * var(--acc-scale, 1)); color: var(--text-sub); margin: 0; flex: 0 0 auto; min-width: 85px; white-space: nowrap; }
+    .acc-num { font-family: 'MaruBuri', sans-serif !important; font-weight: bold; font-size: calc(13.5px * var(--acc-scale, 1)); margin: 0; color: var(--text-main); letter-spacing: 0.3px; flex: 1 1 auto; min-width: 0; text-align: left; white-space: nowrap; overflow: hidden; }
     .acc-actions { display: flex; gap: 12px; align-items: center; flex-shrink: 0; margin-left: auto; }
-    .acc-body.acc-stack .acc-name { flex-basis: 100%; }
     .btn-pink { width: 100%; padding: 16px; border: none; border-radius: 8px; background: var(--pink-main); color: #ffffff; font-size: 15px; font-weight: 600; cursor: pointer; text-decoration: none; display: inline-block; text-align: center; }
     .btn-outline { padding: 6px 12px; border: 1px solid var(--pink-dark); background: #fff; color: var(--pink-dark); border-radius: 4px; font-size: 12px; cursor: pointer; }
     
@@ -1612,23 +1611,21 @@ function toggleAcc(id) {
   fitAccountNumbers();
 }
 
-// 그래도 계좌번호가 한 줄에 안 들어가면 글자 크기를 조금씩 줄여서 맞춤
+// 계좌번호가 한 줄에 안 들어가면 같은 상자 안의 이름·계좌번호 글자를 같은 비율로 줄여서 맞춤
 function fitAccountNumbers() {
   document.querySelectorAll('.acc-body').forEach(body => {
     if (body.style.display !== 'block') return;
-    const nums = [...body.querySelectorAll('.acc-num')];
-    nums.forEach(el => { el.style.fontSize = ''; });
-    // 한 줄이라도 이름·은행이 윗줄로 올라가면 같은 상자 안의 모든 줄을 같은 모양으로 맞춤
-    body.classList.remove('acc-stack');
-    const wrapped = nums.some(el => el.getBoundingClientRect().top - el.previousElementSibling.getBoundingClientRect().top > 4);
-    body.classList.toggle('acc-stack', wrapped);
-    nums.forEach(el => {
-      let size = parseFloat(getComputedStyle(el).fontSize);
-      while (el.scrollWidth > el.clientWidth + 1 && size > 9) {
-        size -= 0.5;
-        el.style.fontSize = size + 'px';
-      }
+    const rows = [...body.querySelectorAll('.acc-row')];
+    const overflowing = () => rows.some(row => {
+      const num = row.querySelector('.acc-num');
+      return num.scrollWidth > num.clientWidth + 1 || row.scrollWidth > row.clientWidth + 1;
     });
+    let scale = 1;
+    body.style.setProperty('--acc-scale', scale);
+    while (overflowing() && scale > 0.5) {
+      scale -= 0.05;
+      body.style.setProperty('--acc-scale', scale.toFixed(2));
+    }
   });
 }
 window.addEventListener('resize', fitAccountNumbers);

@@ -47,10 +47,11 @@
       --line-color: #f0e6e4;
 
       /* game.html 변수 (핑크+하늘색 파스텔 톤 테마) */
-      --sky-top: #8ab8ee; /* 하늘색 */
-      --sky-mid: #b8d4f0; /* 연한 하늘색 */
-      --sky-glow: #fcaec7; /* 핑크색 */
-      --sky-low: #ffd1dc; /* 연한 핑크색 */
+      /* 노을빛이 위(핑크)에서 아래(하늘색)로 지도록 수정 */
+      --sky-top: #fcaec7;   /* 위쪽: 진한 핑크 노을 */
+      --sky-mid: #ffd1dc;   /* 중간: 연한 핑크 */
+      --sky-glow: #b8d4f0;  /* 아래쪽으로 내려오는 연한 하늘색 */
+      --sky-low: #8ab8ee;   
       --path:#caa06b;
       --path-edge:#8a6a42;
       --hud-ink:#fff6ea;
@@ -130,24 +131,26 @@
       margin-bottom: 16px; text-align: center; line-height: 2.1;
     }
 
-    .start-btn {
+   .start-btn {
       width: 100%; max-width: 280px;
-      padding: 15px; border-radius: 12px; border: 2px solid rgba(255,255,255,0.8);
-      background: rgba(0,0,0,0.25); color: #fff; font-size: 14px; font-weight: bold;
-      cursor: pointer; backdrop-filter: blur(4px); transition: transform 0.2s, background 0.2s;
+      padding: 15px; border-radius: 12px; border: none;
+      background: rgba(255,255,255,0.95); color: var(--pink-dark); font-size: 14px; font-weight: bold;
+      cursor: pointer; box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      transition: transform 0.2s, background 0.2s;
     }
-    .start-btn:active { transform: scale(0.96); background: rgba(255,255,255,0.2); }
-    .start-btn.skip { background: rgba(255,255,255,0.95); color: #8ab8ee; border: none; box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
+    .start-btn:active { transform: scale(0.96); background: rgba(255,255,255,0.8); }
+    .start-btn.skip { background: rgba(255,255,255,0.95); color: var(--pink-dark); border: none; box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
 
     .quick-links {
       display: flex; gap: 8px; width: 100%; max-width: 280px; margin-top: 4px;
     }
     .quick-btn {
-      flex: 1; padding: 10px 0; border-radius: 8px; border: 1px solid rgba(255,255,255,0.6);
-      background: rgba(255,255,255,0.15); color: #fff; font-size: 12px; font-weight: 600;
-      cursor: pointer; backdrop-filter: blur(4px); transition: transform 0.2s, background 0.2s;
+      flex: 1; padding: 12px 0; border-radius: 8px; border: none;
+      background: rgba(255,255,255,0.95); color: #8ab8ee; font-size: 12px; font-weight: bold;
+      cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      transition: transform 0.2s, background 0.2s;
     }
-    .quick-btn:active { transform: scale(0.95); background: rgba(255,255,255,0.3); }
+    .quick-btn:active { transform: scale(0.95); background: rgba(255,255,255,0.8); }
 
     /* ====== 게임(game.html) 전용 스타일 ====== */
     #stage {
@@ -170,18 +173,21 @@
     .heart-icon{width:12px;height:11px; position:relative;}
     .heart-icon svg{width:100%;height:100%;display:block;}
     .quest-line{ font-size:11px; color:var(--hud-ink); text-align:center; letter-spacing:0.5px; line-height:1.6; text-shadow:0 2px 4px rgba(0,0,0,0.5); padding-top:4px; }
-    .quest-line b{color:#ffd7e0;}
+    .quest-line b{ color: #d0e8ff; text-shadow: 0 1px 3px rgba(0,0,0,0.4); }
     .cloud{ position:absolute; image-rendering:pixelated; pointer-events:none; will-change:transform; }
     .cloud i{ position:absolute; display:block; }
     @keyframes drift{ from{ transform:translateX(-140px); } to  { transform:translateX(440px); } }
     
     /* 화면 잘림 방지를 위해 전체적으로 높이(bottom) 비율 축소 */
-    .river{ position:absolute; left:0; right:0; bottom:166px; height:86px; background:linear-gradient(180deg,#ffb896 0%, #d98aa0 30%, #7a5a8f 65%, #46335e 100%); }
-    .river::after{ content:''; position:absolute; inset:0; background: repeating-linear-gradient(180deg, rgba(255,255,255,0.16) 0 2px, transparent 2px 12px); opacity:.55; }
+   .river{ position:absolute; left:0; right:0; bottom:166px; height:86px; background:linear-gradient(180deg,#fcaec7 0%, #d98aa0 35%, #7a5a8f 70%, #3f2d54 100%); }
+    .river::after{ content:''; position:absolute; inset:0; background: repeating-linear-gradient(180deg, rgba(255,255,255,0.18) 0 2px, transparent 2px 12px); opacity:.55; }
     .glimmer{ position:absolute; height:2px; background:rgba(255,232,214,0.75); border-radius:1px; animation:shimmer 3s ease-in-out infinite; }
     @keyframes shimmer{ 0%,100%{ opacity:var(--o1); transform:translateX(0) scaleX(1); } 50% { opacity:var(--o2); transform:translateX(4px) scaleX(1.35); } }
-    .far-city{ position:absolute; left:0; right:0; bottom:252px; height:44px; display:flex; align-items:flex-end; gap:3px; padding:0 4px; opacity:.5; }
-    .far-city i{ display:block; flex:1; background:#2c1f45; border-radius:1px 1px 0 0; }
+ .far-city{ position:absolute; left:0; right:0; bottom:252px; height:44px; display:flex; align-items:flex-end; gap:3px; padding:0 4px; opacity:.75; }
+    .far-city i{ display:block; flex:1; background:#2c1f45; border-radius:1px 1px 0 0; position:relative; }
+    .far-city i::after { content:''; position:absolute; top:4px; left:2px; right:2px; bottom:2px; background-image: radial-gradient(#ffe6b0 45%, transparent 46%); background-size: 4px 6px; opacity:0.65; }
+    .far-city i:nth-child(even)::after { background-image: radial-gradient(#ffd1dc 45%, transparent 46%); opacity: 0.4; }
+    .far-city i:nth-child(3n)::after { background-image: radial-gradient(#8ab8ee 45%, transparent 46%); opacity: 0.5; }
     .suspension{ position:absolute; left:0; right:0; bottom:220px; height:76px; z-index:2; }
     .suspension svg{ width:100%; height:100%; display:block; }
     .bank{ position:absolute; left:0; right:0; bottom:130px; height:38px; background:linear-gradient(180deg,#3f6b4f 0%, #4e7a58 55%, #6b8a5a 100%); border-top:3px solid #2c4a38; }
@@ -203,14 +209,14 @@
     @keyframes drive-right { from { transform: translateX(-20px); } to { transform: translateX(450px); } }
     @keyframes drive-left { from { transform: translateX(450px); } to { transform: translateX(-20px); } }
 
-    .track{ position:absolute; left:26px; right:26px; bottom:130px; height:1px; }
+    .track{ position:absolute; left:26px; right:26px; bottom:340px; height:1px; z-index: 15; }
     .waypoint-heart{ position:absolute; bottom:6px; width:14px; height:13px; transition:transform .25s ease, opacity .25s ease; opacity:.35; filter:grayscale(1); }
     .waypoint-heart.lit{opacity:1; filter:none; transform:translateY(-6px) scale(1.15);}
     .waypoint-heart svg{width:100%;height:100%;}
     .sprite-wrap{ position:absolute; bottom:130px; z-index:10; transition:left .35s ease-out, transform .18s ease; image-rendering:pixelated; }
     .sprite{ position:relative; }
     .px{ position:absolute; width:4px; height:4px; }
-    .sprite-shadow{ position:absolute; bottom:-4px; left:50%; transform:translateX(-50%); width:26px; height:6px; background:rgba(0,0,0,0.35); border-radius:50%; filter:blur(1px); }
+    .sprite-shadow{ display: none; }
     .bounce{ animation:bounce .35s ease-in-out infinite; }
     @keyframes bounce{ 0%,100%{transform:translateY(0);} 50%{transform:translateY(-6px);} }
     .bounce-once{ animation:bounce-once .35s ease-in-out; }
@@ -273,8 +279,8 @@
     .c2-hud .heart-count { background: rgba(255,255,255,0.8); border: 2px solid rgba(217,147,157,0.6); }
     .c2-hud .n { color: #5a4b4b; }
     
-    .c2-quest{ font-size:11px; color:#5a4b4b; text-align:center; letter-spacing:.5px; text-shadow:0 1px 2px rgba(255,255,255,0.8); line-height:1.6; }
-    .c2-quest b{ color:#d9939d; }
+    .c2-quest{ font-size:11px; color:#5a4b4b; text-align:center; letter-spacing:.5px; line-height:1.6; }
+    .c2-quest b{ color: #d9939d; }
     
     .c2-controls{ position:absolute; left:0; right:0; bottom:20px; z-index:16; display:flex; justify-content:center; }
     
@@ -1091,15 +1097,45 @@ buildSprite(document.getElementById('startPartnerSprite'), BRIDE_ROWS, BRIDE_PAL
 buildSprite(document.getElementById('playerSprite'), GROOM_ROWS, GROOM_PAL, 4);
 buildSprite(document.getElementById('partnerSprite'), BRIDE_ROWS, BRIDE_PAL, 4);
 
-const ground = document.getElementById('ground');
-const treeSpots = [6, 34, 60, 90];
-treeSpots.forEach((pct,i)=>{
-  const t = document.createElement('div');
-  t.className = 'tree' + (i%2===0 ? ' glow' : '');
-  t.style.left = pct + '%';
-  t.innerHTML = '<div class="leaf"></div><div class="trunk"></div>';
-  ground.appendChild(t);
-});
+const ground = document.getElementById('ground');    // 소나무들의 위치와 앞/뒤 원근감 설정 (가운데 2개와 우측 소나무를 뒤로 배치)
+   const scenerySpots = [
+      { pct: 4, type: 'flower-cluster' },         // 1번 꽃무더기 (가장 왼쪽)
+      { pct: 19, type: 'flower-cluster' },        // 2번 꽃무더기
+      { pct: 28, type: 'tree', depth: 'back' },    // 2번과 3번 꽃 사이에 위치한 뒤로 간 소나무
+      { pct: 36, type: 'flower-cluster' },        // 3번 꽃무더기
+      { pct: 54, type: 'tree', depth: 'back' },   // 🌲 노란색 네모칸 위치로 이동한 뒤로 간 소나무 (중앙)
+      { pct: 60, type: 'flower-cluster' },        // 4번 꽃무더기 (중앙)
+      { pct: 76, type: 'tree', depth: 'back' },   // 뒤로 간 소나무 3
+      { pct: 82, type: 'flower-cluster' }         // 5번 꽃무더기 (윤서 왼쪽 주변)
+    ];
+    
+  scenerySpots.forEach((spot, i) => {
+      if (spot.type === 'tree') {
+        const t = document.createElement('div');
+        const isBack = spot.depth === 'back';
+        t.className = 'tree' + (isBack ? ' back ' : '') + (i % 2 === 0 ? ' glow' : '');
+        t.style.left = spot.pct + '%';
+        t.style.bottom = isBack ? '145px' : '130px'; 
+        t.style.transform = isBack ? 'scale(0.7)' : 'scale(1)'; 
+        t.style.zIndex = isBack ? '0' : '5'; 
+        t.innerHTML = '<div class="leaf"></div><div class="trunk"></div>';
+        ground.appendChild(t);
+      } else {
+        // 꽃무더기 z-index를 낮추고(0), 뒤쪽 잔디밭 위로 배치
+        const cluster = document.createElement('div');
+        cluster.style.cssText = `position:absolute; bottom:148px; left:${spot.pct}%; width:16px; height:10px; z-index:0; transform:scale(0.65); opacity:0.85;`;
+        
+        [0, 6, 12].forEach((offsetX, idx) => {
+          const f = document.createElement('div');
+          const color = idx === 1 ? '#ffd7e0' : '#ff5d7a';
+          f.style.cssText = `position:absolute; bottom:0px; left:${offsetX}px; width:4px; height:4px; background:${color}; box-shadow: 0 -4px 0 ${color}, 0 4px 0 #ffe6b0, -4px 0 0 ${color}, 4px 0 0 ${color}, 0 8px 0 #3f6b4f;`;
+          cluster.appendChild(f);
+        });
+        
+        ground.appendChild(cluster);
+      }
+    });
+
 
 const stage = document.getElementById('stage');
 function makeCloud(topPct, scale, color, alpha, durationSec, delaySec){

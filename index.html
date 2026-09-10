@@ -9,7 +9,10 @@
   <meta property="og:url" content="https://lxxynxx.github.io/yoonming">
 
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="theme-color" content="#fdf8f5">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
   <meta name="color-scheme" content="light"> <!-- 다크모드 기기에서도 항상 밝은 화면으로 렌더링(검은 화면 방지) -->
   <title>윤밍청첩장</title>
   <!-- 배포 테스트: 코드 수정 → 커밋 → 푸시 확인용 주석 (화면·기능 영향 없음) -->
@@ -97,7 +100,7 @@
 
     /* 게임 모드일 때 모바일 뷰포트 완전 고정 (스크롤, 주소창 문제 완벽 해결) */
     body.is-game {
-      background: #000;
+      background: var(--bg-color);
       width: 100%;
       height: 100vh;
       height: 100dvh; /* 동적 뷰포트 지원 */
@@ -1017,46 +1020,60 @@
 <script>
 /* ───────── 0. 시작화면 및 화면 전환 스크립트 ───────── */
 function startGame() {
-  document.getElementById('start-screen').style.opacity = '0';
+  const startScreen = document.getElementById('start-screen');
+  const stage = document.getElementById('stage');
+  
+  // 게임 화면을 즉시 뒤에 준비 (검은 화면 깜빡임 방지)
+  stage.style.display = 'block';
+  stage.style.opacity = '1';
+  
+  // 시작 선택창을 부드럽게 페이드아웃하여 게임 화면으로 스무스하게 전환
+  startScreen.style.transition = 'opacity 0.45s ease';
+  startScreen.style.opacity = '0';
+  
   setTimeout(() => {
-    document.getElementById('start-screen').style.display = 'none';
-    const stage = document.getElementById('stage');
-    stage.style.display = 'block';
-    requestAnimationFrame(() => { stage.style.opacity = '1'; });
-  }, 400);
+    startScreen.style.display = 'none';
+  }, 450);
 }
 
 function skipGame() {
-  // is-game 클래스를 먼저 제거해 검은 배경(body.is-game)이
-  // start-screen 페이드아웃 중에 비치지 않도록 함
   document.body.classList.remove('is-game');
-  document.getElementById('start-screen').style.opacity = '0';
+  const startScreen = document.getElementById('start-screen');
+  const mainInv = document.getElementById('main-invitation');
+  
+  // 청첩장 화면을 즉시 뒤에 준비
+  mainInv.style.display = 'block';
+  mainInv.style.opacity = '1';
+  
+  startScreen.style.transition = 'opacity 0.45s ease';
+  startScreen.style.opacity = '0';
+  
   setTimeout(() => {
-    document.getElementById('start-screen').style.display = 'none';
-    const mainInv = document.getElementById('main-invitation');
-    mainInv.style.display = 'block';
-    requestAnimationFrame(() => { mainInv.style.opacity = '1'; });
+    startScreen.style.display = 'none';
     
     // 자동 인화 애니메이션 바로 트리거 (청첩장 전환 완료 후)
     setTimeout(()=>{
       if(typeof window.printPhoto === 'function') {
         window.printPhoto();
       }
-    }, 800);
-  }, 400);
+    }, 400);
+  }, 450);
 }
 
 // 팝업으로 바로 이동하는 빠른 링크 함수
 function skipToModal(action) {
-  // is-game 클래스를 먼저 제거해 검은 배경(body.is-game)이
-  // start-screen 페이드아웃 중에 비치지 않도록 함
   document.body.classList.remove('is-game');
-  document.getElementById('start-screen').style.opacity = '0';
+  const startScreen = document.getElementById('start-screen');
+  const mainInv2 = document.getElementById('main-invitation');
+  
+  mainInv2.style.display = 'block';
+  mainInv2.style.opacity = '1';
+  
+  startScreen.style.transition = 'opacity 0.45s ease';
+  startScreen.style.opacity = '0';
+  
   setTimeout(() => {
-    document.getElementById('start-screen').style.display = 'none';
-    const mainInv2 = document.getElementById('main-invitation');
-    mainInv2.style.display = 'block';
-    requestAnimationFrame(() => { mainInv2.style.opacity = '1'; });
+    startScreen.style.display = 'none';
     document.body.classList.remove('stop-scroll');
 
     // 오프닝 애니메이션 생략 (바로 메인 화면)

@@ -3,14 +3,14 @@
 <head>
   <!-- 카카오톡 공유 시 미리보기(오픈그래프) 설정 -->
   <meta property="og:type" content="website">
-  <meta property="og:title" content="민교 ♥ 윤서 결혼합니다">
+  <meta property="og:title" content="민교와 윤서의 결혼식💕">
   <meta property="og:description" content="12월 12일 토요일 오후 12시 30분&#10;라포레 웨딩홀">
   <meta property="og:image" content="https://lxxynxx.github.io/yoonming/images/kakao.jpg"> 
   <meta property="og:url" content="https://lxxynxx.github.io/yoonming">
 
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>우리의 산책 - 데모 & 청첩장</title>
+  <title>윤밍청첩장</title>
 
   <!-- 카카오 지도 API 스크립트 -->
   <script type="text/javascript" src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=44a60d269264bd371040375c428f38ee&amp;libraries=services&amp;autoload=false"></script>
@@ -64,6 +64,7 @@
       font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', sans-serif !important;
     }
 
+    /* 게임 픽셀 폰트 오버라이드 */
     .pixel { font-family: 'Press Start 2P', monospace !important; }
 
     /* ====== BODY & 공통 스타일 ====== */
@@ -184,22 +185,33 @@
     .bank::after{ content:''; position:absolute; bottom:0; left:0; right:0; height:6px; background:repeating-linear-gradient(90deg,#5c8a63 0 6px, #4e7a58 6px 12px); }
     .ground{ position:absolute; left:0; right:0; bottom:0; height:130px; background:linear-gradient(180deg,#e7c493 0%, var(--path) 30%, var(--path-edge) 100%); border-top:4px solid #f2dcb6; }
     .ground::before{ content:''; position:absolute; top:12px; left:0; right:0; height:2px; background:repeating-linear-gradient(90deg, rgba(255,255,255,0.35) 0 14px, transparent 14px 28px); }
+   /* 소나무 모양 트리 */
     .tree{position:absolute; bottom:130px; width:26px; height:54px;}
     .tree .trunk{position:absolute; bottom:0; left:10px; width:6px; height:20px; background:#4a3324;}
-    .tree .leaf{position:absolute; bottom:16px; width:26px; height:34px; background:#3f6b4f; border-radius:50% 50% 45% 45%;}
+    .tree .leaf{position:absolute; bottom:16px; left:-4px; width:34px; height:42px; background:#3f6b4f; clip-path: polygon(50% 0%, 75% 35%, 60% 35%, 85% 70%, 70% 70%, 100% 100%, 0% 100%, 30% 70%, 15% 70%, 40% 35%, 25% 35%); border-radius: 1px;}
     .tree.glow .leaf{background:#5c8a63;}
+
+    /* 다리 위 자동차 애니메이션 */
+    .car-track { position:absolute; left:0; right:0; bottom:240px; height:12px; z-index:2; pointer-events:none; }
+    .car { position:absolute; bottom:0; width:10px; height:5px; }
+    .car::after { content:''; position:absolute; bottom:-1px; left:1px; width:2px; height:2px; background:#111; box-shadow:6px 0 0 #111; border-radius:50%; } /* 자동차 바퀴 */
+    .car.go-right { border-radius: 2px 4px 0 0; animation: drive-right 8s linear infinite; }
+    .car.go-left { border-radius: 4px 2px 0 0; animation: drive-left 7s linear infinite; bottom:3px; filter: brightness(0.7); z-index:1; }
+    @keyframes drive-right { from { transform: translateX(-20px); } to { transform: translateX(450px); } }
+    @keyframes drive-left { from { transform: translateX(450px); } to { transform: translateX(-20px); } }
+
     .track{ position:absolute; left:26px; right:26px; bottom:130px; height:1px; }
     .waypoint-heart{ position:absolute; bottom:6px; width:14px; height:13px; transition:transform .25s ease, opacity .25s ease; opacity:.35; filter:grayscale(1); }
     .waypoint-heart.lit{opacity:1; filter:none; transform:translateY(-6px) scale(1.15);}
     .waypoint-heart svg{width:100%;height:100%;}
-    .sprite-wrap{ position:absolute; bottom:130px; z-index:10; transition:left .32s steps(2), transform .18s ease; image-rendering:pixelated; }
+    .sprite-wrap{ position:absolute; bottom:130px; z-index:10; transition:left .35s ease-out, transform .18s ease; image-rendering:pixelated; }
     .sprite{ position:relative; }
     .px{ position:absolute; width:4px; height:4px; }
     .sprite-shadow{ position:absolute; bottom:-4px; left:50%; transform:translateX(-50%); width:26px; height:6px; background:rgba(0,0,0,0.35); border-radius:50%; filter:blur(1px); }
-    .bounce{ animation:bounce .32s steps(2) infinite; }
-    @keyframes bounce{ 0%,100%{transform:translateY(0);} 50%{transform:translateY(-4px);} }
-    .bounce-once{ animation:bounce-once .32s steps(2); }
-    @keyframes bounce-once{ 0%,100%{transform:translateY(0);} 50%{transform:translateY(-4px);} }
+    .bounce{ animation:bounce .35s ease-in-out infinite; }
+    @keyframes bounce{ 0%,100%{transform:translateY(0);} 50%{transform:translateY(-6px);} }
+    .bounce-once{ animation:bounce-once .35s ease-in-out; }
+    @keyframes bounce-once{ 0%,100%{transform:translateY(0);} 50%{transform:translateY(-6px);} }
     .jump{ animation:jump .42s ease; }
     @keyframes jump{ 0%{ transform:translateY(0); } 35%{ transform:translateY(-22px); } 60%{ transform:translateY(-22px); } 100%{ transform:translateY(0); } }
     .crouch{ animation:crouch .42s ease; transform-origin:bottom center; }
@@ -209,7 +221,7 @@
     .burst-heart svg{width:100%;height:100%;}
     
     /* 조작 패드 크기 및 위치 최적화 */
-    .controls{ position:absolute; left:0; right:0; bottom:12px; z-index:20; display:flex; align-items:flex-end; justify-content:space-between; padding:0 22px; }
+    .controls{ position:absolute; left:0; right:0; bottom:12px; z-index:20; display:flex; align-items:flex-end; justify-content:center; padding:0 22px; }
     .pad{ display:grid; grid-template-columns:repeat(3,32px); grid-template-rows:repeat(3,32px); gap:4px; }
     .pad button{ grid-column:2; grid-row:2; border:none; outline:none; }
     .pad-btn{ background:rgba(20,10,30,0.55); border:2px solid rgba(255,255,255,0.55)!important; color:#fff; font-size:14px; display:flex; align-items:center; justify-content:center; border-radius:4px; cursor:pointer; backdrop-filter:blur(2px); }
@@ -218,19 +230,24 @@
     #btn-left{grid-column:1; grid-row:2;} #btn-right{grid-column:3; grid-row:2;}
     .hint-pill{ align-self:center; font-size:9px; color:#fff; background:rgba(0,0,0,0.4); border:2px solid rgba(255,255,255,0.5); padding:10px 12px; line-height:1.7; text-align:center; max-width:120px; }
     
-    #chapter2{ position:absolute; inset:0; z-index:45; background:linear-gradient(180deg,#2b1c3d 0%, #3d2750 46%, #4a2f5c 70%, #38254a 100%); opacity:0; visibility:hidden; transition:opacity .9s ease; overflow:hidden; }
+    /* ====== 챕터 2 스타일 (웨딩홀 테마) ====== */
+    #chapter2{ position:absolute; inset:0; z-index:45; background:linear-gradient(180deg,#fcf8f2 0%, #f4eae1 100%); opacity:0; visibility:hidden; transition:opacity .9s ease; overflow:hidden; }
     #chapter2.show{ opacity:1; visibility:visible; }
-    .studio-wall{ position:absolute; left:0; right:0; top:0; bottom:150px; background: repeating-linear-gradient(90deg, rgba(255,255,255,0.035) 0 2px, transparent 2px 26px), linear-gradient(180deg,#3a2450 0%, #4a2f5c 100%); }
-    .studio-floor{ position:absolute; left:0; right:0; bottom:0; height:150px; background:linear-gradient(180deg,#5c3c62 0%, #4a3050 40%, #3b2642 100%); border-top:4px solid #7a5480; }
-    .studio-floor::before{ content:''; position:absolute; inset:0; background:repeating-linear-gradient(90deg, rgba(0,0,0,0.16) 0 1px, transparent 1px 30px); }
+    
+    /* 줄무늬 제거 및 밝고 화사한 스튜디오 배경 */
+    .studio-wall{ position:absolute; left:0; right:0; top:0; bottom:150px; background: linear-gradient(180deg,#ffffff 0%, #f0e6dd 100%); }
+    .studio-floor{ position:absolute; left:0; right:0; bottom:0; height:150px; background:linear-gradient(180deg,#e8dfd5 0%, #dcd1c7 100%); border-top:4px solid #d4c5b9; }
+    .studio-floor::before{ content:''; position:absolute; inset:0; background:repeating-linear-gradient(90deg, rgba(255,255,255,0.4) 0 1px, transparent 1px 40px); } /* 넓고 은은한 대리석 타일 느낌 */
+    
     .string-lights{ position:absolute; left:0; right:0; top:78px; height:24px; }
-    .string-lights .wire{ position:absolute; left:0; right:0; top:0; height:2px; background:rgba(255,255,255,0.16); }
+    .string-lights .wire{ position:absolute; left:0; right:0; top:0; height:2px; background:rgba(0,0,0,0.08); } /* 밝은 배경에 맞게 선 색상 조절 */
     .bulb{ position:absolute; top:4px; width:6px; height:6px; border-radius:50%; animation:bulbPulse 2.4s ease-in-out infinite; }
-    @keyframes bulbPulse{ 0%,100%{opacity:.45; box-shadow:0 0 3px currentColor;} 50%{opacity:1; box-shadow:0 0 9px currentColor;} }
+    @keyframes bulbPulse{ 0%,100%{opacity:.6; box-shadow:0 0 3px currentColor;} 50%{opacity:1; box-shadow:0 0 9px currentColor;} }
+    
     .booth{ position:absolute; left:50%; transform:translateX(-50%); bottom:180px; width:126px; z-index:4; }
-    .booth-cabinet{ width:100%; background:linear-gradient(180deg,#fdf6f2 0%, #efe2dc 100%); border:4px solid #2b2036; border-bottom:none; border-radius:10px 10px 0 0; padding:12px 10px 14px 10px; display:flex; flex-direction:column; align-items:center; gap:9px; box-shadow:0 -6px 18px rgba(0,0,0,0.28); }
+    .booth-cabinet{ width:100%; background:linear-gradient(180deg,#fdf6f2 0%, #efe2dc 100%); border:4px solid #2b2036; border-bottom:none; border-radius:10px 10px 0 0; padding:12px 10px 14px 10px; display:flex; flex-direction:column; align-items:center; gap:9px; box-shadow:0 -6px 18px rgba(0,0,0,0.15); }
     .booth-sign{ width:92%; background:#fff; border:3px solid #2b2036; border-radius:12px; padding:5px 0; text-align:center; font-size:8px; color:#d9939d; letter-spacing:1px; box-shadow:0 0 12px rgba(255,214,224,0.9); }
-    .booth-lens-big{ width:22px; height:22px; border-radius:50%; background:#1a1420; border:3px solid #cbb9c4; display:flex; align-items:center; justify-content:center; box-shadow:0 2px 5px rgba(0,0,0,0.25); }
+    .booth-lens-big{ width:22px; height:22px; border-radius:50%; background:#1a1420; border:3px solid #cbb9c4; display:flex; align-items:center; justify-content:center; box-shadow:0 2px 5px rgba(0,0,0,0.15); }
     .booth-lens-big i{ display:block; width:8px; height:8px; border-radius:50%; background:#000; box-shadow:inset 1px 1px 2px rgba(255,255,255,0.5); }
     .booth-lens-big.flashing{ box-shadow:0 0 22px 8px #fff9d8; border-color:#fff; }
     .booth-screen2{ width:88%; height:34px; background:#241b30; border:3px solid #4a3a54; border-radius:4px; display:flex; align-items:center; justify-content:center; font-size:8px; color:#ffe0e8; letter-spacing:1px; box-shadow:inset 0 0 10px rgba(0,0,0,0.7); }
@@ -239,20 +256,38 @@
     .strip-paper{ width:100%; background:#fff; border:2px solid #e2d5cf; padding:5px; display:flex; flex-direction:column; gap:4px; }
     .strip-cell{ width:100%; height:38px; background:#f0e3dd; position:relative; overflow:hidden; }
     .strip-cap{ text-align:center; font-size:6px; color:#8a7a80; padding:3px 0 2px; letter-spacing:0.5px; }
-    .c2-sprite{ position:absolute; bottom:100px; z-index:8; transition:left .5s ease, bottom .5s ease; }
-    .c2-shadow{ position:absolute; bottom:-4px; left:50%; transform:translateX(-50%); width:26px; height:6px; background:rgba(0,0,0,0.4); border-radius:50%; filter:blur(1px); }
+    
+    .c2-sprite{ position:absolute; bottom:100px; z-index:8; transition:left .5s ease, bottom .5s ease, transform .5s ease; image-rendering:pixelated; }
+    #c2Player{ width:100px; height:140px; transform:translateY(-10px); }
+    #c2Partner{ width:100px; height:140px; transform:translateY(-10px); }
+    #c2PlayerSprite{ background-image:url('pretty_sprites.png'); background-repeat:no-repeat; background-position: -110px 0; width:100px; height:140px; }
+    #c2PartnerSprite{ background-image:url('pretty_sprites.png'); background-repeat:no-repeat; background-position: 0 0; width:100px; height:140px; }
+    
+    .c2-shadow{ display: none; }
+    
     .pose-heart{ animation:poseHeart .6s ease infinite alternate; }
     @keyframes poseHeart{ from{transform:translateY(0);} to{transform:translateY(-5px);} }
-    .countdown{ position:absolute; left:50%; top:34%; transform:translate(-50%,-50%); font-size:52px; color:#fff; text-shadow:0 0 18px rgba(255,190,210,0.9); opacity:0; z-index:12; pointer-events:none; }
+    
+    /* 밝은 배경에 맞게 텍스트 색상 및 카운트다운 색상 변경 */
+    .countdown{ position:absolute; left:50%; top:34%; transform:translate(-50%,-50%); font-size:52px; color:#d9939d; text-shadow:0 0 18px rgba(255,255,255,0.9); opacity:0; z-index:12; pointer-events:none; }
     .countdown.pop{ animation:cdPop .8s ease; }
     @keyframes cdPop{ 0%{ opacity:0; transform:translate(-50%,-50%) scale(0.4); } 30%{ opacity:1; transform:translate(-50%,-50%) scale(1.15); } 70%{ opacity:1; transform:translate(-50%,-50%) scale(1); } 100%{ opacity:0; transform:translate(-50%,-50%) scale(1.3); } }
     #c2flash{ position:absolute; inset:0; background:#fff; opacity:0; pointer-events:none; z-index:20; }
+    
+    /* 상단 UI 어두운 텍스트로 덮어쓰기 */
     .c2-hud{ position:absolute; top:0; left:0; right:0; padding:16px 16px 0; z-index:14; display:flex; flex-direction:column; gap:8px; }
-    .c2-quest{ font-size:11px; color:#fff6ea; text-align:center; letter-spacing:.5px; text-shadow:0 2px 4px rgba(0,0,0,0.5); line-height:1.6; }
-    .c2-quest b{ color:#ffd7e0; }
+    .c2-hud .chapter-tag { color: #5a4b4b; background: rgba(255,255,255,0.8); border: 2px solid rgba(217,147,157,0.6); }
+    .c2-hud .heart-count { background: rgba(255,255,255,0.8); border: 2px solid rgba(217,147,157,0.6); }
+    .c2-hud .n { color: #5a4b4b; }
+    
+    .c2-quest{ font-size:11px; color:#5a4b4b; text-align:center; letter-spacing:.5px; text-shadow:0 1px 2px rgba(255,255,255,0.8); line-height:1.6; }
+    .c2-quest b{ color:#d9939d; }
+    
     .c2-controls{ position:absolute; left:0; right:0; bottom:20px; z-index:16; display:flex; justify-content:center; }
-    .shutter-btn{ background:rgba(20,10,30,0.6); border:3px solid rgba(255,255,255,0.7); color:#fff; font-size:11px; letter-spacing:1px; padding:14px 26px; border-radius:6px; cursor:pointer; }
-    .shutter-btn:active{ transform:scale(0.95); background:rgba(255,255,255,0.3); }
+    
+    /* 촬영 버튼을 밝은 느낌의 핑크 둥근 테두리 버튼으로 변경 */
+    .shutter-btn{ background:var(--pink-main); border:3px solid #fff; color:#5a4b4b; font-size:11px; letter-spacing:1px; padding:14px 26px; border-radius:12px; cursor:pointer; font-weight:bold; box-shadow:0 4px 12px rgba(0,0,0,0.1); }
+    .shutter-btn:active{ transform:scale(0.95); background:var(--pink-dark); color:#fff; }
     .shutter-btn:disabled{ opacity:.4; cursor:default; }
     .flash{ position:absolute; inset:0; background:#fff; opacity:0; pointer-events:none; z-index:40; }
 
@@ -357,7 +392,7 @@
     
     #map { width: 100%; height: 240px; border-radius: 12px; overflow: hidden; border: 1px solid var(--line-color); background: #ffffff; margin-bottom: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); position: relative; }
     .map-btn-group { display: flex; gap: 8px; width: 100%; margin: 16px 0; }
-    .btn-map { flex: 1; padding: 12px 8px; border: 1px solid var(--line-color); background: #ffffff; border-radius: 6px; font-size: 12px; cursor: pointer; color: var(--text-main); text-align: center; display: flex; align-items: center; justify-content: center; gap: 5px; }
+   .btn-map { flex: 1; padding: 12px 4px; border: 1px solid var(--line-color); background: #ffffff; border-radius: 6px; font-size: 11px; letter-spacing: -0.5px; white-space: nowrap; cursor: pointer; color: var(--text-main); text-align: center; display: flex; align-items: center; justify-content: center; gap: 4px; }
     .transport-box { width: 100%; text-align: left; margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--line-color); font-size: 13px; line-height: 1.8; }
     .transport-box strong { color: var(--pink-dark); display: block; margin-bottom: 4px; }
     .guest-snap-box { width: 100%; background: #ffffff; border: 1px solid var(--line-color); border-radius: 12px; padding: 24px 20px; text-align: center; }
@@ -396,63 +431,6 @@
     .call-btn-group { display: flex; gap: 10px; width: 100%; }
     .btn-call-action { flex: 1; padding: 14px; border-radius: 8px; font-size: 13px; font-weight: bold; text-decoration: none; text-align: center; cursor: pointer; }
 
-    /* 큰 글씨 모드 */
-    body.large-text-mode .section-title-pink { font-size: 26px; }
-    body.large-text-mode .cover-date-banner { font-size: 17px; }
-    body.large-text-mode .invitation-text { font-size: 19px; line-height: 2.3; }
-    body.large-text-mode .profile-name { font-size: 22px; }
-    body.large-text-mode .profile-role { font-size: 16px; }
-    body.large-text-mode .profile-parents { font-size: 16px; }
-    body.large-text-mode .cover-date-banner span:first-child { font-size: 32px !important; line-height: 1.4 !important; }
-    body.large-text-mode .cover-date-banner span:last-child { font-size: 18px !important; line-height: 1.6 !important; }
-    body.large-text-mode .section + .section p[style*="text-align: center"] { font-size: 16px !important; line-height: 1.8 !important; }
-    body.large-text-mode .acc-header { font-size: 17px !important; padding: 14px 12px !important; }
-    body.large-text-mode .acc-body p { font-size: 15px !important; }
-    body.large-text-mode .acc-body p[style*="font-weight: bold"] { font-size: 17px !important; }
-    .acc-body p.long-acc { white-space: nowrap !important; letter-spacing: -0.8px !important; }
-    .acc-body p.bride-acc { white-space: nowrap !important; }
-    body.large-text-mode .acc-body p.long-acc { font-size: 16px !important; letter-spacing: -1.4px !important; white-space: nowrap !important; }
-    body.large-text-mode .acc-body p.bride-acc { font-size: 16px !important; letter-spacing: -0.3px !important; white-space: nowrap !important; }
-    body.large-text-mode .wedding-date-desc { font-size: 18px !important; line-height: 1.8 !important; }
-    body.large-text-mode .calendar-header { font-size: 25px !important; }
-    body.large-text-mode .calendar-grid { font-size: 16px !important; }
-    body.large-text-mode .calendar-grid div { height: 38px !important; }
-    body.large-text-mode .weekday { font-size: 14px !important; }
-    body.large-text-mode .wedding-day-heart::before { font-size: 38px !important; }
-    body.large-text-mode .dday-text { font-size: 18px !important; }
-    body.large-text-mode .circle-box { width: 72px !important; height: 72px !important; font-size: 22px !important; }
-    body.large-text-mode .circle-box::before { font-size: 80px !important; }
-    body.large-text-mode .circle-label { font-size: 13px !important; }
-    body.large-text-mode .location-title { font-size: 22px; }
-    body.large-text-mode .location-addr { font-size: 16px; }
-    body.large-text-mode .transport-box { font-size: 16px; }
-    body.large-text-mode .transport-box p { font-size: 16px !important; line-height: 1.8 !important; }
-    body.large-text-mode .transport-box div p { font-size: 16px !important; line-height: 1.8 !important; }
-    body.large-text-mode .transport-box .btn-pink { font-size: 17px !important; padding: 16px 12px !important; }
-    body.large-text-mode .guest-snap-desc { font-size: 16px; }
-    body.large-text-mode .guest-snap-box .btn-pink { font-size: 17px !important; padding: 16px 12px !important; }
-    body.large-text-mode .rsvp-intro-box .btn-pink { font-size: 17px !important; padding: 16px 12px !important; }
-    body.large-text-mode .rsvp-intro-desc { font-size: 16px; }
-    body.large-text-mode .thanks-text { font-size: 16px !important; line-height: 1.9 !important; } 
-    body.large-text-mode .btn-pink { font-size: 17px; }
-    body.large-text-mode .btn-map { font-size: 15px !important; }
-    body.large-text-mode .custom-modal-content div,
-    body.large-text-mode .custom-modal-content span,
-    body.large-text-mode .custom-modal-content p { font-size: 16px !important; line-height: 1.7 !important; }
-    body.large-text-mode .custom-modal-content .intro-modal-title,
-    body.large-text-mode .custom-modal-content .parking-modal-title { font-size: 22px !important; line-height: 1.4 !important; }
-    body.large-text-mode .custom-modal-content .call-phone-num { font-size: 26px !important; }
-    body.large-text-mode .custom-modal-content .intro-modal-close { font-size: 26px !important; }
-    body.large-text-mode .custom-modal-content .btn-option,
-    body.large-text-mode .custom-modal-content .btn-outline { font-size: 15px !important; }
-    body.large-text-mode .custom-modal-content .rsvp-input-text,
-    body.large-text-mode .custom-modal-content .rsvp-textarea { font-size: 16px !important; }
-    body.large-text-mode .custom-modal-content .btn-pink { font-size: 17px !important; }
-    body.large-text-mode .dont-show-today span { font-size: 14px !important; }
-    body.large-text-mode .footer-maker-text { font-size: 16px !important; }
-    body.large-text-mode .footer-maker-text span { font-size: 14px !important; }
-    body.large-text-mode .transport-box span { font-size: 15.5px !important; letter-spacing: -0.4px !important; }
-
     .bgm-btn { position: absolute; top: 20px; right: 20px; z-index: 9000; background: transparent; border: none; padding: 0; cursor: pointer; font-size: 18px; color: #ffcad4; font-family: sans-serif !important; }
 
   </style>
@@ -467,7 +445,7 @@
       <div style="width:48px; height:48px; position:relative;" id="startPlayerSprite"></div>
       <div style="width:48px; height:48px; position:relative;" id="startPartnerSprite"></div>
     </div>
-    <div class="start-title">민교 ♥ 윤서<br>12 /12</div>
+    <div class="start-title">민교 ♥ 윤서<br>12 / 12</div>
     <button class="start-btn" onclick="startGame()">🎮 미니게임으로 시작하기</button>
     <button class="start-btn skip" onclick="skipGame()">💌 바로 청첩장 보기</button>
     
@@ -520,6 +498,16 @@
         </g>
       </svg>
     </div>
+<!-- ▼ 추가된 자동차 트랙 코드 ▼ -->
+    <div class="car-track">
+      <!-- 9초 중 4.5초가 지난 지점(다리 정중앙)에서 즉시 시작 -->
+      <div class="car go-right" style="background:#ffffff; animation-duration:9s; animation-delay:-4.5s;"></div>
+      <div class="car go-right" style="background:#ffcad4; animation-duration:12s; animation-delay:-2s;"></div>
+      <!-- 왼쪽으로 가는 차들도 다리 위 각기 다른 지점에서 즉시 시작 -->
+      <div class="car go-left" style="background:#b8d4f0; animation-duration:10s; animation-delay:-6s;"></div>
+      <div class="car go-left" style="background:#fcaec7; animation-duration:8s; animation-delay:-1.5s;"></div>
+    </div>
+    <!-- ▲ 여기까지 ▲ -->
     <div class="bank"></div>
     <div class="ground" id="ground"></div>
 
@@ -547,7 +535,7 @@
     </div>
 
     <div class="controls">
-      <div class="hint-pill">TOUCH<br>TO MOVE</div>
+   
       <div class="pad">
         <button class="pad-btn" id="btn-up">▲</button>
         <button class="pad-btn" id="btn-left">◀</button>
@@ -587,7 +575,8 @@
         </div>
         <div class="c2-quest" id="c2Quest">네컷 사진을 찍어보세요</div>
       </div>
-      <div class="c2-controls">
+      <div class="c2-controls" style="gap: 12px;">
+        <button class="shutter-btn pixel" onclick="resetToChapter1()" style="background: rgba(0,0,0,0.4); border-color: rgba(255,255,255,0.4);">🔙 이전</button>
         <button class="shutter-btn pixel" id="shutterBtn">📷 촬영</button>
       </div>
     </div>
@@ -633,9 +622,7 @@
           <div class="cover-script">We're getting<br>Married!</div>
         </div>
       </div>
-      <div id="textSizeBtnWrapper" style="position: fixed; bottom: 24px; right: 20px; z-index: 9999; transition: opacity 0.3s ease; opacity: 0; pointer-events: none;">
-        <button id="textSizeBtn" onclick="toggleTextMode()" style="background: transparent; border: none; padding: 8px; cursor: pointer; font-size: 22px; font-weight: bold; color: #ffcad4; text-shadow: 0 2px 4px rgba(0,0,0,0.15); -webkit-tap-highlight-color: transparent;">+</button>
-      </div>
+
       <div class="cover-date-banner-wrapper reveal">
         <div class="cover-date-banner" style="text-align: center; border: none !important; display: flex; justify-content: center; align-items: center;">
           <img src="images/wax-seal.png" alt="왁스씰" style="width: 90px; height: auto; display: block; object-fit: contain; transform: rotate(6deg);">
@@ -788,73 +775,94 @@
         </div>
       </section>
 
-      <!-- 7. ACCOUNT -->
+     <!-- 7. ACCOUNT -->
       <section class="section" style="background: #ffffff;">
         <div class="section-title-pink reveal">마음 전하실 곳</div>
         <div class="section-subtitle-en reveal">ACCOUNT</div>
         <p style="text-align: center; margin-bottom: 24px; font-size: 13px; line-height: 1.6; color: var(--text-sub); word-break: keep-all;">참석이 어려우신 분들을 위해<br>조심스레 마음 전하실 곳을 남깁니다.<br>멀리서 보내주시는 축복도 잊지 않고 예쁘게 살겠습니다.</p>
-        <div style="display: flex; gap: 10px; width: 100%; align-items: flex-start;">
-          <!-- 신랑측 -->
-          <div style="flex: 1; min-width: 0;">
-            <div class="acc-header" onclick="toggleAcc('groomAcc')" style="margin-bottom: 8px; padding: 12px 10px; justify-content: center; gap: 6px; font-size: 14px;"><span>신랑측</span><span style="color: #d98b99; font-size: 11px;">▼</span></div>
-            <div class="acc-body" id="groomAcc" style="padding: 12px 10px;">
-              <div style="text-align: left; margin-bottom: 0;">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
-                  <p style="font-size: 13px; color: var(--text-sub); margin: 0;">신한 | 정민교</p>
-                  <a href="https://qr.kakaopay.com/Ej77hO5G1" target="_blank" style="display: flex; justify-content: center; align-items: center; width: 22px; height: 22px; background-color: #FEE500; border-radius: 4px; text-decoration: none;" title="카카오페이 송금"><svg width="13" height="13" viewBox="0 0 24 24" fill="#000"><path d="M12 3c-5.5 0-10 3.5-10 7.8 0 2.8 1.8 5.2 4.5 6.5-.2 1-.9 3.2-.9 3.3 0 .1.1.2.2.2.1 0 .2 0 .3-.1.4-.3 3.5-2.4 4.1-2.8.6.1 1.2.1 1.8.1 5.5 0 10-3.5 10-7.8S17.5 3 12 3z"/></svg></a>
-                </div>
-                <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: nowrap; gap: 4px;">
-                  <p class="long-acc" style="font-weight: bold; font-size: 14px; margin: 0; letter-spacing: -0.8px;">110-411-446184</p>
-                  <button onclick="copyAccount('110-411-446184', '신랑')" style="background: none; border: none; padding: 0; cursor: pointer; color: #777; display: flex; align-items: center; flex-shrink: 0;" title="복사"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button>
-                </div>
-              </div>
-              <div style="height: 1px; background-color: #eee; margin: 12px 0;"></div>
-              <div style="text-align: left; margin-bottom: 0;">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; min-height: 22px;"><p style="font-size: 13px; color: var(--text-sub); margin: 0;">우체국 | 정성덕</p></div>
-                <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: nowrap; gap: 2px;">
-                  <p class="long-acc" style="font-weight: bold; font-size: 14px; margin: 0; letter-spacing: -0.3px;">104752-02-190913</p>
-                  <button onclick="copyAccount('104752-02-190913', '신랑 아버지')" style="background: none; border: none; padding: 0; cursor: pointer; color: #777; display: flex; align-items: center;" title="복사"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button>
-                </div>
-              </div>
-              <div style="height: 1px; background-color: #eee; margin: 12px 0;"></div>
-              <div style="text-align: left; margin-bottom: 0;">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; min-height: 22px;"><p style="font-size: 13px; color: var(--text-sub); margin: 0;">기업 | 이희정</p></div>
-                <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: nowrap; gap: 2px;">
-                  <p class="long-acc" style="font-weight: bold; font-size: 14px; margin: 0; letter-spacing: -0.8px; white-space: nowrap;">107-053629-01-033</p>
-                  <button onclick="copyAccount('107-053629-01-033', '신랑 어머니')" style="background: none; border: none; padding: 0; cursor: pointer; color: #777; display: flex; align-items: center;" title="복사"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button>
-                </div>
+        
+        <!-- 가로로 나란히 배치된 버튼 -->
+        <div style="display: flex; gap: 10px; width: 100%; margin-bottom: 8px;">
+          <div class="acc-header" onclick="toggleAcc('groomAcc')" style="flex: 1; margin-bottom: 0; padding: 14px 10px; justify-content: center; gap: 6px; font-size: 15px; font-weight: 500;"><span>신랑측</span><span style="color: #d98b99; font-size: 11px;">▼</span></div>
+          <div class="acc-header" onclick="toggleAcc('brideAcc')" style="flex: 1; margin-bottom: 0; padding: 14px 10px; justify-content: center; gap: 6px; font-size: 15px; font-weight: 500;"><span>신부측</span><span style="color: #d98b99; font-size: 11px;">▼</span></div>
+        </div>
+
+        <!-- 신랑측 계좌 (100% 전체 너비) -->
+        <div class="acc-body" id="groomAcc" style="padding: 24px 20px; width: 100%;">
+          <div style="text-align: left; margin-bottom: 0;">
+            <div style="margin-bottom: 8px;">
+              <p style="font-size: 16px; color: var(--text-sub); margin: 0;">신한 | 정민교</p>
+            </div>
+            <div style="display: flex; justify-content: space-between; align-items: center; gap: 8px;">
+              <p style="font-weight: bold; font-size: 19px; margin: 0; color: var(--text-main); letter-spacing: 0.5px;">110-411-446184</p>
+              <!-- 카카오페이 버튼과 복사 버튼을 나란히 그룹화 -->
+              <div style="display: flex; gap: 10px; align-items: center;">
+                <a href="https://qr.kakaopay.com/Ej77hO5G1" target="_blank" style="display: flex; justify-content: center; align-items: center; width: 32px; height: 32px; background-color: #FEE500; border-radius: 6px; text-decoration: none;" title="카카오페이 송금"><svg width="18" height="18" viewBox="0 0 24 24" fill="#000"><path d="M12 3c-5.5 0-10 3.5-10 7.8 0 2.8 1.8 5.2 4.5 6.5-.2 1-.9 3.2-.9 3.3 0 .1.1.2.2.2.1 0 .2 0 .3-.1.4-.3 3.5-2.4 4.1-2.8.6.1 1.2.1 1.8.1 5.5 0 10-3.5 10-7.8S17.5 3 12 3z"/></svg></a>
+                <button onclick="copyAccount('110-411-446184', '신랑')" style="background: none; border: none; padding: 4px; cursor: pointer; color: #777; display: flex; align-items: center;" title="복사"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button>
               </div>
             </div>
           </div>
-          <!-- 신부측 -->
-          <div style="flex: 1; min-width: 0;">
-            <div class="acc-header" onclick="toggleAcc('brideAcc')" style="margin-bottom: 8px; padding: 12px 10px; justify-content: center; gap: 6px; font-size: 14px;"><span>신부측</span><span style="color: #d98b99; font-size: 11px;">▼</span></div>
-            <div class="acc-body" id="brideAcc" style="padding: 12px 10px;">
-              <div style="text-align: left; margin-bottom: 0;">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
-                  <p style="font-size: 13px; color: var(--text-sub); margin: 0;">국민 | 이윤서</p>
-                  <a href="https://qr.kakaopay.com/Ej7qgmufV" target="_blank" style="display: flex; justify-content: center; align-items: center; width: 22px; height: 22px; background-color: #FEE500; border-radius: 4px; text-decoration: none;" title="카카오페이 송금"><svg width="13" height="13" viewBox="0 0 24 24" fill="#000"><path d="M12 3c-5.5 0-10 3.5-10 7.8 0 2.8 1.8 5.2 4.5 6.5-.2 1-.9 3.2-.9 3.3 0 .1.1.2.2.2.1 0 .2 0 .3-.1.4-.3 3.5-2.4 4.1-2.8.6.1 1.2.1 1.8.1 5.5 0 10-3.5 10-7.8S17.5 3 12 3z"/></svg></a>
-                </div>
-                <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: nowrap; gap: 2px;">
-                  <p class="bride-acc" style="font-weight: bold; font-size: 14px; margin: 0; letter-spacing: 0px; white-space: nowrap;">99205135664</p>
-                  <button onclick="copyAccount('99205135664', '신부')" style="background: none; border: none; padding: 0; cursor: pointer; color: #777; display: flex; align-items: center; flex-shrink: 0;" title="복사"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button>
-                </div>
+          <div style="height: 1px; background-color: #eee; margin: 20px 0;"></div>
+          <div style="text-align: left; margin-bottom: 0;">
+            <div style="margin-bottom: 8px;">
+              <p style="font-size: 16px; color: var(--text-sub); margin: 0;">우체국 | 정성덕</p>
+            </div>
+            <div style="display: flex; justify-content: space-between; align-items: center; gap: 8px;">
+              <p style="font-weight: bold; font-size: 19px; margin: 0; color: var(--text-main); letter-spacing: 0.5px;">104752-02-190913</p>
+              <div style="display: flex; gap: 10px; align-items: center;">
+                <button onclick="copyAccount('104752-02-190913', '신랑 아버지')" style="background: none; border: none; padding: 4px; cursor: pointer; color: #777; display: flex; align-items: center;" title="복사"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button>
               </div>
-              <div style="height: 1px; background-color: #eee; margin: 12px 0;"></div>
-              <div style="text-align: left; margin-bottom: 0;">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; min-height: 22px;"><p style="font-size: 13px; color: var(--text-sub); margin: 0;">하나 | 이상열</p></div>
-                <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: nowrap; gap: 2px;">
-                  <p class="long-acc" style="font-weight: bold; font-size: 14px; margin: 0; letter-spacing: -0.3px;">589-910235-05207</p>
-                  <button onclick="copyAccount('589-910235-05207', '신부 아버지')" style="background: none; border: none; padding: 0; cursor: pointer; color: #777; display: flex; align-items: center;" title="복사"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button>
-                </div>
+            </div>
+          </div>
+          <div style="height: 1px; background-color: #eee; margin: 20px 0;"></div>
+          <div style="text-align: left; margin-bottom: 0;">
+            <div style="margin-bottom: 8px;">
+              <p style="font-size: 16px; color: var(--text-sub); margin: 0;">기업 | 이희정</p>
+            </div>
+            <div style="display: flex; justify-content: space-between; align-items: center; gap: 8px;">
+              <p style="font-weight: bold; font-size: 19px; margin: 0; color: var(--text-main); letter-spacing: 0.5px;">107-053629-01-033</p>
+              <div style="display: flex; gap: 10px; align-items: center;">
+                <button onclick="copyAccount('107-053629-01-033', '신랑 어머니')" style="background: none; border: none; padding: 4px; cursor: pointer; color: #777; display: flex; align-items: center;" title="복사"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button>
               </div>
-              <div style="height: 1px; background-color: #eee; margin: 12px 0;"></div>
-              <div style="text-align: left; margin-bottom: 0;">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; min-height: 22px;"><p style="font-size: 13px; color: var(--text-sub); margin: 0;">국민 | 김남준</p></div>
-                 <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: nowrap; gap: 2px;">
-                  <p class="long-acc" style="font-weight: bold; font-size: 14px; margin: 0; letter-spacing: -0.3px;">591901-01-400140</p>
-                  <button onclick="copyAccount('591901-01-400140', '신부 어머니')" style="background: none; border: none; padding: 0; cursor: pointer; color: #777; display: flex; align-items: center; flex-shrink: 0;" title="복사"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button>
-                </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 신부측 계좌 (100% 전체 너비) -->
+        <div class="acc-body" id="brideAcc" style="padding: 24px 20px; width: 100%;">
+          <div style="text-align: left; margin-bottom: 0;">
+            <div style="margin-bottom: 8px;">
+              <p style="font-size: 16px; color: var(--text-sub); margin: 0;">국민 | 이윤서</p>
+            </div>
+            <div style="display: flex; justify-content: space-between; align-items: center; gap: 8px;">
+              <p style="font-weight: bold; font-size: 19px; margin: 0; color: var(--text-main); letter-spacing: 0.5px;">99205135664</p>
+              <div style="display: flex; gap: 10px; align-items: center;">
+                <a href="https://qr.kakaopay.com/Ej7qgmufV" target="_blank" style="display: flex; justify-content: center; align-items: center; width: 32px; height: 32px; background-color: #FEE500; border-radius: 6px; text-decoration: none;" title="카카오페이 송금"><svg width="18" height="18" viewBox="0 0 24 24" fill="#000"><path d="M12 3c-5.5 0-10 3.5-10 7.8 0 2.8 1.8 5.2 4.5 6.5-.2 1-.9 3.2-.9 3.3 0 .1.1.2.2.2.1 0 .2 0 .3-.1.4-.3 3.5-2.4 4.1-2.8.6.1 1.2.1 1.8.1 5.5 0 10-3.5 10-7.8S17.5 3 12 3z"/></svg></a>
+                <button onclick="copyAccount('99205135664', '신부')" style="background: none; border: none; padding: 4px; cursor: pointer; color: #777; display: flex; align-items: center;" title="복사"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button>
+              </div>
+            </div>
+          </div>
+          <div style="height: 1px; background-color: #eee; margin: 20px 0;"></div>
+          <div style="text-align: left; margin-bottom: 0;">
+            <div style="margin-bottom: 8px;">
+              <p style="font-size: 16px; color: var(--text-sub); margin: 0;">하나 | 이상열</p>
+            </div>
+            <div style="display: flex; justify-content: space-between; align-items: center; gap: 8px;">
+              <p style="font-weight: bold; font-size: 19px; margin: 0; color: var(--text-main); letter-spacing: 0.5px;">589-910235-05207</p>
+              <div style="display: flex; gap: 10px; align-items: center;">
+                <button onclick="copyAccount('589-910235-05207', '신부 아버지')" style="background: none; border: none; padding: 4px; cursor: pointer; color: #777; display: flex; align-items: center;" title="복사"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button>
+              </div>
+            </div>
+          </div>
+          <div style="height: 1px; background-color: #eee; margin: 20px 0;"></div>
+          <div style="text-align: left; margin-bottom: 0;">
+            <div style="margin-bottom: 8px;">
+              <p style="font-size: 16px; color: var(--text-sub); margin: 0;">국민 | 김남준</p>
+            </div>
+             <div style="display: flex; justify-content: space-between; align-items: center; gap: 8px;">
+              <p style="font-weight: bold; font-size: 19px; margin: 0; color: var(--text-main); letter-spacing: 0.5px;">591901-01-400140</p>
+              <div style="display: flex; gap: 10px; align-items: center;">
+                <button onclick="copyAccount('591901-01-400140', '신부 어머니')" style="background: none; border: none; padding: 4px; cursor: pointer; color: #777; display: flex; align-items: center;" title="복사"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg></button>
               </div>
             </div>
           </div>
@@ -915,6 +923,17 @@
       <div style="font-family: 'Pretendard', -apple-system, sans-serif !important; font-size: 13px; color: var(--text-sub); line-height: 1.7; margin-bottom: 16px; text-align: center;">예식 날 하객 여러분께서 직접 찍어주신<br>소중한 사진과 영상을 공유해 주세요!<br>아래 버튼을 눌러 편하게 업로드하실 수 있습니다.<br>카카오톡으로 보내주셔도 감사합니다♥</div>
       <a href="https://www.dropbox.com/request/iq5dleb189bjqpuvhwnw" target="_blank" class="btn-pink" style="display: block; text-align: center; text-decoration: none; background-color: #eec8ce; color: #ffffff; border: none; border-radius: 8px; margin-bottom: 12px; padding: 14px; font-size: 15px; font-weight: bold; width: 100%; box-sizing: border-box; font-family: 'Pretendard', -apple-system, sans-serif !important;">📸 사진 올리러 가기</a>
       <button class="btn-outline" onclick="closeGuestSnapModal()" style="border: none; width: 100%; padding: 10px; font-family: 'Pretendard', -apple-system, sans-serif !important;">다음 안내 보기</button>
+    </div>
+  </div>
+
+  <!-- 기존 주차안내 모달 코드는 유지하되, 현재는 외부 링크로 바로 이동하므로 띄워지지 않음 -->
+  <div class="custom-modal" id="parkingModal">
+    <div class="custom-modal-content" style="text-align: center;">
+      <div class="intro-modal-header"><div class="intro-modal-title parking-modal-title">주차 & 대중교통 이용안내</div><button class="intro-modal-close" onclick="closeParkingModal()">✕</button></div>
+      <div style="font-family: 'Pretendard', -apple-system, sans-serif !important; font-size: 13px; color: var(--text-sub); line-height: 1.7; margin-bottom: 16px; text-align: center;">라포레 웨딩홀의 상세 주차장 및 대중교통 이용 안내를<br>확인하실 수 있습니다.</div>
+      <div class="parking-modal-highlight">※ 대중교통을 이용해 주시면 감사하겠습니다.</div>
+      <a href="https://www.laforetwedding.co.kr/info/" target="_blank" class="btn-pink" style="display: block; text-align: center; text-decoration: none; background-color: #eec8ce; color: #ffffff; border: none; border-radius: 8px; margin-bottom: 12px; padding: 14px; font-size: 15px; font-weight: bold; width: 100%; box-sizing: border-box; font-family: 'Pretendard', -apple-system, sans-serif !important;">🚗 하객 전용 주차장 & 대중교통 이용안내</a>
+      <button class="btn-outline" onclick="closeParkingModal()" style="border: none; width: 100%; padding: 10px; font-family: 'Pretendard', -apple-system, sans-serif !important;">닫기</button>
     </div>
   </div>
 
@@ -1085,10 +1104,10 @@ function buildSprite(el, rows, palette, size){
   el.appendChild(dot);
 }
 
-const GROOM_ROWS = ['..HHHH..','.HHHHHH.','.HSSSSH.','.HSeSeH.','..SSSS..','.BBBBBB.','.BWWWWB.','.BBBBBB.','.BBBBBB.','.PPPPPP.','.PP..PP.','.PP..PP.'];
-const GROOM_PAL = {H:'#2b2440', S:'#f3c6a0', e:'#3a2c1c', B:'#33415e', W:'#f4ede2', P:'#241d33'};
-const BRIDE_ROWS = ['..HHHH..','.HHHHHH.','.HSSSSH.','HHSeSeHH','.H.SS.H.','.DDDDDD.','DDDDDDDD','DDDDDDDD','DDDDDDDD','DDDDDDDD','.SS..SS.','.PP..PP.'];
-const BRIDE_PAL = {H:'#4a2f22', S:'#f3c6a0', e:'#3a2c1c', D:'#e88aa0', P:'#7a3b49'};
+const GROOM_ROWS = ['.HHHHHHHH.','HHHHHHHHHH','.HHSSSSSH.','H.SESSSESH','.HSCSSSC..','..SSSSSS..','..JJWWJJ..','.JJWBBWFJ.','.SJJWWJGS.','..JJJJJJ..','..BBBBBB..','..BB..BB..'];
+const GROOM_PAL = {H:'#362b25', S:'#ffdec7', E:'#111111', C:'#ff8f9f', J:'#2a2a2a', W:'#ffffff', B:'#111111', F:'#ffffff', G:'#5c8a63'};
+const BRIDE_ROWS = ['.....HHHH...','.V.WWHHHH...','VVVWHHHHHH..','.VV.SESSSESH','.VV.SCSSSC..','.V...SSSS...','.V..WWWWWW..','.V..WWGRGW..','...WWRPRWW..','...WWWWWWWW.','..WWWWWWWWWW','..WWWWWWWWWW'];
+const BRIDE_PAL = {H:'#362b25', S:'#ffdec7', E:'#111111', C:'#ff8f9f', V:'#eaf0f4', W:'#ffffff', R:'#ffb3c6', P:'#ff7aa2', G:'#5c8a63'};
 
 /* 시작화면의 스프라이트 생성 */
 buildSprite(document.getElementById('startPlayerSprite'), GROOM_ROWS, GROOM_PAL, 4);
@@ -1201,8 +1220,16 @@ function pressLeft(){
   busyQ = true; stepQ++; moveTo(partner, partnerPct()); playOnce(partnerSpriteWrap, 'bounce-once', 320); updateHearts();
   setTimeout(()=>{ busyQ = false; checkMeet(); }, 340);
 }
-function pressUp(){ if(!met) playOnce(partnerSpriteWrap, 'jump', 420); }
-function pressDown(){ if(!met) playOnce(playerSpriteWrap, 'crouch', 420); }
+function pressUp(){
+  if(busyQ || met || stepQ >= MAX_STEP) return;
+  busyQ = true; stepQ++; moveTo(partner, partnerPct()); playOnce(partnerSpriteWrap, 'jump', 420); updateHearts();
+  setTimeout(()=>{ busyQ = false; checkMeet(); }, 440);
+}
+function pressDown(){
+  if(busyP || met || stepP >= MAX_STEP) return;
+  busyP = true; stepP++; moveTo(player, playerPct()); playOnce(playerSpriteWrap, 'crouch', 420); updateHearts();
+  setTimeout(()=>{ busyP = false; checkMeet(); }, 440);
+}
 
 document.getElementById('btn-right').addEventListener('click', pressRight);
 document.getElementById('btn-left').addEventListener('click', pressLeft);
@@ -1260,7 +1287,7 @@ const POSES = [
 
 function startChapter2(){
   document.getElementById('chapter2').classList.add('show');
-  setTimeout(()=>{ c2Player.style.left = '33%'; c2Partner.style.left = '55%'; c2Quest.innerHTML = '촬영 버튼을 눌러 <b>네컷</b>을 찍어보세요'; }, 500);
+  setTimeout(()=>{ c2Player.style.left = '23%'; c2Partner.style.left = '66%'; c2Quest.innerHTML = '촬영 버튼을 눌러 <b>네컷</b>을 찍어보세요'; }, 500);
 }
 
 function drawCellSprite(cellEl, poseIndex){
@@ -1276,7 +1303,8 @@ function drawCellSprite(cellEl, poseIndex){
 function doShoot(){
   if(shooting || shot >= MAX_SHOT) return;
   shooting = true; shutterBtn.disabled = true;
-  const pose = POSES[shot]; c2Quest.textContent = pose.quest;
+  
+  // 포즈 글씨 띄우는 부분 제거하고 바로 스마일로 진행
   boothScreen.textContent = 'SMILE!';
   if(shot === 2){ playOnce(c2PlayerSp, 'jump', 420); playOnce(c2PartnerSp, 'jump', 420); }
   else { playOnce(c2PlayerSp, 'bounce-once', 320); playOnce(c2PartnerSp, 'bounce-once', 320); }
@@ -1289,12 +1317,54 @@ function doShoot(){
       boothScreen.textContent = 'DONE ♥'; c2Quest.innerHTML = '<b>민교</b>와 <b>윤서</b>의 네컷이 완성됐어요 ♥';
       shutterBtn.textContent = '다음'; shutterBtn.disabled = false; shutterBtn.onclick = goReveal;
     } else {
-      boothScreen.textContent = 'READY'; c2Quest.textContent = '다음 컷을 찍어보세요';
+      boothScreen.textContent = 'READY'; 
+      c2Quest.textContent = '다음 컷을 찍어보세요'; // 촬영 직후 바로 이 문구가 뜨도록 유지
       shutterBtn.disabled = false; shooting = false;
     }
   }, 150);
 }
 shutterBtn.addEventListener('click', ()=>{ if(shot < MAX_SHOT) doShoot(); });
+
+
+function resetToChapter1() {
+  // 1. 챕터 2 화면 숨기기
+  document.getElementById('chapter2').classList.remove('show');
+  
+  // 2. 챕터 1 상태 처음으로 초기화
+  stepP = 0;
+  stepQ = 0;
+  met = false;
+  busyP = false;
+  busyQ = false;
+  moveTo(player, playerPct());
+  moveTo(partner, partnerPct());
+  updateHearts();
+  document.querySelector('.quest-line').innerHTML = '<b>민교</b>와 <b>윤서</b>를 만나게 해주세요';
+  
+  // 3. 챕터 2 사진 찍기 상태 초기화
+  shot = 0;
+  shooting = false;
+  document.getElementById('shotN').textContent = '0/' + MAX_SHOT;
+  document.getElementById('boothScreen').textContent = 'READY';
+  document.getElementById('c2Quest').textContent = '네컷 사진을 찍어보세요';
+  
+  const shutterBtn = document.getElementById('shutterBtn');
+  shutterBtn.textContent = '📷 촬영';
+  shutterBtn.disabled = false;
+  shutterBtn.onclick = null; // 다음 단계로 넘어가는 이벤트 제거
+  
+  // 찍혔던 사진 필름 지우기
+  for(let i=0; i<4; i++){
+    const cell = document.getElementById('cell'+i);
+    if(cell) cell.innerHTML = '';
+  }
+}
+
+
+
+
+
+
 
 // 청첩장 메인 뷰 전환 
 function goReveal(){
@@ -1358,27 +1428,6 @@ window.addEventListener('DOMContentLoaded', () => {
   }, { rootMargin: '300px 0px' });
   if(mapContainer) mapObserver.observe(mapContainer);
 });
-
-window.addEventListener('scroll', () => {
-  const wrapper = document.getElementById('textSizeBtnWrapper');
-  if (!wrapper) return;
-  const nearTop = window.scrollY <= 200;
-  const scrollBottom = window.scrollY + window.innerHeight;
-  const pageHeight = document.documentElement.scrollHeight;
-  const nearBottom = scrollBottom >= pageHeight - 150;
-  if (nearTop || nearBottom) { wrapper.style.opacity = '1'; wrapper.style.pointerEvents = 'auto'; } 
-  else { wrapper.style.opacity = '0'; wrapper.style.pointerEvents = 'none'; }
-});
-
-function toggleTextMode() {
-  const body = document.body;
-  const btn = document.getElementById('textSizeBtn');
-  if (body.classList.contains('large-text-mode')) {
-    body.classList.remove('large-text-mode'); if (btn) btn.textContent = '+';
-  } else {
-    body.classList.add('large-text-mode'); if (btn) btn.textContent = '-';
-  }
-}
 
 const observerOptions = { root: null, rootMargin: '0px 0px -40px 0px', threshold: 0.1 };
 const revealObserver = new IntersectionObserver((entries) => {
@@ -1524,7 +1573,18 @@ function updateCountdown() {
 }
 updateCountdown(); setInterval(updateCountdown, 1000);
 
-function toggleAcc(id) { const el = document.getElementById(id); el.style.display = el.style.display === 'block' ? 'none' : 'block'; }
+function toggleAcc(id) {
+  const groom = document.getElementById('groomAcc');
+  const bride = document.getElementById('brideAcc');
+  
+  if (id === 'groomAcc') {
+    groom.style.display = groom.style.display === 'block' ? 'none' : 'block';
+    bride.style.display = 'none'; // 신부측 닫기
+  } else {
+    bride.style.display = bride.style.display === 'block' ? 'none' : 'block';
+    groom.style.display = 'none'; // 신랑측 닫기
+  }
+}
 function copyAccount(no, side) { navigator.clipboard.writeText(no).then(() => { alert(`${side} 계좌번호가 복사되었습니다.`); }); }
 
 function openMap(type) {

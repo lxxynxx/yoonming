@@ -307,10 +307,31 @@
     .reveal { opacity: 0; transform: translate3d(0, 30px, 0); transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1), transform 0.8s cubic-bezier(0.22, 1, 0.36, 1); will-change: transform, opacity; }
     .reveal.active { opacity: 1; transform: translate3d(0, 0, 0); }
     
-    .envelope-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; height: 100dvh; background: var(--bg-color); z-index: 10000; display: flex; flex-direction: column; justify-content: flex-start; align-items: center; padding-top: 80px; overflow-y: auto; transition: opacity 1.8s ease, visibility 1.8s ease; cursor: default; }
+    .envelope-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; height: 100dvh; background: var(--bg-color); z-index: 10000; display: flex; flex-direction: column; justify-content: flex-start; align-items: center; padding-top: 36px; overflow-x: hidden; overflow-y: auto; transition: opacity 1.8s ease, visibility 1.8s ease; cursor: default; }
     .envelope-overlay.fade-out { opacity: 0; visibility: hidden; }
-    .printer-machine { position: relative; width: 290px; display: flex; flex-direction: column; align-items: center; transition: transform 0.6s ease; margin-top: 0; }
-    .printer-machine.printing { transform: translateY(2px); }
+    .printer-machine { --machine-scale: 1; position: relative; width: 290px; display: flex; flex-direction: column; align-items: center; transform: scale(var(--machine-scale)); transform-origin: top center; transition: transform 0.6s ease; margin-top: 0; }
+    .printer-machine.printing { transform: scale(var(--machine-scale)) translateY(2px); }
+
+    /* 화면 높이별 반응형 최적화 (사파리, 카카오톡 인앱 브라우저, 소형 기기 대응) */
+    @media (max-height: 720px) {
+      .envelope-overlay { padding-top: 24px; }
+      .printer-machine { --machine-scale: 0.9; }
+    }
+    @media (max-height: 650px) {
+      .envelope-overlay { padding-top: 16px; }
+      .printer-machine { --machine-scale: 0.82; }
+    }
+    @media (max-height: 580px) {
+      .envelope-overlay { padding-top: 10px; }
+      .printer-machine { --machine-scale: 0.74; }
+    }
+    @media (max-height: 510px) {
+      .envelope-overlay { padding-top: 6px; }
+      .printer-machine { --machine-scale: 0.65; }
+    }
+    @media (max-width: 320px) {
+      .printer-machine { --machine-scale: 0.85; }
+    }
     .machine-frame { width: 100%; display: flex; flex-direction: column; align-items: center; border: 1.5px solid #ddc9c0; border-radius: 22px; background: rgba(255,255,255,0.35); box-shadow: 0 6px 18px rgba(0,0,0,0.06); padding: 16px 12px 0 12px; position: relative; z-index: 10; }
     .top-light-bar { width: 78%; height: 38px; background: #ffffff; border-radius: 19px; display: flex; justify-content: center; align-items: center; gap: 8px; box-shadow: 0 0 15px rgba(255, 255, 255, 0.9), inset 0 2px 5px rgba(0,0,0,0.05); position: relative; z-index: 10; }
     .top-light-bar .print-head-title { font-family: 'MaruBuri', sans-serif !important; font-weight: 700 !important; font-size: 15px; letter-spacing: 2px; color: #d9939d; text-shadow: none; }
@@ -1509,10 +1530,31 @@ function typeWriter() {
   }
 }
 
+function updatePrinterResponsiveScale() {
+  const machine = document.getElementById('printerMachine');
+  const overlay = document.getElementById('envelopeOverlay');
+  if (!machine || !overlay) return;
+  const vh = window.innerHeight;
+  const vw = window.innerWidth;
+  const targetH = 610;
+  const targetW = 300;
+  const scaleH = (vh - 20) / targetH;
+  const scaleW = (vw - 16) / targetW;
+  const scale = Math.min(1, Math.min(scaleH, scaleW));
+  if (scale < 0.98) {
+    machine.style.setProperty('--machine-scale', scale.toFixed(3));
+  } else {
+    machine.style.removeProperty('--machine-scale');
+  }
+}
+window.addEventListener('resize', updatePrinterResponsiveScale);
+window.addEventListener('orientationchange', () => { setTimeout(updatePrinterResponsiveScale, 100); });
+
 let isPrinting = false;   
 window.printPhoto = function() {
   if (isPrinting) return; 
   isPrinting = true;
+  updatePrinterResponsiveScale();
   const machine = document.getElementById('printerMachine');
   if (machine) machine.classList.add('printing');
   
@@ -1529,7 +1571,10 @@ window.printPhoto = function() {
   setTimeout(() => { closeOpening(); },3800); 
 }
 
-window.addEventListener('DOMContentLoaded', () => { document.querySelectorAll('.reveal').forEach(el => { revealObserver.observe(el); }); });
+window.addEventListener('DOMContentLoaded', () => { 
+  updatePrinterResponsiveScale();
+  document.querySelectorAll('.reveal').forEach(el => { revealObserver.observe(el); }); 
+});
 
 function closeOpening() {
   if (isClosed) return; isClosed = true;

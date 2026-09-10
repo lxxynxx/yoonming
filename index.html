@@ -10,6 +10,7 @@
 
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="color-scheme" content="light"> <!-- 다크모드 기기에서도 항상 밝은 화면으로 렌더링(검은 화면 방지) -->
   <title>윤밍청첩장</title>
 
   <!-- 카카오 지도 API 스크립트 -->
@@ -76,6 +77,7 @@
       scroll-behavior: smooth;
       -webkit-overflow-scrolling: touch;
       touch-action: manipulation;
+      background: var(--bg-color); /* 다크모드에서 브라우저 기본(검정) 배경이 비치는 것 방지 */
     }
 
     body {
@@ -474,7 +476,7 @@
   <div id="global-flash" style="position:fixed; inset:0; background:#fff; opacity:0; pointer-events:none; z-index:99999; transition:opacity .5s ease;"></div>
 
   <!-- ====== 게임 컨테이너 ====== -->
-  <div id="stage" style="display:none;">
+  <div id="stage" style="display:none; opacity:0; transition: opacity 0.5s ease;">
     <div class="river" id="river"></div>
     <div class="far-city" id="farCity"></div>
     <div class="suspension">
@@ -599,7 +601,7 @@
 
 
   <!-- ====== 청첩장 컨테이너 (처음엔 숨김) ====== -->
-  <div id="main-invitation" style="display: none;">
+  <div id="main-invitation" style="display: none; opacity:0; transition: opacity 0.5s ease;">
     
     <div class="envelope-overlay" id="envelopeOverlay">
       <div class="printer-machine" id="printerMachine">
@@ -1012,16 +1014,22 @@ function startGame() {
   document.getElementById('start-screen').style.opacity = '0';
   setTimeout(() => {
     document.getElementById('start-screen').style.display = 'none';
-    document.getElementById('stage').style.display = 'block';
+    const stage = document.getElementById('stage');
+    stage.style.display = 'block';
+    requestAnimationFrame(() => { stage.style.opacity = '1'; });
   }, 400);
 }
 
 function skipGame() {
+  // is-game 클래스를 먼저 제거해 검은 배경(body.is-game)이
+  // start-screen 페이드아웃 중에 비치지 않도록 함
+  document.body.classList.remove('is-game');
   document.getElementById('start-screen').style.opacity = '0';
   setTimeout(() => {
     document.getElementById('start-screen').style.display = 'none';
-    document.getElementById('main-invitation').style.display = 'block';
-    document.body.classList.remove('is-game');
+    const mainInv = document.getElementById('main-invitation');
+    mainInv.style.display = 'block';
+    requestAnimationFrame(() => { mainInv.style.opacity = '1'; });
     
     // 자동 인화 애니메이션 바로 트리거 (청첩장 전환 완료 후)
     setTimeout(()=>{
@@ -1034,11 +1042,15 @@ function skipGame() {
 
 // 팝업으로 바로 이동하는 빠른 링크 함수
 function skipToModal(action) {
+  // is-game 클래스를 먼저 제거해 검은 배경(body.is-game)이
+  // start-screen 페이드아웃 중에 비치지 않도록 함
+  document.body.classList.remove('is-game');
   document.getElementById('start-screen').style.opacity = '0';
   setTimeout(() => {
     document.getElementById('start-screen').style.display = 'none';
-    document.getElementById('main-invitation').style.display = 'block';
-    document.body.classList.remove('is-game');
+    const mainInv2 = document.getElementById('main-invitation');
+    mainInv2.style.display = 'block';
+    requestAnimationFrame(() => { mainInv2.style.opacity = '1'; });
     document.body.classList.remove('stop-scroll');
 
     // 오프닝 애니메이션 생략 (바로 메인 화면)
@@ -1373,26 +1385,30 @@ function resetToChapter1() {
 // 청첩장 메인 뷰 전환 
 function goReveal(){
   const f = document.getElementById('global-flash');
-  f.style.transition = 'opacity .5s ease';
+  // 플래시 효과를 즉시 하얗게 채우기
+  f.style.transition = 'opacity 0.3s ease';
   f.style.opacity = '1';
   
   setTimeout(()=>{
+    // 화면 전환을 플래시가 완전히 가린 상태에서 동시에 처리
     document.getElementById('stage').style.display = 'none';
-    document.getElementById('main-invitation').style.display = 'block';
+    const mainInv3 = document.getElementById('main-invitation');
+    mainInv3.style.display = 'block';
+    mainInv3.style.opacity = '1';
     document.body.classList.remove('is-game');
     
-    // 전환 완료 후 하얀 플래시 제거
-    setTimeout(()=>{ f.style.opacity = '0'; }, 50);
+    // 부드럽게 하얀 화면이 걷히도록 수정
+    setTimeout(()=>{ 
+      f.style.opacity = '0'; 
+    }, 200);
 
-    // 1초 뒤에 터치 없이 자동으로 사진 인화 함수 호출
     setTimeout(()=>{
       if(typeof window.printPhoto === 'function') {
         window.printPhoto();
       }
-    }, 1000);
-  }, 500);
+    }, 800);
+  }, 300);
 }
-
 
 /* ───────── 2. 청첩장(index.html) 스크립트 ───────── */
 (function revealCoverScriptWhenFontReady() {
